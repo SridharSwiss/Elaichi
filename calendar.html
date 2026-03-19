@@ -246,6 +246,7 @@ body::before {
 .filter-btn.fiesta.active { background: var(--chili); border-color: var(--chili); color: white; }
 .filter-btn.major.active { background: var(--indigo); border-color: var(--indigo); color: white; }
 .filter-btn.database.active { background: #E67E22; border-color: #E67E22; color: white; }
+.filter-btn.rejected.active { background: #B0A8A3; border-color: #B0A8A3; color: white; }
 
 /* CONTENT */
 .content {
@@ -313,6 +314,7 @@ body::before {
 .event-card.fiesta::before { background: var(--chili); }
 .event-card.major::before { background: var(--indigo); }
 .event-card.database::before { background: #E67E22; }
+.event-card.rejected::before { background: #B0A8A3; }
 
 .event-card:hover {
   transform: translateY(-3px);
@@ -325,6 +327,9 @@ body::before {
 .event-card.fiesta:hover { background: var(--fiesta-bg); }
 .event-card.major:hover { background: var(--major-bg); }
 .event-card.database:hover { background: rgba(230, 126, 34, 0.06); }
+.event-card.rejected { opacity: 0.55; }
+.event-card.rejected:hover { background: rgba(176, 168, 163, 0.06); opacity: 0.75; }
+.event-card.rejected .event-name { text-decoration: line-through; text-decoration-color: var(--chili); }
 
 .card-top {
   display: flex;
@@ -373,6 +378,12 @@ body::before {
 .event-tag.database {
   background: rgba(230,126,34,0.1);
   color: #C0601A;
+}
+
+.event-tag.rejected {
+  background: rgba(214,69,69,0.1);
+  color: var(--chili);
+  text-decoration: line-through;
 }
 
 .event-name {
@@ -777,6 +788,7 @@ body::before {
     <button class="filter-btn fiesta" onclick="filterEvents('fiesta')">Fiesta & Special</button>
     <button class="filter-btn major" onclick="filterEvents('major')">Major Festivals</button>
     <button class="filter-btn database" onclick="filterEvents('database')">DB Opportunities</button>
+    <button class="filter-btn rejected" onclick="filterEvents('rejected')">Rejected</button>
 
     <div class="search-box">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
@@ -794,6 +806,7 @@ body::before {
     <div class="legend-item"><div class="legend-dot fiesta"></div> Fiesta / Special Events — High-visibility opportunity</div>
     <div class="legend-item"><div class="legend-dot major"></div> Major Festival — 40K+ crowd, food zones</div>
     <div class="legend-item"><div class="legend-dot" style="background:#E67E22"></div> DB Opportunity — From Elaichi research database</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#B0A8A3"></div> Rejected — Application not accepted</div>
   </div>
 
   <!-- Events populated by JS -->
@@ -851,8 +864,8 @@ const events = [
   // ═══════════════════════════════════════════
   // MAJOR FESTIVALS — 40K+ crowd, confirmed food zones
   // ═══════════════════════════════════════════
-  { name: "Greenfield Festival", dates: "Jun 11–13", startMonth: 6, startDay: 11, endDay: 13, location: "Interlaken Airport, Interlaken", type: "major", source: "greenfieldfestival.ch", notes: "CH's largest rock fest · Hearty food preferred", visitors: "70,000+" },
-  { name: "OpenAir St. Gallen", dates: "Jun 25–28", startMonth: 6, startDay: 25, endDay: 28, location: "Sittertobel Valley, St. Gallen", type: "major", source: "openairsg.ch", notes: "Oldest CH open-air fest (since 1977) · Local sourcing focus", visitors: "110,000+" },
+  { name: "Greenfield Festival", dates: "Jun 11–13", startMonth: 6, startDay: 11, endDay: 13, location: "Interlaken Airport, Interlaken", type: "rejected", source: "greenfieldfestival.ch", notes: "Application rejected · CH's largest rock fest", visitors: "70,000+" },
+  { name: "OpenAir St. Gallen", dates: "Jun 25–28", startMonth: 6, startDay: 25, endDay: 28, location: "Sittertobel Valley, St. Gallen", type: "rejected", source: "openairsg.ch", notes: "Application rejected · Oldest CH open-air fest (since 1977)", visitors: "110,000+" },
   { name: "Frauenfeld Openair", dates: "Jul 8–11", startMonth: 7, startDay: 8, endDay: 11, location: "Grosse Allmend, Frauenfeld", type: "major", source: "openair-frauenfeld.ch", notes: "Europe's biggest hip-hop festival · High-volume quick service", visitors: "60,000–75,000" },
   { name: "Moon+Stars Festival", dates: "Jul 9–19", startMonth: 7, startDay: 9, endDay: 19, location: "Piazza Grande, Locarno", type: "major", source: "moonandstars.ch", notes: "10 nights · 30+ food trucks on Food+Music Street", visitors: "100,000+" },
   { name: "Gurtenfestival", dates: "Jul 15–18", startMonth: 7, startDay: 15, endDay: 18, location: "Gurten Mountain, Bern", type: "major", source: "gurtenfestival.ch", notes: "Mountain-top fest · Local & sustainable sourcing focus", visitors: "80,000–100,000" },
@@ -957,7 +970,7 @@ function renderEvents() {
     `;
 
     monthEvents.forEach(ev => {
-      const typeLabel = ev.type === 'confirmed' ? 'CONFIRMED' : ev.type === 'fiesta' ? 'SPECIAL' : ev.type === 'major' ? 'MAJOR FESTIVAL' : ev.type === 'database' ? 'OPPORTUNITY' : 'PROVISIONAL';
+      const typeLabel = ev.type === 'confirmed' ? 'CONFIRMED' : ev.type === 'fiesta' ? 'SPECIAL' : ev.type === 'major' ? 'MAJOR FESTIVAL' : ev.type === 'database' ? 'OPPORTUNITY' : ev.type === 'rejected' ? 'REJECTED' : 'PROVISIONAL';
       const nowBadge = ev.isNow ? `<span class="now-badge"><span class="live-dot"></span> Happening Now</span>` : '';
 
       html += `
