@@ -438,6 +438,67 @@ a.event-card {
   letter-spacing: -0.01em;
 }
 
+
+/* RANK & REVENUE BADGES */
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 0.6rem;
+  margin-bottom: 0.3rem;
+}
+.tier-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  border-radius: 6px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+.tier-S .tier-letter { background: #00F5A0; color: #0A0A0A; }
+.tier-A .tier-letter { background: #6C5CE7; color: white; }
+.tier-B .tier-letter { background: #0984E3; color: white; }
+.tier-C .tier-letter { background: #E67E22; color: white; }
+.tier-D .tier-letter { background: var(--smoke); color: white; }
+.rank-score {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--smoke);
+}
+.rev-badge {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: #00B894;
+  margin-bottom: 0.2rem;
+}
+.score-pills {
+  display: flex;
+  gap: 4px;
+  margin-top: 0.4rem;
+  flex-wrap: wrap;
+}
+.score-pills span {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.52rem;
+  background: rgba(0,0,0,0.05);
+  color: var(--smoke);
+  padding: 2px 5px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+/* Dark card adaptations */
+.event-card.confirmed .rev-badge { color: #00F5A0; }
+.event-card.confirmed .rank-score { color: rgba(255,255,255,0.4); }
+.event-card.confirmed .score-pills span { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.4); }
+.event-card.confirmed .visitor-badge { color: rgba(255,255,255,0.5); }
+.event-card.rejected .rev-badge { color: rgba(255,255,255,0.25); }
+.event-card.rejected .rank-score { color: rgba(255,255,255,0.2); }
+.event-card.rejected .score-pills span { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.2); }
+.event-card.rejected .visitor-badge { color: rgba(255,255,255,0.2); }
+
 .visitor-badge {
   font-family: 'Space Mono', monospace;
   font-size: 0.62rem;
@@ -454,9 +515,131 @@ a.event-card {
   opacity: 0.65;
 }
 
-.event-card.confirmed .visitor-badge { color: #00F5A0; }
+.event-card.confirmed 
+/* RANK & REVENUE BADGES */
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 0.6rem;
+  margin-bottom: 0.3rem;
+}
+.tier-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  border-radius: 6px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+.tier-S .tier-letter { background: #00F5A0; color: #0A0A0A; }
+.tier-A .tier-letter { background: #6C5CE7; color: white; }
+.tier-B .tier-letter { background: #0984E3; color: white; }
+.tier-C .tier-letter { background: #E67E22; color: white; }
+.tier-D .tier-letter { background: var(--smoke); color: white; }
+.rank-score {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--smoke);
+}
+.rev-badge {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: #00B894;
+  margin-bottom: 0.2rem;
+}
+.score-pills {
+  display: flex;
+  gap: 4px;
+  margin-top: 0.4rem;
+  flex-wrap: wrap;
+}
+.score-pills span {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.52rem;
+  background: rgba(0,0,0,0.05);
+  color: var(--smoke);
+  padding: 2px 5px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+/* Dark card adaptations */
+.event-card.confirmed .rev-badge { color: #00F5A0; }
+.event-card.confirmed .rank-score { color: rgba(255,255,255,0.4); }
+.event-card.confirmed .score-pills span { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.4); }
+.event-card.confirmed .visitor-badge { color: rgba(255,255,255,0.5); }
+.event-card.rejected .rev-badge { color: rgba(255,255,255,0.25); }
+.event-card.rejected .rank-score { color: rgba(255,255,255,0.2); }
+.event-card.rejected .score-pills span { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.2); }
+.event-card.rejected .visitor-badge { color: rgba(255,255,255,0.2); }
+
+.visitor-badge { color: #00F5A0; }
 .event-card.confirmed .event-note { color: rgba(255,255,255,0.45); opacity: 1; }
-.event-card.rejected .visitor-badge { color: rgba(255,255,255,0.25); }
+.event-card.rejected 
+/* RANK & REVENUE BADGES */
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 0.6rem;
+  margin-bottom: 0.3rem;
+}
+.tier-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  border-radius: 6px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+.tier-S .tier-letter { background: #00F5A0; color: #0A0A0A; }
+.tier-A .tier-letter { background: #6C5CE7; color: white; }
+.tier-B .tier-letter { background: #0984E3; color: white; }
+.tier-C .tier-letter { background: #E67E22; color: white; }
+.tier-D .tier-letter { background: var(--smoke); color: white; }
+.rank-score {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--smoke);
+}
+.rev-badge {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: #00B894;
+  margin-bottom: 0.2rem;
+}
+.score-pills {
+  display: flex;
+  gap: 4px;
+  margin-top: 0.4rem;
+  flex-wrap: wrap;
+}
+.score-pills span {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.52rem;
+  background: rgba(0,0,0,0.05);
+  color: var(--smoke);
+  padding: 2px 5px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+/* Dark card adaptations */
+.event-card.confirmed .rev-badge { color: #00F5A0; }
+.event-card.confirmed .rank-score { color: rgba(255,255,255,0.4); }
+.event-card.confirmed .score-pills span { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.4); }
+.event-card.confirmed .visitor-badge { color: rgba(255,255,255,0.5); }
+.event-card.rejected .rev-badge { color: rgba(255,255,255,0.25); }
+.event-card.rejected .rank-score { color: rgba(255,255,255,0.2); }
+.event-card.rejected .score-pills span { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.2); }
+.event-card.rejected .visitor-badge { color: rgba(255,255,255,0.2); }
+
+.visitor-badge { color: rgba(255,255,255,0.25); }
 .event-card.rejected .event-note { color: rgba(255,255,255,0.2); opacity: 1; }
 
 .event-location {
@@ -876,6 +1059,18 @@ a.event-card {
     <div class="legend-item"><div class="legend-dot" style="background:#555"></div> Rejected — No action needed</div>
   </div>
 
+  <!-- SCORING KEY -->
+  <div class="legend" style="margin-top: 0.5rem; font-size: 0.72rem;">
+    <div class="legend-item"><strong>Rank (max 25)</strong> = C (Crowd) + D (Duration) + F (Food Focus) + E (Ease of Entry) + B (Brand Fit)</div>
+    <div class="legend-item">
+      <span style="background:#00F5A0;color:#0A0A0A;padding:2px 6px;border-radius:4px;font-weight:800;font-family:Syne;font-size:0.7rem;">S</span> 21–25 &nbsp;
+      <span style="background:#6C5CE7;color:white;padding:2px 6px;border-radius:4px;font-weight:800;font-family:Syne;font-size:0.7rem;">A</span> 18–20 &nbsp;
+      <span style="background:#0984E3;color:white;padding:2px 6px;border-radius:4px;font-weight:800;font-family:Syne;font-size:0.7rem;">B</span> 15–17 &nbsp;
+      <span style="background:#E67E22;color:white;padding:2px 6px;border-radius:4px;font-weight:800;font-family:Syne;font-size:0.7rem;">C</span> 12–14 &nbsp;
+      <span style="background:#9A9590;color:white;padding:2px 6px;border-radius:4px;font-weight:800;font-family:Syne;font-size:0.7rem;">D</span> &lt;12
+    </div>
+  </div>
+
   <!-- Events populated by JS -->
   <div id="eventsContent"></div>
 </div>
@@ -892,114 +1087,114 @@ const events = [
   // ═══════════════════════════════════════════
   // CONFIRMED — Booked & locked in
   // ═══════════════════════════════════════════
-  { name: "SunIce Festival — Winter Edition", dates: "Mar 19–22", startMonth: 3, startDay: 19, endDay: 22, location: "Salastrains, St. Moritz", type: "confirmed", source: "SunIce Festival", isNow: true, notes: "20,000 guests · 70 artists · Food Village", visitors: "20,000+" , url: "https://www.sunicefestival.ch/winter/home"},
-  { name: "Zürich Bier Festival", dates: "Apr 24–25", startMonth: 4, startDay: 24, endDay: 25, location: "Theater Spirgarten, Zürich-Altstetten", type: "confirmed", source: "ProBier.ch", notes: "300+ craft beers · Food trucks featured", visitors: "25,000+" , url: "https://www.probier.ch/"},
-  { name: "SunIce Festival — Summer Edition", dates: "Sep 17–19", startMonth: 9, startDay: 17, endDay: 19, location: "Lido Ascona, Ticino", type: "confirmed", source: "SunIce Festival", notes: "Lakeside summer edition", visitors: "20,000+" , url: "https://www.sunicefestival.ch/"},
+  { name: "SunIce Festival — Winter Edition", dates: "Mar 19–22", startMonth: 3, startDay: 19, endDay: 22, location: "Salastrains, St. Moritz", type: "confirmed", source: "SunIce Festival", isNow: true, notes: "20,000 guests · 70 artists · Food Village" , url: "https://www.sunicefestival.ch/winter/home", visitors: "20,000", rev: "CHF 3,360", rank: 14, tier: "C", scores: {c:2,d:2,f:3,e:4,b:3}},
+  { name: "Zürich Bier Festival", dates: "Apr 24–25", startMonth: 4, startDay: 24, endDay: 25, location: "Theater Spirgarten, Zürich-Altstetten", type: "confirmed", source: "ProBier.ch", notes: "300+ craft beers · Food trucks featured" , url: "https://www.probier.ch/", visitors: "27,000", rev: "CHF 5,670", rank: 16, tier: "B", scores: {c:2,d:2,f:4,e:4,b:4}},
+  { name: "SunIce Festival — Summer Edition", dates: "Sep 17–19", startMonth: 9, startDay: 17, endDay: 19, location: "Lido Ascona, Ticino", type: "confirmed", source: "SunIce Festival", notes: "Lakeside summer edition" , url: "https://www.sunicefestival.ch/", visitors: "20,000", rev: "CHF 3,360", rank: 14, tier: "C", scores: {c:2,d:2,f:3,e:4,b:3}},
 
   // ═══════════════════════════════════════════
   // PROVISIONAL — Alta Vista / Street Food Park
   // ═══════════════════════════════════════════
-  { name: "Zürich Marathon Food Zone", dates: "Apr 12", startMonth: 4, startDay: 12, endDay: 12, location: "Zürich", type: "provisional", source: "Alta Vista Events", visitors: "" , url: "https://www.altavistaevents.ch/events"},
-  { name: "1st Street Food Park Wil", dates: "Apr 24–26", startMonth: 4, startDay: 24, endDay: 26, location: "Bleicheplatz, Wil (SG)", type: "provisional", source: "Alta Vista Events", visitors: "" , url: "https://www.streetfood-park.com/"},
-  { name: "1st Street Food Park Einsiedeln", dates: "May 1–3", startMonth: 5, startDay: 1, endDay: 3, location: "Paracelsus Park, Einsiedeln", type: "provisional", source: "Alta Vista Events", visitors: "" , url: "https://www.streetfood-park.com/"},
-  { name: "15th ZH Street Food Park — Season Opening", dates: "May 5–10", startMonth: 5, startDay: 5, endDay: 10, location: "Zürich HB — Haupthalle", type: "provisional", source: "Alta Vista Events", notes: "Flagship venue · 400K daily station traffic", visitors: "50,000–80,000" , url: "https://www.streetfoodparkzh.com/"},
-  { name: "2nd Street Food Park Burgdorf", dates: "May 15–17", startMonth: 5, startDay: 15, endDay: 17, location: "Markthalle, Burgdorf", type: "provisional", source: "Alta Vista Events", visitors: "" , url: "https://www.streetfood-park.com/"},
-  { name: "3rd Street Food Park Aarau", dates: "May 22–25", startMonth: 5, startDay: 22, endDay: 25, location: "Maienzugplatz, Aarau", type: "provisional", source: "Alta Vista Events", visitors: "" , url: "https://www.streetfood-park.com/"},
-  { name: "3rd Street Food Park — Prime Tower", dates: "May 26–Jun 14", startMonth: 5, startDay: 26, endDay: 14, location: "Prime Tower, Zürich", type: "provisional", source: "Alta Vista Events", notes: "20-day run · Premium Zürich location", visitors: "" , url: "https://www.streetfood-park.com/"},
-  { name: "12th Street Food Park Dielsdorf", dates: "May 29–31", startMonth: 5, startDay: 29, endDay: 31, location: "Horse Park, Dielsdorf", type: "provisional", source: "Alta Vista Events", visitors: "" , url: "https://www.streetfood-park.com/"},
-  { name: "7th Street Food Park Winterthur", dates: "Jun 5–7", startMonth: 6, startDay: 5, endDay: 7, location: "Teuchelweiherplatz, Winterthur", type: "provisional", source: "Alta Vista Events", visitors: "" , url: "https://www.streetfood-park.com/"},
-  { name: "1st Street Food Park Zug am See", dates: "Jun 18–21", startMonth: 6, startDay: 18, endDay: 21, location: "Landsgemeindeplatz, Zug", type: "provisional", source: "Alta Vista Events", notes: "Lakeside setting", visitors: "" , url: "https://www.streetfood-park.com/"},
-  { name: "1st Street Food Park Bern", dates: "Jun 26–28", startMonth: 6, startDay: 26, endDay: 28, location: "Westside Center, Bern", type: "provisional", source: "Alta Vista Events", visitors: "" , url: "https://www.streetfood-park.com/"},
-  { name: "1st Street Food Park Siebnen", dates: "Jun 26–28", startMonth: 6, startDay: 26, endDay: 28, location: "Chilbiplatz, Siebnen", type: "provisional", source: "Alta Vista Events", visitors: "" , url: "https://www.streetfood-park.com/"},
-  { name: "1st Street Food Park Affoltern a.A.", dates: "Jul 3–5", startMonth: 7, startDay: 3, endDay: 5, location: "Kronenplatz, Affoltern am Albis", type: "provisional", source: "Alta Vista Events", visitors: "" , url: "https://www.streetfood-park.com/"},
-  { name: "Street Food Park @ Open Air Gampel", dates: "Aug 19–23", startMonth: 8, startDay: 19, endDay: 23, location: "Open Air Gampel, Valais", type: "provisional", source: "Alta Vista Events", notes: "Music festival food zone partnership", visitors: "100,000+" , url: "https://www.altavistaevents.ch/events"},
-  { name: "2nd Street Food Park Baden", dates: "Aug 27–30", startMonth: 8, startDay: 27, endDay: 30, location: "Brown Boveri Platz, Baden", type: "provisional", source: "Alta Vista Events", visitors: "" , url: "https://www.streetfood-park.com/"},
-  { name: "3rd Street Food Park — Mall of Switzerland", dates: "Sep 2–6", startMonth: 9, startDay: 2, endDay: 6, location: "Mall of Switzerland, Ebikon", type: "provisional", source: "Alta Vista Events", notes: "Biggest mall in CH", visitors: "" , url: "https://www.streetfood-park.com/"},
-  { name: "2nd Street Food Park Uster", dates: "Sep 11–13", startMonth: 9, startDay: 11, endDay: 13, location: "Zeughausareal, Uster", type: "provisional", source: "Alta Vista Events", visitors: "" , url: "https://www.streetfood-park.com/"},
-  { name: "2nd Street Food Park Chur", dates: "Sep 18–20", startMonth: 9, startDay: 18, endDay: 20, location: "Theaterplatz, Chur", type: "provisional", source: "Alta Vista Events", visitors: "" , url: "https://www.streetfood-park.com/"},
-  { name: "2nd Street Food Park Kloten", dates: "Oct 2–4", startMonth: 10, startDay: 2, endDay: 4, location: "Stadtplatz, Kloten", type: "provisional", source: "Alta Vista Events", visitors: "" , url: "https://www.streetfood-park.com/"},
-  { name: "16th ZH Street Food Park — Halloween", dates: "Oct 27–Nov 1", startMonth: 10, startDay: 27, endDay: 1, location: "Zürich HB — Haupthalle", type: "provisional", source: "Alta Vista Events", notes: "Halloween special edition", visitors: "" , url: "https://www.streetfoodparkzh.com/"},
-  { name: "Lake Noël Zug", dates: "Dec 10–23", startMonth: 12, startDay: 10, endDay: 23, location: "Seepromenade, Zug", type: "provisional", source: "Alta Vista Events", notes: "Christmas market · Lakeside", visitors: "" , url: "https://www.altavistaevents.ch/events"},
+  { name: "Zürich Marathon Food Zone", dates: "Apr 12", startMonth: 4, startDay: 12, endDay: 12, location: "Zürich", type: "provisional", source: "Alta Vista Events" , url: "https://www.altavistaevents.ch/events", visitors: "40,000", rev: "CHF 4,480", rank: 13, tier: "C", scores: {c:3,d:1,f:2,e:4,b:3}},
+  { name: "1st Street Food Park Wil", dates: "Apr 24–26", startMonth: 4, startDay: 24, endDay: 26, location: "Bleicheplatz, Wil (SG)", type: "provisional", source: "Alta Vista Events" , url: "https://www.streetfood-park.com/", visitors: "15,000", rev: "CHF 5,250", rank: 17, tier: "B", scores: {c:2,d:2,f:5,e:4,b:4}},
+  { name: "1st Street Food Park Einsiedeln", dates: "May 1–3", startMonth: 5, startDay: 1, endDay: 3, location: "Paracelsus Park, Einsiedeln", type: "provisional", source: "Alta Vista Events" , url: "https://www.streetfood-park.com/", visitors: "15,000", rev: "CHF 5,250", rank: 17, tier: "B", scores: {c:2,d:2,f:5,e:4,b:4}},
+  { name: "15th ZH Street Food Park — Season Opening", dates: "May 5–10", startMonth: 5, startDay: 5, endDay: 10, location: "Zürich HB — Haupthalle", type: "provisional", source: "Alta Vista Events", notes: "Flagship venue · 400K daily station traffic" , url: "https://www.streetfoodparkzh.com/", visitors: "65,000", rev: "CHF 18,200", rank: 19, tier: "A", scores: {c:3,d:3,f:5,e:3,b:5}},
+  { name: "2nd Street Food Park Burgdorf", dates: "May 15–17", startMonth: 5, startDay: 15, endDay: 17, location: "Markthalle, Burgdorf", type: "provisional", source: "Alta Vista Events" , url: "https://www.streetfood-park.com/", visitors: "15,000", rev: "CHF 5,250", rank: 17, tier: "B", scores: {c:2,d:2,f:5,e:4,b:4}},
+  { name: "3rd Street Food Park Aarau", dates: "May 22–25", startMonth: 5, startDay: 22, endDay: 25, location: "Maienzugplatz, Aarau", type: "provisional", source: "Alta Vista Events" , url: "https://www.streetfood-park.com/", visitors: "20,000", rev: "CHF 7,000", rank: 17, tier: "B", scores: {c:2,d:2,f:5,e:4,b:4}},
+  { name: "3rd Street Food Park — Prime Tower", dates: "May 26–Jun 14", startMonth: 5, startDay: 26, endDay: 14, location: "Prime Tower, Zürich", type: "provisional", source: "Alta Vista Events", notes: "20-day run · Premium Zürich location" , url: "https://www.streetfood-park.com/", visitors: "80,000", rev: "CHF 13,440", rank: 22, tier: "S", scores: {c:4,d:5,f:5,e:3,b:5}},
+  { name: "12th Street Food Park Dielsdorf", dates: "May 29–31", startMonth: 5, startDay: 29, endDay: 31, location: "Horse Park, Dielsdorf", type: "provisional", source: "Alta Vista Events" , url: "https://www.streetfood-park.com/", visitors: "15,000", rev: "CHF 5,250", rank: 17, tier: "B", scores: {c:2,d:2,f:5,e:4,b:4}},
+  { name: "7th Street Food Park Winterthur", dates: "Jun 5–7", startMonth: 6, startDay: 5, endDay: 7, location: "Teuchelweiherplatz, Winterthur", type: "provisional", source: "Alta Vista Events" , url: "https://www.streetfood-park.com/", visitors: "20,000", rev: "CHF 7,000", rank: 17, tier: "B", scores: {c:2,d:2,f:5,e:4,b:4}},
+  { name: "1st Street Food Park Zug am See", dates: "Jun 18–21", startMonth: 6, startDay: 18, endDay: 21, location: "Landsgemeindeplatz, Zug", type: "provisional", source: "Alta Vista Events", notes: "Lakeside setting" , url: "https://www.streetfood-park.com/", visitors: "20,000", rev: "CHF 7,000", rank: 17, tier: "B", scores: {c:2,d:2,f:5,e:4,b:4}},
+  { name: "1st Street Food Park Bern", dates: "Jun 26–28", startMonth: 6, startDay: 26, endDay: 28, location: "Westside Center, Bern", type: "provisional", source: "Alta Vista Events" , url: "https://www.streetfood-park.com/", visitors: "20,000", rev: "CHF 7,000", rank: 17, tier: "B", scores: {c:2,d:2,f:5,e:4,b:4}},
+  { name: "1st Street Food Park Siebnen", dates: "Jun 26–28", startMonth: 6, startDay: 26, endDay: 28, location: "Chilbiplatz, Siebnen", type: "provisional", source: "Alta Vista Events" , url: "https://www.streetfood-park.com/", visitors: "12,000", rev: "CHF 4,200", rank: 17, tier: "B", scores: {c:1,d:2,f:5,e:5,b:4}},
+  { name: "1st Street Food Park Affoltern a.A.", dates: "Jul 3–5", startMonth: 7, startDay: 3, endDay: 5, location: "Kronenplatz, Affoltern am Albis", type: "provisional", source: "Alta Vista Events" , url: "https://www.streetfood-park.com/", visitors: "12,000", rev: "CHF 4,200", rank: 17, tier: "B", scores: {c:1,d:2,f:5,e:5,b:4}},
+  { name: "Street Food Park @ Open Air Gampel", dates: "Aug 19–23", startMonth: 8, startDay: 19, endDay: 23, location: "Open Air Gampel, Valais", type: "provisional", source: "Alta Vista Events", notes: "Music festival food zone partnership" , url: "https://www.altavistaevents.ch/events", visitors: "100,000", rev: "CHF 14,000", rank: 18, tier: "A", scores: {c:5,d:3,f:3,e:3,b:4}},
+  { name: "2nd Street Food Park Baden", dates: "Aug 27–30", startMonth: 8, startDay: 27, endDay: 30, location: "Brown Boveri Platz, Baden", type: "provisional", source: "Alta Vista Events" , url: "https://www.streetfood-park.com/", visitors: "20,000", rev: "CHF 7,000", rank: 17, tier: "B", scores: {c:2,d:2,f:5,e:4,b:4}},
+  { name: "3rd Street Food Park — Mall of Switzerland", dates: "Sep 2–6", startMonth: 9, startDay: 2, endDay: 6, location: "Mall of Switzerland, Ebikon", type: "provisional", source: "Alta Vista Events", notes: "Biggest mall in CH" , url: "https://www.streetfood-park.com/", visitors: "40,000", rev: "CHF 11,200", rank: 19, tier: "A", scores: {c:3,d:3,f:5,e:3,b:5}},
+  { name: "2nd Street Food Park Uster", dates: "Sep 11–13", startMonth: 9, startDay: 11, endDay: 13, location: "Zeughausareal, Uster", type: "provisional", source: "Alta Vista Events" , url: "https://www.streetfood-park.com/", visitors: "15,000", rev: "CHF 5,250", rank: 17, tier: "B", scores: {c:2,d:2,f:5,e:4,b:4}},
+  { name: "2nd Street Food Park Chur", dates: "Sep 18–20", startMonth: 9, startDay: 18, endDay: 20, location: "Theaterplatz, Chur", type: "provisional", source: "Alta Vista Events" , url: "https://www.streetfood-park.com/", visitors: "15,000", rev: "CHF 5,250", rank: 17, tier: "B", scores: {c:2,d:2,f:5,e:4,b:4}},
+  { name: "2nd Street Food Park Kloten", dates: "Oct 2–4", startMonth: 10, startDay: 2, endDay: 4, location: "Stadtplatz, Kloten", type: "provisional", source: "Alta Vista Events" , url: "https://www.streetfood-park.com/", visitors: "15,000", rev: "CHF 5,250", rank: 17, tier: "B", scores: {c:2,d:2,f:5,e:4,b:4}},
+  { name: "16th ZH Street Food Park — Halloween", dates: "Oct 27–Nov 1", startMonth: 10, startDay: 27, endDay: 1, location: "Zürich HB — Haupthalle", type: "provisional", source: "Alta Vista Events", notes: "Halloween special edition" , url: "https://www.streetfoodparkzh.com/", visitors: "55,000", rev: "CHF 15,400", rank: 19, tier: "A", scores: {c:3,d:3,f:5,e:3,b:5}},
+  { name: "Lake Noël Zug", dates: "Dec 10–23", startMonth: 12, startDay: 10, endDay: 23, location: "Seepromenade, Zug", type: "provisional", source: "Alta Vista Events", notes: "Christmas market · Lakeside" , url: "https://www.altavistaevents.ch/events", visitors: "40,000", rev: "CHF 4,480", rank: 16, tier: "B", scores: {c:3,d:4,f:3,e:3,b:3}},
 
   // ═══════════════════════════════════════════
   // FIESTA / SPECIAL — Alta Vista special events
   // ═══════════════════════════════════════════
-  { name: "Fiesta Corazón Latino — Wknd 1", dates: "Jul 3–5", startMonth: 7, startDay: 3, endDay: 5, location: "Teuchelweiherplatz, Winterthur", type: "fiesta", source: "Alta Vista Events", notes: "Latin food & culture festival", visitors: "" , url: "https://www.fiestacorazonlatino.ch/"},
-  { name: "Fiesta Corazón Latino — Wknd 2", dates: "Jul 10–12", startMonth: 7, startDay: 10, endDay: 12, location: "Teuchelweiherplatz, Winterthur", type: "fiesta", source: "Alta Vista Events", visitors: "" , url: "https://www.fiestacorazonlatino.ch/"},
-  { name: "Fiesta Corazón Latino — Neuchâtel", dates: "Aug 21–23", startMonth: 8, startDay: 21, endDay: 23, location: "Place du Port, Neuchâtel", type: "fiesta", source: "Alta Vista Events", notes: "French-speaking Switzerland", visitors: "" , url: "https://www.fiestacorazonlatino.ch/"},
+  { name: "Fiesta Corazón Latino — Wknd 1", dates: "Jul 3–5", startMonth: 7, startDay: 3, endDay: 5, location: "Teuchelweiherplatz, Winterthur", type: "fiesta", source: "Alta Vista Events", notes: "Latin food & culture festival" , url: "https://www.fiestacorazonlatino.ch/", visitors: "15,000", rev: "CHF 5,250", rank: 17, tier: "B", scores: {c:2,d:2,f:4,e:4,b:5}},
+  { name: "Fiesta Corazón Latino — Wknd 2", dates: "Jul 10–12", startMonth: 7, startDay: 10, endDay: 12, location: "Teuchelweiherplatz, Winterthur", type: "fiesta", source: "Alta Vista Events" , url: "https://www.fiestacorazonlatino.ch/", visitors: "15,000", rev: "CHF 5,250", rank: 17, tier: "B", scores: {c:2,d:2,f:4,e:4,b:5}},
+  { name: "Fiesta Corazón Latino — Neuchâtel", dates: "Aug 21–23", startMonth: 8, startDay: 21, endDay: 23, location: "Place du Port, Neuchâtel", type: "fiesta", source: "Alta Vista Events", notes: "French-speaking Switzerland" , url: "https://www.fiestacorazonlatino.ch/", visitors: "12,000", rev: "CHF 4,200", rank: 16, tier: "B", scores: {c:1,d:2,f:4,e:4,b:5}},
 
   // ═══════════════════════════════════════════
   // MAJOR FESTIVALS — 40K+ crowd, confirmed food zones
   // ═══════════════════════════════════════════
-  { name: "Greenfield Festival", dates: "Jun 11–13", startMonth: 6, startDay: 11, endDay: 13, location: "Interlaken Airport, Interlaken", type: "rejected", source: "greenfieldfestival.ch", notes: "Application rejected · CH's largest rock fest", visitors: "70,000+" , url: "https://greenfieldfestival.ch/en"},
-  { name: "OpenAir St. Gallen", dates: "Jun 25–28", startMonth: 6, startDay: 25, endDay: 28, location: "Sittertobel Valley, St. Gallen", type: "rejected", source: "openairsg.ch", notes: "Application rejected · Oldest CH open-air fest (since 1977)", visitors: "110,000+" , url: "https://www.openairsg.ch/"},
-  { name: "Frauenfeld Openair", dates: "Jul 8–11", startMonth: 7, startDay: 8, endDay: 11, location: "Grosse Allmend, Frauenfeld", type: "major", source: "openair-frauenfeld.ch", notes: "Europe's biggest hip-hop festival · High-volume quick service", visitors: "60,000–75,000" , url: "https://www.openair-frauenfeld.ch/"},
-  { name: "Moon+Stars Festival", dates: "Jul 9–19", startMonth: 7, startDay: 9, endDay: 19, location: "Piazza Grande, Locarno", type: "major", source: "moonandstars.ch", notes: "10 nights · 30+ food trucks on Food+Music Street", visitors: "100,000+" , url: "https://moonandstars.ch/"},
-  { name: "Gurtenfestival", dates: "Jul 15–18", startMonth: 7, startDay: 15, endDay: 18, location: "Gurten Mountain, Bern", type: "major", source: "gurtenfestival.ch", notes: "Mountain-top fest · Local & sustainable sourcing focus", visitors: "80,000–100,000" , url: "https://www.gurtenfestival.ch/"},
-  { name: "Paléo Festival Nyon", dates: "Jul 21–26", startMonth: 7, startDay: 21, endDay: 26, location: "Nyon", type: "major", source: "paleo.ch", notes: "Largest open-air in CH · 130 food stalls · Very competitive", visitors: "250,000+" , url: "https://www.paleo.ch/"},
-  { name: "Fête de Genève", dates: "Jul 30–Aug 9", startMonth: 7, startDay: 30, endDay: 9, location: "Lake Geneva shores, Geneva", type: "major", source: "fete-de-geneve.ch", notes: "10-day lakeside summer festival", visitors: "100,000+" , url: "https://geneve-geneve.ch/en/"},
-  { name: "Heitere Open Air", dates: "Aug 7–9", startMonth: 8, startDay: 7, endDay: 9, location: "Heitere-Platz, Zofingen", type: "major", source: "heitere.ch", notes: "35th edition · Pop, hip-hop & singer-songwriter", visitors: "46,000" , url: "https://heitere.ch/"},
-  { name: "Openair Gampel", dates: "Aug 19–23", startMonth: 8, startDay: 19, endDay: 23, location: "Festivalgelände, Gampel-Bratsch", type: "major", source: "openairgampel.ch", notes: "5 days · Kygo headlining · 25K daily capacity", visitors: "100,000+" , url: "https://www.openairgampel.ch/en/home"},
+  { name: "Greenfield Festival", dates: "Jun 11–13", startMonth: 6, startDay: 11, endDay: 13, location: "Interlaken Airport, Interlaken", type: "rejected", source: "greenfieldfestival.ch", notes: "Application rejected · CH's largest rock fest" , url: "https://greenfieldfestival.ch/en", visitors: "70,000", rev: "CHF 11,760", rank: 15, tier: "B", scores: {c:4,d:2,f:3,e:3,b:3}},
+  { name: "OpenAir St. Gallen", dates: "Jun 25–28", startMonth: 6, startDay: 25, endDay: 28, location: "Sittertobel Valley, St. Gallen", type: "rejected", source: "openairsg.ch", notes: "Application rejected · Oldest CH open-air fest (since 1977)" , url: "https://www.openairsg.ch/", visitors: "110,000", rev: "CHF 15,400", rank: 15, tier: "B", scores: {c:5,d:2,f:3,e:2,b:3}},
+  { name: "Frauenfeld Openair", dates: "Jul 8–11", startMonth: 7, startDay: 8, endDay: 11, location: "Grosse Allmend, Frauenfeld", type: "major", source: "openair-frauenfeld.ch", notes: "Europe's biggest hip-hop festival · High-volume quick service" , url: "https://www.openair-frauenfeld.ch/", visitors: "67,000", rev: "CHF 11,256", rank: 15, tier: "B", scores: {c:4,d:2,f:3,e:2,b:4}},
+  { name: "Moon+Stars Festival", dates: "Jul 9–19", startMonth: 7, startDay: 9, endDay: 19, location: "Piazza Grande, Locarno", type: "major", source: "moonandstars.ch", notes: "10 nights · 30+ food trucks on Food+Music Street" , url: "https://moonandstars.ch/", visitors: "100,000", rev: "CHF 14,000", rank: 21, tier: "S", scores: {c:5,d:4,f:4,e:3,b:5}},
+  { name: "Gurtenfestival", dates: "Jul 15–18", startMonth: 7, startDay: 15, endDay: 18, location: "Gurten Mountain, Bern", type: "major", source: "gurtenfestival.ch", notes: "Mountain-top fest · Local & sustainable sourcing focus" , url: "https://www.gurtenfestival.ch/", visitors: "90,000", rev: "CHF 12,600", rank: 15, tier: "B", scores: {c:4,d:2,f:3,e:2,b:4}},
+  { name: "Paléo Festival Nyon", dates: "Jul 21–26", startMonth: 7, startDay: 21, endDay: 26, location: "Nyon", type: "major", source: "paleo.ch", notes: "Largest open-air in CH · 130 food stalls · Very competitive" , url: "https://www.paleo.ch/", visitors: "250,000", rev: "CHF 28,000", rank: 18, tier: "A", scores: {c:5,d:3,f:4,e:2,b:4}},
+  { name: "Fête de Genève", dates: "Jul 30–Aug 9", startMonth: 7, startDay: 30, endDay: 9, location: "Lake Geneva shores, Geneva", type: "major", source: "fete-de-geneve.ch", notes: "10-day lakeside summer festival" , url: "https://geneve-geneve.ch/en/", visitors: "100,000", rev: "CHF 11,200", rank: 19, tier: "A", scores: {c:5,d:4,f:3,e:3,b:4}},
+  { name: "Heitere Open Air", dates: "Aug 7–9", startMonth: 8, startDay: 7, endDay: 9, location: "Heitere-Platz, Zofingen", type: "major", source: "heitere.ch", notes: "35th edition · Pop, hip-hop & singer-songwriter" , url: "https://heitere.ch/", visitors: "46,000", rev: "CHF 7,728", rank: 15, tier: "B", scores: {c:3,d:2,f:3,e:3,b:4}},
+  { name: "Openair Gampel", dates: "Aug 19–23", startMonth: 8, startDay: 19, endDay: 23, location: "Festivalgelände, Gampel-Bratsch", type: "major", source: "openairgampel.ch", notes: "5 days · Kygo headlining · 25K daily capacity" , url: "https://www.openairgampel.ch/en/home", visitors: "100,000", rev: "CHF 14,000", rank: 18, tier: "A", scores: {c:5,d:3,f:3,e:3,b:4}},
 
   // ═══════════════════════════════════════════
   // DATABASE — Elaichi AG researched opportunities
   // ═══════════════════════════════════════════
-  { name: "Basel Fasnacht", dates: "Feb 23–25", startMonth: 2, startDay: 23, endDay: 25, location: "Basel", type: "database", source: "Elaichi Database", notes: "UNESCO heritage · 72-hour carnival · Traditional stands", visitors: "200,000–300,000" , url: "https://www.fasnachts-comite.ch/"},
-  { name: "Luzerner Fasnacht", dates: "Feb 2026", startMonth: 2, startDay: 12, endDay: 18, location: "Lucerne — Rathausquai area", type: "database", source: "Elaichi Database", notes: "6 days of celebrations · Pop-up bars & food", visitors: "150,000+" , url: "https://www.luzerner-fasnacht.ch/"},
-  { name: "Gluscht — Food & Wine Festival", dates: "Mar 2026", startMonth: 3, startDay: 14, endDay: 14, location: "Fribourg", type: "database", source: "Elaichi Database", notes: "Single-day food & wine tastings", visitors: "10,000+" , url: "https://www.fribourgtourisme.ch/"},
-  { name: "Street Food Tour Switzerland", dates: "Apr–Sep 2026", startMonth: 4, startDay: 1, endDay: 26, location: "20 cities across Switzerland", type: "database", source: "streetfood-festivals.ch", notes: "11th season · 20 stops · 50+ vendors per stop · Free admission", visitors: "600,000+ total" , url: "https://streetfood-festivals.ch/en/"},
-  { name: "BEA Bern (Berner Ausstellung)", dates: "Apr 24–May 3", startMonth: 4, startDay: 24, endDay: 3, location: "BERNEXPO, Bern", type: "database", source: "beaexpo.ch", notes: "Major spring trade fair · 10 days · Multiple food areas", visitors: "300,000+" , url: "https://www.beaexpo.ch/"},
-  { name: "FOOD ZURICH", dates: "Jun 12–22", startMonth: 6, startDay: 12, endDay: 22, location: "Zürich — various venues", type: "database", source: "foodzurich.com", notes: "3rd largest food fest in Europe · 100+ events · Apply early", visitors: "100,000+" , url: "https://www.foodzurich.com/"},
-  { name: "Street Food Festival Zürich", dates: "Jun 2026", startMonth: 6, startDay: 12, endDay: 28, location: "Hardturmbrache, Zürich", type: "database", source: "streetfoodfestival.ch", notes: "Multi-week · 150+ vendors · Large-scale", visitors: "50,000+" , url: "https://www.streetfoodfestival.ch/"},
-  { name: "StrEAT Food Festival Vevey", dates: "Jun 25–28", startMonth: 6, startDay: 25, endDay: 28, location: "Quai Perdonnet, Vevey", type: "database", source: "vevey-streatfoodfest.ch", notes: "370m lakeside 'longest table' · 30+ food trucks", visitors: "40,000–60,000" , url: "https://www.vevey-streatfoodfest.ch/"},
-  { name: "Montreux Jazz Festival", dates: "Jul 2026", startMonth: 7, startDay: 3, endDay: 18, location: "Montreux — lakeside", type: "database", source: "montreuxjazzfestival.com", notes: "16 days · 50+ food stands · 2,500m² terrace · Apply Nov–Jan", visitors: "250,000+" , url: "https://www.montreuxjazzfestival.com/"},
-  { name: "Lugano LongLake Festival", dates: "Jul 9–26", startMonth: 7, startDay: 9, endDay: 26, location: "Lakefront & Parco Ciani, Lugano", type: "database", source: "longlake.ch", notes: "18 days · 300+ free events · Food trucks in Parco Ciani", visitors: "150,000+" , url: "https://www.longlake.ch/"},
-  { name: "Blue Balls Festival Lucerne", dates: "Jul 2026", startMonth: 7, startDay: 18, endDay: 26, location: "KKL & Lakeside, Lucerne", type: "database", source: "blueballs.ch", notes: "9 days · High-traffic lakeside spots", visitors: "100,000+" , url: "https://www.blueballs.ch/"},
-  { name: "Swiss National Day", dates: "Aug 1", startMonth: 8, startDay: 1, endDay: 1, location: "All Switzerland — nationwide", type: "database", source: "Elaichi Database", notes: "Falls on Saturday in 2026 · Contact municipalities 3–6 months prior", visitors: "1,000,000+" , url: "https://www.myswitzerland.com/en-us/experiences/events/"},
-  { name: "Locarno Film Festival", dates: "Aug 2026", startMonth: 8, startDay: 5, endDay: 15, location: "Piazza Grande, Locarno", type: "database", source: "locarnofestival.ch", notes: "Dedicated food truck area at 'La Rotonda'", visitors: "150,000+" , url: "https://www.locarnofestival.ch/"},
-  { name: "Zürich Dörflifäscht", dates: "Aug 2026", startMonth: 8, startDay: 28, endDay: 30, location: "Niederdorf, Zürich", type: "database", source: "Elaichi Database", notes: "Niederdorf quarter transforms into party mile", visitors: "50,000+" , url: "https://www.zuerich.com/en/events-nightlife/event-highlights"},
-  { name: "Solothurn Street Food Festival", dates: "Aug 2026", startMonth: 8, startDay: 28, endDay: 30, location: "Solothurn", type: "database", source: "Elaichi Database", notes: "3-day street food focus", visitors: "20,000+" , url: "https://streetfood-festivals.ch/en/"},
-  { name: "Lozärner Määs (Lucerne Autumn Fair)", dates: "Oct 3–18", startMonth: 10, startDay: 3, endDay: 18, location: "Inseli & KKL area, Lucerne", type: "database", source: "stadtluzern.ch", notes: "16 days · 100+ market houses · Apply mid-Nov prior year", visitors: "450,000+" , url: "https://www.luzern.com/en/highlights/events/lozaerner-maeas/"},
-  { name: "OLMA St. Gallen", dates: "Oct 8–18", startMonth: 10, startDay: 8, endDay: 18, location: "OLMA Messen, St. Gallen", type: "database", source: "olma-messen.ch", notes: "CH's largest public trade fair · 11 days · Food halls", visitors: "350,000+" , url: "https://www.olma-messen.ch/"},
-  { name: "Zürich Christmas Markets", dates: "Nov–Dec 2026", startMonth: 11, startDay: 19, endDay: 24, location: "Hauptbahnhof & Sechseläutenplatz, Zürich", type: "database", source: "zuerich.com", notes: "Multiple market locations · Apply summer/fall", visitors: "200,000+" , url: "https://www.zuerich.com/en/events-nightlife/event-highlights/christmas"},
-  { name: "Montreux Christmas Market", dates: "Nov 20–Dec 24", startMonth: 11, startDay: 20, endDay: 24, location: "Lakeside, Montreux", type: "database", source: "montreuxnoel.com", notes: "One of CH's most beautiful Xmas markets · Lakeside chalets", visitors: "400,000+" , url: "https://www.montreuxnoel.com/"},
-  { name: "Basel Christmas Market", dates: "Nov 26–Dec 23", startMonth: 11, startDay: 26, endDay: 23, location: "Barfüsserplatz & Münsterplatz, Basel", type: "database", source: "basel.com", notes: "CH's oldest Xmas market · 150+ wooden chalets", visitors: "300,000+" , url: "https://www.basel.com/en/christmas"},
-  { name: "Bern Christmas Markets", dates: "Nov 20–Dec 28", startMonth: 11, startDay: 20, endDay: 28, location: "Kleine Schanze & Old Town, Bern", type: "database", source: "bern.com", notes: "UNESCO Old Town · 5 market locations · 50+ stalls", visitors: "200,000+" , url: "https://www.bern.com/en/christmas"},
-  { name: "Lausanne Christmas Markets", dates: "Nov 20–Dec 24", startMonth: 11, startDay: 20, endDay: 24, location: "6 locations, Lausanne", type: "database", source: "lausanne-noel.ch", notes: "6 themed markets · Free Christmas train", visitors: "150,000+" , url: "https://www.lausanne-noel.ch/"},
-  { name: "Zurich Street Food Festival Winter", dates: "Winter 2026", startMonth: 12, startDay: 1, endDay: 15, location: "Zürich", type: "database", source: "streetfoodfestival.ch", notes: "Winter edition of popular street food fest", visitors: "30,000+" , url: "https://www.streetfoodfestival.ch/"},
+  { name: "Basel Fasnacht", dates: "Feb 23–25", startMonth: 2, startDay: 23, endDay: 25, location: "Basel", type: "database", source: "Elaichi Database", notes: "UNESCO heritage · 72-hour carnival · Traditional stands" , url: "https://www.fasnachts-comite.ch/", visitors: "250,000", rev: "CHF 17,500", rank: 14, tier: "C", scores: {c:5,d:2,f:2,e:2,b:3}},
+  { name: "Luzerner Fasnacht", dates: "Feb 2026", startMonth: 2, startDay: 12, endDay: 18, location: "Lucerne — Rathausquai area", type: "database", source: "Elaichi Database", notes: "6 days of celebrations · Pop-up bars & food" , url: "https://www.luzerner-fasnacht.ch/", visitors: "150,000", rev: "CHF 8,400", rank: 15, tier: "B", scores: {c:5,d:3,f:2,e:2,b:3}},
+  { name: "Gluscht — Food & Wine Festival", dates: "Mar 2026", startMonth: 3, startDay: 14, endDay: 14, location: "Fribourg", type: "database", source: "Elaichi Database", notes: "Single-day food & wine tastings" , url: "https://www.fribourgtourisme.ch/", visitors: "10,000", rev: "CHF 4,200", rank: 14, tier: "C", scores: {c:1,d:1,f:5,e:3,b:4}},
+  { name: "Street Food Tour Switzerland", dates: "Apr–Sep 2026", startMonth: 4, startDay: 1, endDay: 26, location: "20 cities across Switzerland", type: "database", source: "streetfood-festivals.ch", notes: "11th season · 20 stops · 50+ vendors per stop · Free admission" , url: "https://streetfood-festivals.ch/en/", visitors: "40,000", rev: "CHF 14,000", rank: 18, tier: "A", scores: {c:3,d:2,f:5,e:3,b:5}},
+  { name: "BEA Bern (Berner Ausstellung)", dates: "Apr 24–May 3", startMonth: 4, startDay: 24, endDay: 3, location: "BERNEXPO, Bern", type: "database", source: "beaexpo.ch", notes: "Major spring trade fair · 10 days · Multiple food areas" , url: "https://www.beaexpo.ch/", visitors: "300,000", rev: "CHF 16,800", rank: 18, tier: "A", scores: {c:5,d:4,f:3,e:3,b:3}},
+  { name: "FOOD ZURICH", dates: "Jun 12–22", startMonth: 6, startDay: 12, endDay: 22, location: "Zürich — various venues", type: "database", source: "foodzurich.com", notes: "3rd largest food fest in Europe · 100+ events · Apply early" , url: "https://www.foodzurich.com/", visitors: "100,000", rev: "CHF 14,000", rank: 22, tier: "S", scores: {c:5,d:4,f:5,e:3,b:5}},
+  { name: "Street Food Festival Zürich", dates: "Jun 2026", startMonth: 6, startDay: 12, endDay: 28, location: "Hardturmbrache, Zürich", type: "database", source: "streetfoodfestival.ch", notes: "Multi-week · 150+ vendors · Large-scale" , url: "https://www.streetfoodfestival.ch/", visitors: "50,000", rev: "CHF 10,500", rank: 20, tier: "A", scores: {c:3,d:4,f:5,e:3,b:5}},
+  { name: "StrEAT Food Festival Vevey", dates: "Jun 25–28", startMonth: 6, startDay: 25, endDay: 28, location: "Quai Perdonnet, Vevey", type: "database", source: "vevey-streatfoodfest.ch", notes: "370m lakeside 'longest table' · 30+ food trucks" , url: "https://www.vevey-streatfoodfest.ch/", visitors: "50,000", rev: "CHF 14,000", rank: 18, tier: "A", scores: {c:3,d:2,f:5,e:3,b:5}},
+  { name: "Montreux Jazz Festival", dates: "Jul 2026", startMonth: 7, startDay: 3, endDay: 18, location: "Montreux — lakeside", type: "database", source: "montreuxjazzfestival.com", notes: "16 days · 50+ food stands · 2,500m² terrace · Apply Nov–Jan" , url: "https://www.montreuxjazzfestival.com/", visitors: "250,000", rev: "CHF 14,000", rank: 19, tier: "A", scores: {c:5,d:5,f:3,e:2,b:4}},
+  { name: "Lugano LongLake Festival", dates: "Jul 9–26", startMonth: 7, startDay: 9, endDay: 26, location: "Lakefront & Parco Ciani, Lugano", type: "database", source: "longlake.ch", notes: "18 days · 300+ free events · Food trucks in Parco Ciani" , url: "https://www.longlake.ch/", visitors: "150,000", rev: "CHF 8,400", rank: 20, tier: "A", scores: {c:5,d:5,f:3,e:3,b:4}},
+  { name: "Blue Balls Festival Lucerne", dates: "Jul 2026", startMonth: 7, startDay: 18, endDay: 26, location: "KKL & Lakeside, Lucerne", type: "database", source: "blueballs.ch", notes: "9 days · High-traffic lakeside spots" , url: "https://www.blueballs.ch/", visitors: "100,000", rev: "CHF 8,400", rank: 19, tier: "A", scores: {c:5,d:4,f:3,e:3,b:4}},
+  { name: "Swiss National Day", dates: "Aug 1", startMonth: 8, startDay: 1, endDay: 1, location: "All Switzerland — nationwide", type: "database", source: "Elaichi Database", notes: "Falls on Saturday in 2026 · Contact municipalities 3–6 months prior" , url: "https://www.myswitzerland.com/en-us/experiences/events/", visitors: "50,000", rev: "CHF 7,000", rank: 13, tier: "C", scores: {c:3,d:1,f:2,e:3,b:4}},
+  { name: "Locarno Film Festival", dates: "Aug 2026", startMonth: 8, startDay: 5, endDay: 15, location: "Piazza Grande, Locarno", type: "database", source: "locarnofestival.ch", notes: "Dedicated food truck area at 'La Rotonda'" , url: "https://www.locarnofestival.ch/", visitors: "150,000", rev: "CHF 10,500", rank: 19, tier: "A", scores: {c:5,d:4,f:3,e:3,b:4}},
+  { name: "Zürich Dörflifäscht", dates: "Aug 2026", startMonth: 8, startDay: 28, endDay: 30, location: "Niederdorf, Zürich", type: "database", source: "Elaichi Database", notes: "Niederdorf quarter transforms into party mile" , url: "https://www.zuerich.com/en/events-nightlife/event-highlights", visitors: "50,000", rev: "CHF 8,400", rank: 15, tier: "B", scores: {c:3,d:2,f:3,e:3,b:4}},
+  { name: "Solothurn Street Food Festival", dates: "Aug 2026", startMonth: 8, startDay: 28, endDay: 30, location: "Solothurn", type: "database", source: "Elaichi Database", notes: "3-day street food focus" , url: "https://streetfood-festivals.ch/en/", visitors: "20,000", rev: "CHF 7,000", rank: 18, tier: "A", scores: {c:2,d:2,f:5,e:4,b:5}},
+  { name: "Lozärner Määs (Lucerne Autumn Fair)", dates: "Oct 3–18", startMonth: 10, startDay: 3, endDay: 18, location: "Inseli & KKL area, Lucerne", type: "database", source: "stadtluzern.ch", notes: "16 days · 100+ market houses · Apply mid-Nov prior year" , url: "https://www.luzern.com/en/highlights/events/lozaerner-maeas/", visitors: "450,000", rev: "CHF 12,600", rank: 19, tier: "A", scores: {c:5,d:5,f:3,e:3,b:3}},
+  { name: "OLMA St. Gallen", dates: "Oct 8–18", startMonth: 10, startDay: 8, endDay: 18, location: "OLMA Messen, St. Gallen", type: "database", source: "olma-messen.ch", notes: "CH's largest public trade fair · 11 days · Food halls" , url: "https://www.olma-messen.ch/", visitors: "360,000", rev: "CHF 10,080", rank: 18, tier: "A", scores: {c:5,d:4,f:3,e:3,b:3}},
+  { name: "Zürich Christmas Markets", dates: "Nov–Dec 2026", startMonth: 11, startDay: 19, endDay: 24, location: "Hauptbahnhof & Sechseläutenplatz, Zürich", type: "database", source: "zuerich.com", notes: "Multiple market locations · Apply summer/fall" , url: "https://www.zuerich.com/en/events-nightlife/event-highlights/christmas", visitors: "200,000", rev: "CHF 5,600", rank: 19, tier: "A", scores: {c:5,d:5,f:3,e:3,b:3}},
+  { name: "Montreux Christmas Market", dates: "Nov 20–Dec 24", startMonth: 11, startDay: 20, endDay: 24, location: "Lakeside, Montreux", type: "database", source: "montreuxnoel.com", notes: "One of CH's most beautiful Xmas markets · Lakeside chalets" , url: "https://www.montreuxnoel.com/", visitors: "400,000", rev: "CHF 8,400", rank: 18, tier: "A", scores: {c:5,d:5,f:3,e:2,b:3}},
+  { name: "Basel Christmas Market", dates: "Nov 26–Dec 23", startMonth: 11, startDay: 26, endDay: 23, location: "Barfüsserplatz & Münsterplatz, Basel", type: "database", source: "basel.com", notes: "CH's oldest Xmas market · 150+ wooden chalets" , url: "https://www.basel.com/en/christmas", visitors: "300,000", rev: "CHF 6,300", rank: 18, tier: "A", scores: {c:5,d:5,f:3,e:2,b:3}},
+  { name: "Bern Christmas Markets", dates: "Nov 20–Dec 28", startMonth: 11, startDay: 20, endDay: 28, location: "Kleine Schanze & Old Town, Bern", type: "database", source: "bern.com", notes: "UNESCO Old Town · 5 market locations · 50+ stalls" , url: "https://www.bern.com/en/christmas", visitors: "200,000", rev: "CHF 4,200", rank: 19, tier: "A", scores: {c:5,d:5,f:3,e:3,b:3}},
+  { name: "Lausanne Christmas Markets", dates: "Nov 20–Dec 24", startMonth: 11, startDay: 20, endDay: 24, location: "6 locations, Lausanne", type: "database", source: "lausanne-noel.ch", notes: "6 themed markets · Free Christmas train" , url: "https://www.lausanne-noel.ch/", visitors: "150,000", rev: "CHF 3,150", rank: 19, tier: "A", scores: {c:5,d:5,f:3,e:3,b:3}},
+  { name: "Zurich Street Food Festival Winter", dates: "Winter 2026", startMonth: 12, startDay: 1, endDay: 15, location: "Zürich", type: "database", source: "streetfoodfestival.ch", notes: "Winter edition of popular street food fest" , url: "https://www.streetfoodfestival.ch/", visitors: "30,000", rev: "CHF 8,400", rank: 18, tier: "A", scores: {c:2,d:3,f:5,e:3,b:5}},
 
   // ═══════════════════════════════════════════
   // SCOUTED — New opportunities researched Mar 2026
   // ═══════════════════════════════════════════
-  { name: "SF Tour — Biel", dates: "Mar 27–29", startMonth: 3, startDay: 27, endDay: 29, location: "Esplanade, Biel", type: "scouted", source: "streetfood-festivals.ch", notes: "Streetfood Festival Original Tour · 45 stands · Free entry", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
-  { name: "SF Tour — Lausanne", dates: "Apr 3–6", startMonth: 4, startDay: 3, endDay: 6, location: "Montbenon, Lausanne", type: "scouted", source: "streetfood-festivals.ch", notes: "4-day stop · French-speaking CH", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/lausanne/" },
-  { name: "SF Tour — Bern", dates: "Apr 10–12", startMonth: 4, startDay: 10, endDay: 12, location: "Nationales Pferdezentrum, Bern", type: "scouted", source: "streetfood-festivals.ch", notes: "Capital city stop", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/bern/" },
-  { name: "SF Tour — Luzern", dates: "Apr 17–19", startMonth: 4, startDay: 17, endDay: 19, location: "Eiszentrum, Luzern", type: "scouted", source: "streetfood-festivals.ch", notes: "Tourist hotspot", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
-  { name: "SF Tour — Zug", dates: "Apr 24–26", startMonth: 4, startDay: 24, endDay: 26, location: "Seepromenade, Zug", type: "scouted", source: "streetfood-festivals.ch", notes: "NEW stop for 2026 · Lakeside", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
-  { name: "SF Tour — Solothurn", dates: "May 1–3", startMonth: 5, startDay: 1, endDay: 3, location: "Attisholz-Areal, Solothurn", type: "scouted", source: "streetfood-festivals.ch", notes: "Industrial heritage venue", visitors: "30,000+", url: "https://streetfood-festivals.ch/en/" },
-  { name: "SF Tour — Basel", dates: "May 8–10", startMonth: 5, startDay: 8, endDay: 10, location: "Messegelände, Basel", type: "scouted", source: "streetfood-festivals.ch", notes: "Exhibition grounds", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
-  { name: "SF Tour — Baden", dates: "May 14–17", startMonth: 5, startDay: 14, endDay: 17, location: "Brown-Boveri-Platz, Baden", type: "scouted", source: "streetfood-festivals.ch", notes: "4-day run", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
-  { name: "SF Tour — Fribourg", dates: "May 22–25", startMonth: 5, startDay: 22, endDay: 25, location: "Bluefactory, Fribourg", type: "scouted", source: "streetfood-festivals.ch", notes: "4 days · Bilingual city", visitors: "30,000+", url: "https://streetfood-festivals.ch/en/" },
-  { name: "SF Tour — Olten", dates: "May 29–31", startMonth: 5, startDay: 29, endDay: 31, location: "Schützenmatte, Olten", type: "scouted", source: "streetfood-festivals.ch", notes: "Original tour birthplace (since 2015)", visitors: "30,000+", url: "https://streetfood-festivals.ch/en/" },
-  { name: "SF Tour — Locarno", dates: "Jun 3–6", startMonth: 6, startDay: 3, endDay: 6, location: "Lungolago, Locarno", type: "scouted", source: "streetfood-festivals.ch", notes: "4 days · Lakeside Ticino", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
-  { name: "SF Tour — St. Gallen", dates: "Jun 12–14", startMonth: 6, startDay: 12, endDay: 14, location: "Olma, St. Gallen", type: "scouted", source: "streetfood-festivals.ch", notes: "At the famous Olma grounds", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
-  { name: "SF Tour — Interlaken", dates: "Jun 19–21", startMonth: 6, startDay: 19, endDay: 21, location: "Interlaken Ost", type: "scouted", source: "streetfood-festivals.ch", notes: "Tourist magnet · Jungfrau region", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
-  { name: "SF Tour — Aarau", dates: "Aug 14–16", startMonth: 8, startDay: 14, endDay: 16, location: "Maienzugplatz, Aarau", type: "scouted", source: "streetfood-festivals.ch", notes: "Summer run", visitors: "30,000+", url: "https://streetfood-festivals.ch/en/" },
-  { name: "SF Tour — Langenthal", dates: "Aug 21–23", startMonth: 8, startDay: 21, endDay: 23, location: "Markthallenplatz, Langenthal", type: "scouted", source: "streetfood-festivals.ch", visitors: "30,000+", url: "https://streetfood-festivals.ch/en/" },
-  { name: "SF Tour — Basel St. Jakob", dates: "Aug 28–30", startMonth: 8, startDay: 28, endDay: 30, location: "St. Jakob, Basel", type: "scouted", source: "streetfood-festivals.ch", notes: "2nd Basel stop · Stadium area", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
-  { name: "SF Tour — Lugano", dates: "Sep 4–6", startMonth: 9, startDay: 4, endDay: 6, location: "Campo Marzio, Lugano", type: "scouted", source: "streetfood-festivals.ch", notes: "Italian-speaking CH", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
-  { name: "SF Tour — Bern WankdorfCity", dates: "Sep 11–13", startMonth: 9, startDay: 11, endDay: 13, location: "WankdorfCity, Bern", type: "scouted", source: "streetfood-festivals.ch", notes: "2nd Bern stop · Stadium district", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
-  { name: "SF Tour — Brig", dates: "Sep 18–20", startMonth: 9, startDay: 18, endDay: 20, location: "Rhonesand Platz, Brig", type: "scouted", source: "streetfood-festivals.ch", notes: "Valais · Gateway to Simplon", visitors: "20,000+", url: "https://streetfood-festivals.ch/en/" },
-  { name: "SF Tour — Thun", dates: "Sep 25–27", startMonth: 9, startDay: 25, endDay: 27, location: "Lachenwiese, Thun", type: "scouted", source: "streetfood-festivals.ch", notes: "Season finale · Lakeside", visitors: "30,000+", url: "https://streetfood-festivals.ch/en/" },
-  { name: "Stadtfest Brugg (STAFE26)", dates: "Aug 20–23 & 27–30", startMonth: 8, startDay: 20, endDay: 30, location: "Altstadt, Brugg", type: "scouted", source: "stafe26.ch", notes: "8-day city fest · 100+ food stands & trucks · Major acts", visitors: "100,000+", url: "https://www.stafe26.ch/" },
-  { name: "Stadtfest Glarus", dates: "Jun 19–21", startMonth: 6, startDay: 19, endDay: 21, location: "Glarus", type: "scouted", source: "MySwitzerland", notes: "3-day city festival", visitors: "30,000+", url: "https://www.myswitzerland.com/en-us/experiences/events/stadtfest-glarus-2026/" },
-  { name: "Knabenschiessen Zürich", dates: "Sep 12–14", startMonth: 9, startDay: 12, endDay: 14, location: "Albisgütli, Zürich", type: "scouted", source: "knabenschiessen.ch", notes: "ZH's largest folk fest · 800K+ visitors · Food stands", visitors: "800,000+", url: "https://www.knabenschiessen.ch/" },
-  { name: "Seenachtfest Rapperswil-Jona", dates: "Aug 7–9", startMonth: 8, startDay: 7, endDay: 9, location: "Seeufer, Rapperswil-Jona", type: "scouted", source: "rapperswil-zuerichsee.ch", notes: "Biggest summer event on Zürichsee · Fireworks · Food stalls", visitors: "50,000+", url: "https://www.rapperswil-zuerichsee.ch/de/seenachtfest-rapperswil-jona" },
-  { name: "Festa d'Autunno Lugano", dates: "Oct 2–4", startMonth: 10, startDay: 2, endDay: 4, location: "Lugano", type: "scouted", source: "Rick Steves", notes: "Harvest food & wine festival · Ticino", visitors: "30,000+", url: "https://www.luganoeventi.ch/" },
-  { name: "Zibelemärit Bern", dates: "Nov 23", startMonth: 11, startDay: 23, endDay: 23, location: "Old Town, Bern", type: "scouted", source: "Rick Steves", notes: "Traditional onion market · Single-day but massive footfall", visitors: "50,000+", url: "https://www.bern.com/en/detail/zibelemarit" },
-  { name: "Genusswoche / Semaine du Goût", dates: "Sep 17–27", startMonth: 9, startDay: 17, endDay: 27, location: "All Switzerland (Zürich = Ville du Goût 2026)", type: "scouted", source: "gout.ch", notes: "National food week · ZH is 2026 host city · Multiple events", visitors: "100,000+", url: "https://www.gout.ch/" },
-  { name: "Rheinfall Feuerwerk (Swiss National Day Eve)", dates: "Jul 31", startMonth: 7, startDay: 31, endDay: 31, location: "Rheinfall, Schaffhausen", type: "scouted", source: "Rick Steves", notes: "Iconic fireworks · Food stands · Eve of Aug 1", visitors: "50,000+", url: "https://www.rheinfall.ch/" },
-  { name: "Expovina Wine Fair Zürich", dates: "Nov 2026", startMonth: 11, startDay: 5, endDay: 18, location: "Lake Zürich boats (Bürkliplatz)", type: "scouted", source: "zuerich.com", notes: "10 boats on lake · 14 days · Premium clientele", visitors: "50,000+", url: "https://www.expovina.ch/" },
+  { name: "SF Tour — Biel", dates: "Mar 27–29", startMonth: 3, startDay: 27, endDay: 29, location: "Esplanade, Biel", type: "scouted", source: "streetfood-festivals.ch", notes: "Streetfood Festival Original Tour · 45 stands · Free entry", url: "https://streetfood-festivals.ch/en/" , visitors: "35,000", rev: "CHF 10,780", rank: 18, tier: "A", scores: {c:3,d:2,f:5,e:3,b:5}},
+  { name: "SF Tour — Lausanne", dates: "Apr 3–6", startMonth: 4, startDay: 3, endDay: 6, location: "Montbenon, Lausanne", type: "scouted", source: "streetfood-festivals.ch", notes: "4-day stop · French-speaking CH", url: "https://streetfood-festivals.ch/en/lausanne/" , visitors: "45,000", rev: "CHF 13,860", rank: 18, tier: "A", scores: {c:3,d:2,f:5,e:3,b:5}},
+  { name: "SF Tour — Bern", dates: "Apr 10–12", startMonth: 4, startDay: 10, endDay: 12, location: "Nationales Pferdezentrum, Bern", type: "scouted", source: "streetfood-festivals.ch", notes: "Capital city stop", url: "https://streetfood-festivals.ch/en/bern/" , visitors: "45,000", rev: "CHF 13,860", rank: 18, tier: "A", scores: {c:3,d:2,f:5,e:3,b:5}},
+  { name: "SF Tour — Luzern", dates: "Apr 17–19", startMonth: 4, startDay: 17, endDay: 19, location: "Eiszentrum, Luzern", type: "scouted", source: "streetfood-festivals.ch", notes: "Tourist hotspot", url: "https://streetfood-festivals.ch/en/" , visitors: "45,000", rev: "CHF 13,860", rank: 18, tier: "A", scores: {c:3,d:2,f:5,e:3,b:5}},
+  { name: "SF Tour — Zug", dates: "Apr 24–26", startMonth: 4, startDay: 24, endDay: 26, location: "Seepromenade, Zug", type: "scouted", source: "streetfood-festivals.ch", notes: "NEW stop for 2026 · Lakeside", url: "https://streetfood-festivals.ch/en/" , visitors: "35,000", rev: "CHF 10,780", rank: 18, tier: "A", scores: {c:3,d:2,f:5,e:3,b:5}},
+  { name: "SF Tour — Solothurn", dates: "May 1–3", startMonth: 5, startDay: 1, endDay: 3, location: "Attisholz-Areal, Solothurn", type: "scouted", source: "streetfood-festivals.ch", notes: "Industrial heritage venue", url: "https://streetfood-festivals.ch/en/" , visitors: "30,000", rev: "CHF 9,240", rank: 17, tier: "B", scores: {c:2,d:2,f:5,e:3,b:5}},
+  { name: "SF Tour — Basel", dates: "May 8–10", startMonth: 5, startDay: 8, endDay: 10, location: "Messegelände, Basel", type: "scouted", source: "streetfood-festivals.ch", notes: "Exhibition grounds", url: "https://streetfood-festivals.ch/en/" , visitors: "45,000", rev: "CHF 13,860", rank: 18, tier: "A", scores: {c:3,d:2,f:5,e:3,b:5}},
+  { name: "SF Tour — Baden", dates: "May 14–17", startMonth: 5, startDay: 14, endDay: 17, location: "Brown-Boveri-Platz, Baden", type: "scouted", source: "streetfood-festivals.ch", notes: "4-day run", url: "https://streetfood-festivals.ch/en/" , visitors: "35,000", rev: "CHF 10,780", rank: 18, tier: "A", scores: {c:3,d:2,f:5,e:3,b:5}},
+  { name: "SF Tour — Fribourg", dates: "May 22–25", startMonth: 5, startDay: 22, endDay: 25, location: "Bluefactory, Fribourg", type: "scouted", source: "streetfood-festivals.ch", notes: "4 days · Bilingual city", url: "https://streetfood-festivals.ch/en/" , visitors: "30,000", rev: "CHF 9,240", rank: 17, tier: "B", scores: {c:2,d:2,f:5,e:3,b:5}},
+  { name: "SF Tour — Olten", dates: "May 29–31", startMonth: 5, startDay: 29, endDay: 31, location: "Schützenmatte, Olten", type: "scouted", source: "streetfood-festivals.ch", notes: "Original tour birthplace (since 2015)", url: "https://streetfood-festivals.ch/en/" , visitors: "30,000", rev: "CHF 9,240", rank: 17, tier: "B", scores: {c:2,d:2,f:5,e:3,b:5}},
+  { name: "SF Tour — Locarno", dates: "Jun 3–6", startMonth: 6, startDay: 3, endDay: 6, location: "Lungolago, Locarno", type: "scouted", source: "streetfood-festivals.ch", notes: "4 days · Lakeside Ticino", url: "https://streetfood-festivals.ch/en/" , visitors: "40,000", rev: "CHF 12,320", rank: 18, tier: "A", scores: {c:3,d:2,f:5,e:3,b:5}},
+  { name: "SF Tour — St. Gallen", dates: "Jun 12–14", startMonth: 6, startDay: 12, endDay: 14, location: "Olma, St. Gallen", type: "scouted", source: "streetfood-festivals.ch", notes: "At the famous Olma grounds", url: "https://streetfood-festivals.ch/en/" , visitors: "40,000", rev: "CHF 12,320", rank: 18, tier: "A", scores: {c:3,d:2,f:5,e:3,b:5}},
+  { name: "SF Tour — Interlaken", dates: "Jun 19–21", startMonth: 6, startDay: 19, endDay: 21, location: "Interlaken Ost", type: "scouted", source: "streetfood-festivals.ch", notes: "Tourist magnet · Jungfrau region", url: "https://streetfood-festivals.ch/en/" , visitors: "40,000", rev: "CHF 12,320", rank: 18, tier: "A", scores: {c:3,d:2,f:5,e:3,b:5}},
+  { name: "SF Tour — Aarau", dates: "Aug 14–16", startMonth: 8, startDay: 14, endDay: 16, location: "Maienzugplatz, Aarau", type: "scouted", source: "streetfood-festivals.ch", notes: "Summer run", url: "https://streetfood-festivals.ch/en/" , visitors: "30,000", rev: "CHF 9,240", rank: 17, tier: "B", scores: {c:2,d:2,f:5,e:3,b:5}},
+  { name: "SF Tour — Langenthal", dates: "Aug 21–23", startMonth: 8, startDay: 21, endDay: 23, location: "Markthallenplatz, Langenthal", type: "scouted", source: "streetfood-festivals.ch", url: "https://streetfood-festivals.ch/en/" , visitors: "25,000", rev: "CHF 7,700", rank: 17, tier: "B", scores: {c:2,d:2,f:5,e:3,b:5}},
+  { name: "SF Tour — Basel St. Jakob", dates: "Aug 28–30", startMonth: 8, startDay: 28, endDay: 30, location: "St. Jakob, Basel", type: "scouted", source: "streetfood-festivals.ch", notes: "2nd Basel stop · Stadium area", url: "https://streetfood-festivals.ch/en/" , visitors: "40,000", rev: "CHF 12,320", rank: 18, tier: "A", scores: {c:3,d:2,f:5,e:3,b:5}},
+  { name: "SF Tour — Lugano", dates: "Sep 4–6", startMonth: 9, startDay: 4, endDay: 6, location: "Campo Marzio, Lugano", type: "scouted", source: "streetfood-festivals.ch", notes: "Italian-speaking CH", url: "https://streetfood-festivals.ch/en/" , visitors: "40,000", rev: "CHF 12,320", rank: 18, tier: "A", scores: {c:3,d:2,f:5,e:3,b:5}},
+  { name: "SF Tour — Bern WankdorfCity", dates: "Sep 11–13", startMonth: 9, startDay: 11, endDay: 13, location: "WankdorfCity, Bern", type: "scouted", source: "streetfood-festivals.ch", notes: "2nd Bern stop · Stadium district", url: "https://streetfood-festivals.ch/en/" , visitors: "40,000", rev: "CHF 12,320", rank: 18, tier: "A", scores: {c:3,d:2,f:5,e:3,b:5}},
+  { name: "SF Tour — Brig", dates: "Sep 18–20", startMonth: 9, startDay: 18, endDay: 20, location: "Rhonesand Platz, Brig", type: "scouted", source: "streetfood-festivals.ch", notes: "Valais · Gateway to Simplon", url: "https://streetfood-festivals.ch/en/" , visitors: "20,000", rev: "CHF 6,160", rank: 17, tier: "B", scores: {c:2,d:2,f:5,e:3,b:5}},
+  { name: "SF Tour — Thun", dates: "Sep 25–27", startMonth: 9, startDay: 25, endDay: 27, location: "Lachenwiese, Thun", type: "scouted", source: "streetfood-festivals.ch", notes: "Season finale · Lakeside", url: "https://streetfood-festivals.ch/en/" , visitors: "30,000", rev: "CHF 9,240", rank: 17, tier: "B", scores: {c:2,d:2,f:5,e:3,b:5}},
+  { name: "Stadtfest Brugg (STAFE26)", dates: "Aug 20–23 & 27–30", startMonth: 8, startDay: 20, endDay: 30, location: "Altstadt, Brugg", type: "scouted", source: "stafe26.ch", notes: "8-day city fest · 100+ food stands & trucks · Major acts", url: "https://www.stafe26.ch/" , visitors: "100,000", rev: "CHF 11,200", rank: 19, tier: "A", scores: {c:5,d:4,f:3,e:3,b:4}},
+  { name: "Stadtfest Glarus", dates: "Jun 19–21", startMonth: 6, startDay: 19, endDay: 21, location: "Glarus", type: "scouted", source: "MySwitzerland", notes: "3-day city festival", url: "https://www.myswitzerland.com/en-us/experiences/events/stadtfest-glarus-2026/" , visitors: "30,000", rev: "CHF 4,200", rank: 13, tier: "C", scores: {c:2,d:2,f:3,e:3,b:3}},
+  { name: "Knabenschiessen Zürich", dates: "Sep 12–14", startMonth: 9, startDay: 12, endDay: 14, location: "Albisgütli, Zürich", type: "scouted", source: "knabenschiessen.ch", notes: "ZH's largest folk fest · 800K+ visitors · Food stands", url: "https://www.knabenschiessen.ch/" , visitors: "800,000", rev: "CHF 11,200", rank: 15, tier: "B", scores: {c:5,d:2,f:3,e:2,b:3}},
+  { name: "Seenachtfest Rapperswil-Jona", dates: "Aug 7–9", startMonth: 8, startDay: 7, endDay: 9, location: "Seeufer, Rapperswil-Jona", type: "scouted", source: "rapperswil-zuerichsee.ch", notes: "Biggest summer event on Zürichsee · Fireworks · Food stalls", url: "https://www.rapperswil-zuerichsee.ch/de/seenachtfest-rapperswil-jona" , visitors: "50,000", rev: "CHF 7,000", rank: 15, tier: "B", scores: {c:3,d:2,f:3,e:3,b:4}},
+  { name: "Festa d'Autunno Lugano", dates: "Oct 2–4", startMonth: 10, startDay: 2, endDay: 4, location: "Lugano", type: "scouted", source: "Rick Steves", notes: "Harvest food & wine festival · Ticino", url: "https://www.luganoeventi.ch/" , visitors: "30,000", rev: "CHF 6,300", rank: 15, tier: "B", scores: {c:2,d:2,f:4,e:3,b:4}},
+  { name: "Zibelemärit Bern", dates: "Nov 23", startMonth: 11, startDay: 23, endDay: 23, location: "Old Town, Bern", type: "scouted", source: "Rick Steves", notes: "Traditional onion market · Single-day but massive footfall", url: "https://www.bern.com/en/detail/zibelemarit" , visitors: "50,000", rev: "CHF 7,000", rank: 13, tier: "C", scores: {c:3,d:1,f:3,e:3,b:3}},
+  { name: "Genusswoche / Semaine du Goût", dates: "Sep 17–27", startMonth: 9, startDay: 17, endDay: 27, location: "All Switzerland (Zürich = Ville du Goût 2026)", type: "scouted", source: "gout.ch", notes: "National food week · ZH is 2026 host city · Multiple events", url: "https://www.gout.ch/" , visitors: "100,000", rev: "CHF 7,000", rank: 22, tier: "S", scores: {c:5,d:4,f:5,e:3,b:5}},
+  { name: "Rheinfall Feuerwerk (Swiss National Day Eve)", dates: "Jul 31", startMonth: 7, startDay: 31, endDay: 31, location: "Rheinfall, Schaffhausen", type: "scouted", source: "Rick Steves", notes: "Iconic fireworks · Food stands · Eve of Aug 1", url: "https://www.rheinfall.ch/" , visitors: "50,000", rev: "CHF 5,600", rank: 12, tier: "C", scores: {c:3,d:1,f:2,e:3,b:3}},
+  { name: "Expovina Wine Fair Zürich", dates: "Nov 2026", startMonth: 11, startDay: 5, endDay: 18, location: "Lake Zürich boats (Bürkliplatz)", type: "scouted", source: "zuerich.com", notes: "10 boats on lake · 14 days · Premium clientele", url: "https://www.expovina.ch/" , visitors: "50,000", rev: "CHF 2,800", rank: 13, tier: "C", scores: {c:3,d:4,f:2,e:2,b:2}},
 ];
 
 const monthNames = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -1086,7 +1281,10 @@ function renderEvents() {
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
             ${ev.location}
           </div>
-          ${ev.visitors ? `<div class="visitor-badge">⚡ ${ev.visitors} visitors</div>` : ''}
+          ${ev.tier ? `<div class="rank-badge tier-${ev.tier}"><span class="tier-letter">${ev.tier}</span><span class="rank-score">${ev.rank}/25</span></div>` : ''}
+          ${ev.rev ? `<div class="rev-badge">${ev.rev} est. revenue</div>` : ''}
+          ${ev.visitors ? `<div class="visitor-badge">👥 ${ev.visitors} visitors</div>` : ''}
+          ${ev.scores ? `<div class="score-pills"><span title="Crowd">C:${ev.scores.c}</span><span title="Duration">D:${ev.scores.d}</span><span title="Food Focus">F:${ev.scores.f}</span><span title="Ease of Entry">E:${ev.scores.e}</span><span title="Brand Fit">B:${ev.scores.b}</span></div>` : ''}
           ${ev.notes ? `<div class="event-note">${ev.notes}</div>` : ''}
           ${ev.url ? `<a href="${ev.url}" target="_blank" rel="noopener" class="event-source" style="display:inline-block;color:#0984E3;text-decoration:underline;cursor:pointer;">↗ ${ev.source}</a>` : `<div class="event-source">via ${ev.source}</div>`}
         </div>
