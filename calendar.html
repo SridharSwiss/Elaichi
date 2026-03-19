@@ -247,6 +247,7 @@ body::before {
 .filter-btn.major.active { background: var(--indigo); border-color: var(--indigo); color: white; }
 .filter-btn.database.active { background: #E67E22; border-color: #E67E22; color: white; }
 .filter-btn.rejected.active { background: #B0A8A3; border-color: #B0A8A3; color: white; }
+.filter-btn.scouted.active { background: #0984E3; border-color: #0984E3; color: white; }
 
 /* CONTENT */
 .content {
@@ -315,6 +316,7 @@ body::before {
 .event-card.major::before { background: var(--indigo); }
 .event-card.database::before { background: #E67E22; }
 .event-card.rejected::before { background: #B0A8A3; }
+.event-card.scouted::before { background: #0984E3; }
 
 .event-card:hover {
   transform: translateY(-3px);
@@ -329,6 +331,7 @@ body::before {
 .event-card.database:hover { background: rgba(230, 126, 34, 0.06); }
 .event-card.rejected { opacity: 0.55; }
 .event-card.rejected:hover { background: rgba(176, 168, 163, 0.06); opacity: 0.75; }
+.event-card.scouted:hover { background: rgba(9, 132, 227, 0.06); }
 .event-card.rejected .event-name { text-decoration: line-through; text-decoration-color: var(--chili); }
 
 .card-top {
@@ -384,6 +387,11 @@ body::before {
   background: rgba(214,69,69,0.1);
   color: var(--chili);
   text-decoration: line-through;
+}
+
+.event-tag.scouted {
+  background: rgba(9,132,227,0.1);
+  color: #0769B5;
 }
 
 .event-name {
@@ -760,7 +768,7 @@ body::before {
   <p class="hero-sub">Track every confirmed gig, festival opportunity, and food park event across Switzerland — all in one place.</p>
   <div class="hero-stats">
     <div class="stat-item">
-      <div class="stat-num" id="totalEvents">59</div>
+      <div class="stat-num" id="totalEvents">88</div>
       <div class="stat-label">Total Events</div>
     </div>
     <div class="stat-item">
@@ -768,11 +776,11 @@ body::before {
       <div class="stat-label">Confirmed</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num" id="provisionalCount">56</div>
+      <div class="stat-num" id="provisionalCount">85</div>
       <div class="stat-label">Potential</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">11</div>
+      <div class="stat-num">12</div>
       <div class="stat-label">Months Active</div>
     </div>
   </div>
@@ -789,6 +797,7 @@ body::before {
     <button class="filter-btn major" onclick="filterEvents('major')">Major Festivals</button>
     <button class="filter-btn database" onclick="filterEvents('database')">DB Opportunities</button>
     <button class="filter-btn rejected" onclick="filterEvents('rejected')">Rejected</button>
+    <button class="filter-btn scouted" onclick="filterEvents('scouted')">Scouted (New!)</button>
 
     <div class="search-box">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
@@ -806,6 +815,7 @@ body::before {
     <div class="legend-item"><div class="legend-dot fiesta"></div> Fiesta / Special Events — High-visibility opportunity</div>
     <div class="legend-item"><div class="legend-dot major"></div> Major Festival — 40K+ crowd, food zones</div>
     <div class="legend-item"><div class="legend-dot" style="background:#E67E22"></div> DB Opportunity — From Elaichi research database</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#0984E3"></div> Scouted — New opportunities (10K+ CHF potential)</div>
     <div class="legend-item"><div class="legend-dot" style="background:#B0A8A3"></div> Rejected — Application not accepted</div>
   </div>
 
@@ -900,6 +910,39 @@ const events = [
   { name: "Bern Christmas Markets", dates: "Nov 20–Dec 28", startMonth: 11, startDay: 20, endDay: 28, location: "Kleine Schanze & Old Town, Bern", type: "database", source: "bern.com", notes: "UNESCO Old Town · 5 market locations · 50+ stalls", visitors: "200,000+" },
   { name: "Lausanne Christmas Markets", dates: "Nov 20–Dec 24", startMonth: 11, startDay: 20, endDay: 24, location: "6 locations, Lausanne", type: "database", source: "lausanne-noel.ch", notes: "6 themed markets · Free Christmas train", visitors: "150,000+" },
   { name: "Zurich Street Food Festival Winter", dates: "Winter 2026", startMonth: 12, startDay: 1, endDay: 15, location: "Zürich", type: "database", source: "streetfoodfestival.ch", notes: "Winter edition of popular street food fest", visitors: "30,000+" },
+
+  // ═══════════════════════════════════════════
+  // SCOUTED — New opportunities researched Mar 2026
+  // ═══════════════════════════════════════════
+  { name: "SF Tour — Biel", dates: "Mar 27–29", startMonth: 3, startDay: 27, endDay: 29, location: "Esplanade, Biel", type: "scouted", source: "streetfood-festivals.ch", notes: "Streetfood Festival Original Tour · 45 stands · Free entry", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
+  { name: "SF Tour — Lausanne", dates: "Apr 3–6", startMonth: 4, startDay: 3, endDay: 6, location: "Montbenon, Lausanne", type: "scouted", source: "streetfood-festivals.ch", notes: "4-day stop · French-speaking CH", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/lausanne/" },
+  { name: "SF Tour — Bern", dates: "Apr 10–12", startMonth: 4, startDay: 10, endDay: 12, location: "Nationales Pferdezentrum, Bern", type: "scouted", source: "streetfood-festivals.ch", notes: "Capital city stop", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/bern/" },
+  { name: "SF Tour — Luzern", dates: "Apr 17–19", startMonth: 4, startDay: 17, endDay: 19, location: "Eiszentrum, Luzern", type: "scouted", source: "streetfood-festivals.ch", notes: "Tourist hotspot", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
+  { name: "SF Tour — Zug", dates: "Apr 24–26", startMonth: 4, startDay: 24, endDay: 26, location: "Seepromenade, Zug", type: "scouted", source: "streetfood-festivals.ch", notes: "NEW stop for 2026 · Lakeside", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
+  { name: "SF Tour — Solothurn", dates: "May 1–3", startMonth: 5, startDay: 1, endDay: 3, location: "Attisholz-Areal, Solothurn", type: "scouted", source: "streetfood-festivals.ch", notes: "Industrial heritage venue", visitors: "30,000+", url: "https://streetfood-festivals.ch/en/" },
+  { name: "SF Tour — Basel", dates: "May 8–10", startMonth: 5, startDay: 8, endDay: 10, location: "Messegelände, Basel", type: "scouted", source: "streetfood-festivals.ch", notes: "Exhibition grounds", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
+  { name: "SF Tour — Baden", dates: "May 14–17", startMonth: 5, startDay: 14, endDay: 17, location: "Brown-Boveri-Platz, Baden", type: "scouted", source: "streetfood-festivals.ch", notes: "4-day run", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
+  { name: "SF Tour — Fribourg", dates: "May 22–25", startMonth: 5, startDay: 22, endDay: 25, location: "Bluefactory, Fribourg", type: "scouted", source: "streetfood-festivals.ch", notes: "4 days · Bilingual city", visitors: "30,000+", url: "https://streetfood-festivals.ch/en/" },
+  { name: "SF Tour — Olten", dates: "May 29–31", startMonth: 5, startDay: 29, endDay: 31, location: "Schützenmatte, Olten", type: "scouted", source: "streetfood-festivals.ch", notes: "Original tour birthplace (since 2015)", visitors: "30,000+", url: "https://streetfood-festivals.ch/en/" },
+  { name: "SF Tour — Locarno", dates: "Jun 3–6", startMonth: 6, startDay: 3, endDay: 6, location: "Lungolago, Locarno", type: "scouted", source: "streetfood-festivals.ch", notes: "4 days · Lakeside Ticino", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
+  { name: "SF Tour — St. Gallen", dates: "Jun 12–14", startMonth: 6, startDay: 12, endDay: 14, location: "Olma, St. Gallen", type: "scouted", source: "streetfood-festivals.ch", notes: "At the famous Olma grounds", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
+  { name: "SF Tour — Interlaken", dates: "Jun 19–21", startMonth: 6, startDay: 19, endDay: 21, location: "Interlaken Ost", type: "scouted", source: "streetfood-festivals.ch", notes: "Tourist magnet · Jungfrau region", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
+  { name: "SF Tour — Aarau", dates: "Aug 14–16", startMonth: 8, startDay: 14, endDay: 16, location: "Maienzugplatz, Aarau", type: "scouted", source: "streetfood-festivals.ch", notes: "Summer run", visitors: "30,000+", url: "https://streetfood-festivals.ch/en/" },
+  { name: "SF Tour — Langenthal", dates: "Aug 21–23", startMonth: 8, startDay: 21, endDay: 23, location: "Markthallenplatz, Langenthal", type: "scouted", source: "streetfood-festivals.ch", visitors: "30,000+", url: "https://streetfood-festivals.ch/en/" },
+  { name: "SF Tour — Basel St. Jakob", dates: "Aug 28–30", startMonth: 8, startDay: 28, endDay: 30, location: "St. Jakob, Basel", type: "scouted", source: "streetfood-festivals.ch", notes: "2nd Basel stop · Stadium area", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
+  { name: "SF Tour — Lugano", dates: "Sep 4–6", startMonth: 9, startDay: 4, endDay: 6, location: "Campo Marzio, Lugano", type: "scouted", source: "streetfood-festivals.ch", notes: "Italian-speaking CH", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
+  { name: "SF Tour — Bern WankdorfCity", dates: "Sep 11–13", startMonth: 9, startDay: 11, endDay: 13, location: "WankdorfCity, Bern", type: "scouted", source: "streetfood-festivals.ch", notes: "2nd Bern stop · Stadium district", visitors: "30,000–50,000", url: "https://streetfood-festivals.ch/en/" },
+  { name: "SF Tour — Brig", dates: "Sep 18–20", startMonth: 9, startDay: 18, endDay: 20, location: "Rhonesand Platz, Brig", type: "scouted", source: "streetfood-festivals.ch", notes: "Valais · Gateway to Simplon", visitors: "20,000+", url: "https://streetfood-festivals.ch/en/" },
+  { name: "SF Tour — Thun", dates: "Sep 25–27", startMonth: 9, startDay: 25, endDay: 27, location: "Lachenwiese, Thun", type: "scouted", source: "streetfood-festivals.ch", notes: "Season finale · Lakeside", visitors: "30,000+", url: "https://streetfood-festivals.ch/en/" },
+  { name: "Stadtfest Brugg (STAFE26)", dates: "Aug 20–23 & 27–30", startMonth: 8, startDay: 20, endDay: 30, location: "Altstadt, Brugg", type: "scouted", source: "stafe26.ch", notes: "8-day city fest · 100+ food stands & trucks · Major acts", visitors: "100,000+", url: "https://www.stafe26.ch/" },
+  { name: "Stadtfest Glarus", dates: "Jun 19–21", startMonth: 6, startDay: 19, endDay: 21, location: "Glarus", type: "scouted", source: "MySwitzerland", notes: "3-day city festival", visitors: "30,000+", url: "https://www.myswitzerland.com/en-us/experiences/events/stadtfest-glarus-2026/" },
+  { name: "Knabenschiessen Zürich", dates: "Sep 12–14", startMonth: 9, startDay: 12, endDay: 14, location: "Albisgütli, Zürich", type: "scouted", source: "knabenschiessen.ch", notes: "ZH's largest folk fest · 800K+ visitors · Food stands", visitors: "800,000+", url: "https://www.knabenschiessen.ch/" },
+  { name: "Seenachtfest Rapperswil-Jona", dates: "Aug 7–9", startMonth: 8, startDay: 7, endDay: 9, location: "Seeufer, Rapperswil-Jona", type: "scouted", source: "rapperswil-zuerichsee.ch", notes: "Biggest summer event on Zürichsee · Fireworks · Food stalls", visitors: "50,000+", url: "https://www.rapperswil-zuerichsee.ch/de/seenachtfest-rapperswil-jona" },
+  { name: "Festa d'Autunno Lugano", dates: "Oct 2–4", startMonth: 10, startDay: 2, endDay: 4, location: "Lugano", type: "scouted", source: "Rick Steves", notes: "Harvest food & wine festival · Ticino", visitors: "30,000+", url: "https://www.luganoeventi.ch/" },
+  { name: "Zibelemärit Bern", dates: "Nov 23", startMonth: 11, startDay: 23, endDay: 23, location: "Old Town, Bern", type: "scouted", source: "Rick Steves", notes: "Traditional onion market · Single-day but massive footfall", visitors: "50,000+", url: "https://www.bern.com/en/detail/zibelemarit" },
+  { name: "Genusswoche / Semaine du Goût", dates: "Sep 17–27", startMonth: 9, startDay: 17, endDay: 27, location: "All Switzerland (Zürich = Ville du Goût 2026)", type: "scouted", source: "gout.ch", notes: "National food week · ZH is 2026 host city · Multiple events", visitors: "100,000+", url: "https://www.gout.ch/" },
+  { name: "Rheinfall Feuerwerk (Swiss National Day Eve)", dates: "Jul 31", startMonth: 7, startDay: 31, endDay: 31, location: "Rheinfall, Schaffhausen", type: "scouted", source: "Rick Steves", notes: "Iconic fireworks · Food stands · Eve of Aug 1", visitors: "50,000+", url: "https://www.rheinfall.ch/" },
+  { name: "Expovina Wine Fair Zürich", dates: "Nov 2026", startMonth: 11, startDay: 5, endDay: 18, location: "Lake Zürich boats (Bürkliplatz)", type: "scouted", source: "zuerich.com", notes: "10 boats on lake · 14 days · Premium clientele", visitors: "50,000+", url: "https://www.expovina.ch/" },
 ];
 
 const monthNames = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -970,7 +1013,7 @@ function renderEvents() {
     `;
 
     monthEvents.forEach(ev => {
-      const typeLabel = ev.type === 'confirmed' ? 'CONFIRMED' : ev.type === 'fiesta' ? 'SPECIAL' : ev.type === 'major' ? 'MAJOR FESTIVAL' : ev.type === 'database' ? 'OPPORTUNITY' : ev.type === 'rejected' ? 'REJECTED' : 'PROVISIONAL';
+      const typeLabel = ev.type === 'confirmed' ? 'CONFIRMED' : ev.type === 'fiesta' ? 'SPECIAL' : ev.type === 'major' ? 'MAJOR FESTIVAL' : ev.type === 'database' ? 'OPPORTUNITY' : ev.type === 'rejected' ? 'REJECTED' : ev.type === 'scouted' ? 'SCOUTED' : 'PROVISIONAL';
       const nowBadge = ev.isNow ? `<span class="now-badge"><span class="live-dot"></span> Happening Now</span>` : '';
 
       html += `
@@ -986,7 +1029,7 @@ function renderEvents() {
           </div>
           ${ev.visitors ? `<div class="event-source" style="color: var(--saffron); opacity: 0.85; font-family: 'Space Mono'; font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 0.5rem;">⚡ ${ev.visitors} visitors</div>` : ''}
           ${ev.notes ? `<div class="event-source" style="color: var(--ink-soft); opacity: 0.65; font-family: 'DM Sans'; font-size: 0.72rem; text-transform: none; letter-spacing: 0;">${ev.notes}</div>` : ''}
-          <div class="event-source">via ${ev.source}</div>
+          ${ev.url ? `<a href="${ev.url}" target="_blank" rel="noopener" class="event-source" style="display:inline-block;color:#0984E3;text-decoration:underline;cursor:pointer;">↗ ${ev.source}</a>` : `<div class="event-source">via ${ev.source}</div>`}
         </div>
       `;
     });
