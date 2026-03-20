@@ -493,7 +493,91 @@ a.event-card {
 .event-card.confirmed .rev-badge { color: #00F5A0; }
 .event-card.confirmed .rank-score { color: rgba(255,255,255,0.4); }
 .event-card.confirmed .score-pills span { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.4); }
-.event-card.confirmed .visitor-badge { color: rgba(255,255,255,0.5); }
+.event-card.confirmed 
+/* CONFLICT BADGES & CLUSTERS */
+.conflict-badge {
+  position: absolute;
+  top: 10px; right: 10px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  background: #FFF3CD;
+  color: #856404;
+  padding: 3px 8px;
+  border-radius: 100px;
+  border: 1px solid #FFE69C;
+  z-index: 2;
+  letter-spacing: 0.02em;
+}
+.event-card.confirmed .conflict-badge,
+.event-card.rejected .conflict-badge { display: none; }
+
+.conflict-cluster {
+  margin-bottom: 2rem;
+  background: white;
+  border-radius: 16px;
+  border: 2px solid #FFE69C;
+  overflow: hidden;
+}
+.cluster-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 1rem 1.2rem;
+  background: #FFF9E6;
+  border-bottom: 1px solid #FFE69C;
+  flex-wrap: wrap;
+}
+.cluster-num {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  background: #856404;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+.cluster-dates {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  color: #856404;
+}
+.cluster-count {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--smoke);
+  margin-left: auto;
+}
+.cluster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+  padding: 1rem;
+}
+.cluster-grid .event-card {
+  margin: 0;
+}
+.conflict-best {
+  border: 2px solid #00F5A0 !important;
+  box-shadow: 0 0 0 3px rgba(0,245,160,0.12);
+}
+.best-pick {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 0.62rem;
+  color: #00B894;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.conflicts-header { margin-bottom: 1rem; }
+
+@media (max-width: 768px) {
+  .cluster-grid { grid-template-columns: 1fr; }
+  .cluster-header { gap: 6px; }
+  .cluster-num { font-size: 0.75rem; }
+}
+
+.visitor-badge { color: rgba(255,255,255,0.5); }
 .event-card.rejected .rev-badge { color: rgba(255,255,255,0.25); }
 .event-card.rejected .rank-score { color: rgba(255,255,255,0.2); }
 .event-card.rejected .score-pills span { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.2); }
@@ -1038,6 +1122,7 @@ a.event-card {
     <button class="filter-btn database" onclick="filterEvents('database')">DB Opportunities</button>
     <button class="filter-btn rejected" onclick="filterEvents('rejected')">Rejected</button>
     <button class="filter-btn scouted" onclick="filterEvents('scouted')">Scouted (New!)</button>
+    <button class="filter-btn" onclick="filterEvents('conflicts')" style="border-color:#FFE69C;color:#856404;background:#FFF9E6;">⚠️ Conflicts</button>
 
     <div class="search-box">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
@@ -1218,8 +1303,11 @@ function searchEvents(term) {
 
 function renderEvents() {
   let filtered = events;
+  const isConflictView = (currentFilter === 'conflicts');
 
   if (currentFilter === 'action') {
+    filtered = filtered.filter(e => e.type !== 'confirmed' && e.type !== 'rejected');
+  } else if (currentFilter === 'conflicts') {
     filtered = filtered.filter(e => e.type !== 'confirmed' && e.type !== 'rejected');
   } else if (currentFilter !== 'all') {
     filtered = filtered.filter(e => e.type === currentFilter);
@@ -1233,70 +1321,111 @@ function renderEvents() {
     );
   }
 
-  // Group by month
-  const grouped = {};
-  filtered.forEach(e => {
-    if (!grouped[e.startMonth]) grouped[e.startMonth] = [];
-    grouped[e.startMonth].push(e);
-  });
+  // === CONFLICT DETECTION ENGINE ===
+  function getRange(ev) {
+    const sm = ev.startMonth, sd = ev.startDay, ed = ev.endDay;
+    const s = new Date(2026, sm - 1, sd);
+    const e = ed < sd ? new Date(2026, sm, ed) : new Date(2026, sm - 1, ed);
+    return { s, e };
+  }
+  function ov(a, b) {
+    const ra = getRange(a), rb = getRange(b);
+    return ra.s <= rb.e && rb.s <= ra.e;
+  }
+  const act = events.filter(e => e.type !== 'confirmed' && e.type !== 'rejected');
+  const cMap = {};
+  act.forEach(a => { cMap[a.name] = []; });
+  for (let i = 0; i < act.length; i++) {
+    for (let j = i + 1; j < act.length; j++) {
+      if (ov(act[i], act[j])) {
+        cMap[act[i].name].push(act[j]);
+        cMap[act[j].name].push(act[i]);
+      }
+    }
+  }
 
   const container = document.getElementById('eventsContent');
-
   if (filtered.length === 0) {
-    container.innerHTML = `
-      <div class="empty-state">
-        <div class="emoji">🍛</div>
-        <p>No events match your filter. Try adjusting your search.</p>
-      </div>
-    `;
+    container.innerHTML = '<div class="empty-state"><div class="emoji">🍛</div><p>No events match.</p></div>';
     return;
   }
 
-  let html = '';
-  const sortedMonths = Object.keys(grouped).map(Number).sort((a, b) => a - b);
+  // === CONFLICTS COMPARISON VIEW ===
+  if (isConflictView) {
+    const parent = {};
+    filtered.forEach(e => { parent[e.name] = e.name; });
+    function find(x) { return parent[x] === x ? x : (parent[x] = find(parent[x])); }
+    function union(a, b) { parent[find(a)] = find(b); }
+    for (let i = 0; i < filtered.length; i++)
+      for (let j = i + 1; j < filtered.length; j++)
+        if (ov(filtered[i], filtered[j])) union(filtered[i].name, filtered[j].name);
 
-  sortedMonths.forEach(month => {
-    const monthEvents = grouped[month];
-    html += `
-      <div class="month-group">
-        <div class="month-header">
-          <span class="month-name">${monthNames[month]}</span>
-          <span class="month-count">${monthEvents.length} event${monthEvents.length > 1 ? 's' : ''}</span>
-        </div>
-        <div class="events-grid">
-    `;
+    const clusters = {};
+    filtered.forEach(e => { const r = find(e.name); if (!clusters[r]) clusters[r] = []; clusters[r].push(e); });
+    const cList = Object.values(clusters).filter(c => c.length > 1)
+      .sort((a, b) => a[0].startMonth - b[0].startMonth || a[0].startDay - b[0].startDay);
 
-    monthEvents.forEach(ev => {
-      const typeLabel = ev.type === 'confirmed' ? 'CONFIRMED' : ev.type === 'fiesta' ? 'SPECIAL' : ev.type === 'major' ? 'MAJOR FESTIVAL' : ev.type === 'database' ? 'OPPORTUNITY' : ev.type === 'rejected' ? 'REJECTED' : ev.type === 'scouted' ? 'SCOUTED' : 'PROVISIONAL';
-      const nowBadge = ev.isNow ? `<span class="now-badge"><span class="live-dot"></span> Happening Now</span>` : '';
+    let html = '<div class="conflicts-header"><h2 style="font-family:Syne;font-weight:700;font-size:1.4rem;margin-bottom:0.3rem;">⚠️ ' + cList.length + ' Date Conflict Clusters</h2><p style="font-size:0.82rem;color:var(--smoke);margin-bottom:1.5rem;">Events grouped by overlapping dates — highest-ranked shown first with ★ TOP PICK. Compare to decide.</p></div>';
 
-      html += `
-        <div class="event-card ${ev.type}">
-          <div class="card-top">
-            <span class="event-dates">${ev.dates}</span>
-            <span class="event-tag ${ev.type}">${typeLabel}</span>
-          </div>
-          <div class="event-name">${ev.name}${nowBadge}</div>
-          <div class="event-location">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-            ${ev.location}
-          </div>
-          ${ev.tier ? `<div class="rank-badge tier-${ev.tier}"><span class="tier-letter">${ev.tier}</span><span class="rank-score">${ev.rank}/25</span></div>` : ''}
-          ${ev.rev ? `<div class="rev-badge">${ev.rev} est. revenue</div>` : ''}
-          ${ev.visitors ? `<div class="visitor-badge">👥 ${ev.visitors} visitors</div>` : ''}
-          ${ev.scores ? `<div class="score-pills"><span title="Crowd">C:${ev.scores.c}</span><span title="Duration">D:${ev.scores.d}</span><span title="Food Focus">F:${ev.scores.f}</span><span title="Ease of Entry">E:${ev.scores.e}</span><span title="Brand Fit">B:${ev.scores.b}</span></div>` : ''}
-          ${ev.notes ? `<div class="event-note">${ev.notes}</div>` : ''}
-          ${ev.url ? `<a href="${ev.url}" target="_blank" rel="noopener" class="event-source" style="display:inline-block;color:#0984E3;text-decoration:underline;cursor:pointer;">↗ ${ev.source}</a>` : `<div class="event-source">via ${ev.source}</div>`}
-        </div>
-      `;
+    cList.forEach((cluster, ci) => {
+      cluster.sort((a, b) => (b.rank || 0) - (a.rank || 0) || parseInt((b.rev||'0').replace(/[^0-9]/g,'')) - parseInt((a.rev||'0').replace(/[^0-9]/g,'')));
+      const dateRange = [...new Set(cluster.map(e => e.dates))].join(' · ');
+      html += '<div class="conflict-cluster"><div class="cluster-header"><span class="cluster-num">Cluster ' + (ci+1) + '</span><span class="cluster-dates">' + dateRange + '</span><span class="cluster-count">' + cluster.length + ' competing</span></div><div class="cluster-grid">';
+
+      cluster.forEach((ev, idx) => {
+        const tl = ev.type === 'major' ? 'MAJOR' : ev.type === 'database' ? 'OPPORTUNITY' : ev.type === 'scouted' ? 'SCOUTED' : ev.type === 'fiesta' ? 'SPECIAL' : 'PROVISIONAL';
+        const best = idx === 0;
+        html += '<' + (ev.url ? 'a href="'+ev.url+'" target="_blank" rel="noopener"' : 'div') + ' class="event-card ' + ev.type + (best ? ' conflict-best' : '') + '" style="text-decoration:none;color:inherit;display:block;">';
+        if (best) html += '<div class="best-pick">★ TOP PICK</div>';
+        html += '<div class="card-top"><span class="event-dates">' + ev.dates + '</span><span class="event-tag ' + ev.type + '">' + tl + '</span></div>';
+        html += '<div class="event-name">' + ev.name + '</div>';
+        html += '<div class="event-location"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>' + ev.location + '</div>';
+        if (ev.tier) html += '<div class="rank-badge tier-' + ev.tier + '"><span class="tier-letter">' + ev.tier + '</span><span class="rank-score">' + ev.rank + '/25</span></div>';
+        if (ev.rev) html += '<div class="rev-badge">' + ev.rev + ' est. revenue</div>';
+        if (ev.visitors) html += '<div class="visitor-badge">👥 ' + ev.visitors + ' visitors</div>';
+        html += '</' + (ev.url ? 'a' : 'div') + '>';
+      });
+      html += '</div></div>';
     });
 
-    html += `</div></div>`;
+    container.innerHTML = html;
+    return;
+  }
+
+  // === NORMAL MONTH-GROUPED VIEW (with conflict badges) ===
+  let html = '';
+  const grouped = {};
+  filtered.forEach(e => { if (!grouped[e.startMonth]) grouped[e.startMonth] = []; grouped[e.startMonth].push(e); });
+
+  Object.keys(grouped).map(Number).sort((a, b) => a - b).forEach(month => {
+    const me = grouped[month];
+    html += '<div class="month-group"><div class="month-header"><span class="month-name">' + monthNames[month] + '</span><span class="month-count">' + me.length + ' event' + (me.length > 1 ? 's' : '') + '</span></div><div class="events-grid">';
+
+    me.forEach(ev => {
+      const tl = ev.type === 'confirmed' ? 'CONFIRMED' : ev.type === 'fiesta' ? 'SPECIAL' : ev.type === 'major' ? 'MAJOR FESTIVAL' : ev.type === 'database' ? 'OPPORTUNITY' : ev.type === 'rejected' ? 'REJECTED' : ev.type === 'scouted' ? 'SCOUTED' : 'PROVISIONAL';
+      const nb = ev.isNow ? '<span class="now-badge"><span class="live-dot"></span> Happening Now</span>' : '';
+      const cf = cMap[ev.name] || [];
+      const cb = cf.length > 0 && ev.type !== 'confirmed' && ev.type !== 'rejected' ? '<div class="conflict-badge">⚠️ ' + cf.length + ' clash' + (cf.length > 1 ? 'es' : '') + '</div>' : '';
+
+      html += '<' + (ev.url ? 'a href="'+ev.url+'" target="_blank" rel="noopener"' : 'div') + ' class="event-card ' + ev.type + '" style="text-decoration:none;color:inherit;display:block;">';
+      html += cb;
+      html += '<div class="card-top"><span class="event-dates">' + ev.dates + '</span><span class="event-tag ' + ev.type + '">' + tl + '</span></div>';
+      html += '<div class="event-name">' + ev.name + nb + '</div>';
+      html += '<div class="event-location"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>' + ev.location + '</div>';
+      if (ev.tier) html += '<div class="rank-badge tier-' + ev.tier + '"><span class="tier-letter">' + ev.tier + '</span><span class="rank-score">' + ev.rank + '/25</span></div>';
+      if (ev.rev) html += '<div class="rev-badge">' + ev.rev + ' est. revenue</div>';
+      if (ev.visitors) html += '<div class="visitor-badge">👥 ' + ev.visitors + ' visitors</div>';
+      if (ev.scores) html += '<div class="score-pills"><span title="Crowd">C:' + ev.scores.c + '</span><span title="Duration">D:' + ev.scores.d + '</span><span title="Food Focus">F:' + ev.scores.f + '</span><span title="Ease of Entry">E:' + ev.scores.e + '</span><span title="Brand Fit">B:' + ev.scores.b + '</span></div>';
+      if (ev.notes) html += '<div class="event-note">' + ev.notes + '</div>';
+      if (ev.url) html += '<span class="event-source" style="display:inline-block;color:#0984E3;text-decoration:underline;">↗ ' + ev.source + '</span>';
+      else html += '<div class="event-source">via ' + ev.source + '</div>';
+      html += '</' + (ev.url ? 'a' : 'div') + '>';
+    });
+
+    html += '</div></div>';
   });
 
   container.innerHTML = html;
-
-  // Update stats
   const total = filtered.length;
   const conf = filtered.filter(e => e.type === 'confirmed').length;
   const prov = filtered.filter(e => e.type !== 'confirmed').length;
