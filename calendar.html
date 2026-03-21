@@ -251,6 +251,72 @@ body::before {
 .filter-btn.sftour.active { background: #FD79A8; border-color: #FD79A8; color: white; }
 .filter-btn.action.active { background: var(--ink); border-color: var(--ink); color: #00F5A0; font-weight: 700; }
 
+/* RANK FILTER ROW */
+.rank-row {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  gap: 6px;
+}
+.rank-btn {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 0.72rem;
+  padding: 5px 14px;
+  border-radius: 6px;
+  border: 1.5px solid var(--mist);
+  background: transparent;
+  color: var(--smoke);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 36px;
+  text-align: center;
+}
+.rank-btn:hover { border-color: var(--ink); color: var(--ink); }
+.rank-btn.active { background: var(--ink); border-color: var(--ink); color: var(--cream); }
+.rank-btn.rank-s.active { background: #00F5A0; border-color: #00F5A0; color: #0A0A0A; }
+.rank-btn.rank-a.active { background: #6C5CE7; border-color: #6C5CE7; color: white; }
+.rank-btn.rank-b.active { background: #0984E3; border-color: #0984E3; color: white; }
+.rank-btn.rank-c.active { background: #E67E22; border-color: #E67E22; color: white; }
+.rank-btn.rank-d.active { background: var(--smoke); border-color: var(--smoke); color: white; }
+.rank-hint {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--smoke);
+  margin-left: 4px;
+}
+
+/* MONTH FILTER ROW */
+.month-row {
+  gap: 4px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  margin-bottom: 0;
+}
+.month-btn {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.65rem;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1.5px solid var(--mist);
+  background: transparent;
+  color: var(--smoke);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 36px;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+.month-btn:hover { border-color: var(--saffron); color: var(--ink); }
+.month-btn.active { background: var(--saffron); border-color: var(--saffron); color: #1A1A1A; font-weight: 700; }
+.month-hint {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--smoke);
+  margin-left: 4px;
+}
+
 /* CONTENT */
 .content {
   padding: 2rem 5vw 4rem;
@@ -946,6 +1012,25 @@ a.event-card {
     flex-shrink: 0;
     min-height: 36px;
   }
+  .rank-row {
+    margin-top: 6px;
+    padding-top: 6px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .rank-row::-webkit-scrollbar { display: none; }
+  .rank-btn { font-size: 0.65rem; padding: 5px 10px; flex-shrink: 0; min-height: 32px; }
+  .month-row {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 6px;
+  }
+  .month-row::-webkit-scrollbar { display: none; }
+  .month-btn { font-size: 0.6rem; padding: 4px 8px; flex-shrink: 0; min-height: 30px; }
   .search-box { 
     min-width: 180px; 
     max-width: 200px;
@@ -1119,6 +1204,22 @@ a.event-card {
 
 <!-- FILTER BAR -->
 <div class="filter-section">
+  <div class="filter-row month-row">
+    <span class="filter-label">Month</span>
+    <button class="month-btn active" onclick="filterMonth('all')">All</button>
+    <button class="month-btn" onclick="filterMonth(2)">Feb</button>
+    <button class="month-btn" onclick="filterMonth(3)">Mar</button>
+    <button class="month-btn" onclick="filterMonth(4)">Apr</button>
+    <button class="month-btn" onclick="filterMonth(5)">May</button>
+    <button class="month-btn" onclick="filterMonth(6)">Jun</button>
+    <button class="month-btn" onclick="filterMonth(7)">Jul</button>
+    <button class="month-btn" onclick="filterMonth(8)">Aug</button>
+    <button class="month-btn" onclick="filterMonth(9)">Sep</button>
+    <button class="month-btn" onclick="filterMonth(10)">Oct</button>
+    <button class="month-btn" onclick="filterMonth(11)">Nov</button>
+    <button class="month-btn" onclick="filterMonth(12)">Dec</button>
+    <span class="month-hint" id="monthHint"></span>
+  </div>
   <div class="filter-row">
     <span class="filter-label">Filter</span>
     <button class="filter-btn active" onclick="filterEvents('all')">All Events</button>
@@ -1137,6 +1238,16 @@ a.event-card {
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
       <input type="text" placeholder="Search city or event…" oninput="searchEvents(this.value)">
     </div>
+  </div>
+  <div class="filter-row rank-row">
+    <span class="filter-label">Rank</span>
+    <button class="rank-btn active" onclick="filterRank('all')">All Ranks</button>
+    <button class="rank-btn rank-s" onclick="filterRank('S')">S</button>
+    <button class="rank-btn rank-a" onclick="filterRank('A')">A</button>
+    <button class="rank-btn rank-b" onclick="filterRank('B')">B</button>
+    <button class="rank-btn rank-c" onclick="filterRank('C')">C</button>
+    <button class="rank-btn rank-d" onclick="filterRank('D')">D</button>
+    <span class="rank-hint" id="rankHint"></span>
   </div>
 </div>
 
@@ -1327,13 +1438,29 @@ const events = [
 const monthNames = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 let currentFilter = 'all';
+let currentRank = 'all';
+let currentMonth = 'all';
 let searchTerm = '';
 
 function filterEvents(type) {
   currentFilter = type;
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   event.target.classList.add('active');
-  // Scroll active filter into view on mobile
+  event.target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  renderEvents();
+}
+
+function filterRank(tier) {
+  currentRank = tier;
+  document.querySelectorAll('.rank-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderEvents();
+}
+
+function filterMonth(m) {
+  currentMonth = m;
+  document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
   event.target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
   renderEvents();
 }
@@ -1355,12 +1482,48 @@ function renderEvents() {
     filtered = filtered.filter(e => e.type === currentFilter);
   }
 
+  // === MONTH FILTER (top layer) ===
+  if (currentMonth !== 'all') {
+    filtered = filtered.filter(e => {
+      const sm = e.startMonth, sd = e.startDay, ed = e.endDay;
+      const start = new Date(2026, sm - 1, sd);
+      const end = ed < sd ? new Date(2026, sm, ed) : new Date(2026, sm - 1, ed);
+      const mStart = new Date(2026, currentMonth - 1, 1);
+      const mEnd = new Date(2026, currentMonth, 0); // last day of month
+      return start <= mEnd && end >= mStart;
+    });
+  }
+  // Update month hint
+  const monthHintEl = document.getElementById('monthHint');
+  if (monthHintEl) {
+    if (currentMonth !== 'all') {
+      const mNames = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      monthHintEl.textContent = `${filtered.length} in ${mNames[currentMonth]}`;
+    } else {
+      monthHintEl.textContent = '';
+    }
+  }
+
   if (searchTerm) {
     filtered = filtered.filter(e =>
       e.name.toLowerCase().includes(searchTerm) ||
       e.location.toLowerCase().includes(searchTerm) ||
       (e.notes && e.notes.toLowerCase().includes(searchTerm))
     );
+  }
+
+  // === RANK TIER FILTER (second layer) ===
+  if (currentRank !== 'all') {
+    filtered = filtered.filter(e => e.tier === currentRank);
+  }
+  // Update rank hint with count
+  const hintEl = document.getElementById('rankHint');
+  if (hintEl) {
+    if (currentRank !== 'all') {
+      hintEl.textContent = `${filtered.length} event${filtered.length !== 1 ? 's' : ''}`;
+    } else {
+      hintEl.textContent = '';
+    }
   }
 
   // === CONFLICT DETECTION ENGINE ===
