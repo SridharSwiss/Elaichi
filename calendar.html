@@ -286,6 +286,223 @@ body::before {
   margin-left: 4px;
 }
 
+/* COMPACT STATS BAR */
+.compact-stats {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+.compact-stats.visible { display: flex; }
+.cs-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: var(--ink);
+  letter-spacing: 0.06em;
+  margin-right: 6px;
+}
+.cs-item {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  color: var(--smoke);
+}
+.cs-num {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 0.8rem;
+  color: var(--ink);
+}
+.cs-num.cs-green { color: #00A86B; }
+.cs-divider {
+  color: var(--mist);
+  font-size: 0.9rem;
+}
+.cs-showing {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--saffron);
+  font-weight: 700;
+}
+
+/* VIEW TOGGLE */
+.view-row {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  gap: 6px;
+}
+.view-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1.5px solid var(--mist);
+  background: transparent;
+  color: var(--smoke);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.view-btn:hover { border-color: var(--ink); color: var(--ink); }
+.view-btn.active { background: var(--ink); border-color: var(--ink); color: var(--cream); }
+
+/* DASHBOARD PANELS */
+.dashboard-panel {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* TIMELINE */
+.tl-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.tl-grid {
+  display: grid;
+  grid-template-columns: 200px repeat(11, 1fr);
+  min-width: 900px;
+  gap: 0;
+}
+.tl-header {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--smoke);
+  padding: 8px 6px;
+  border-bottom: 2px solid var(--ink);
+  text-align: center;
+}
+.tl-header:first-child { text-align: left; }
+.tl-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 6px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 22px;
+}
+.tl-cell {
+  padding: 4px 2px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  position: relative;
+  min-height: 22px;
+}
+.tl-bar {
+  height: 16px;
+  border-radius: 3px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  min-width: 6px;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.15s;
+}
+.tl-bar:hover { opacity: 1; }
+.tl-section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 16px 0 8px;
+  color: var(--ink);
+}
+
+/* REVENUE DASHBOARD */
+.rev-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.rev-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid var(--mist);
+}
+.rev-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+.rev-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+}
+.rev-row:last-child { border-bottom: none; }
+.rev-label { color: var(--smoke); }
+.rev-val {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--ink);
+}
+.rev-val.green { color: #00A86B; }
+.rev-total-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-top: 2px solid var(--ink);
+  margin-top: 4px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+}
+.rev-total-val {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.1rem;
+  color: #00A86B;
+}
+.rev-bar-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 120px;
+  padding-top: 8px;
+}
+.rev-bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  justify-content: flex-end;
+}
+.rev-bar {
+  width: 100%;
+  max-width: 40px;
+  border-radius: 4px 4px 0 0;
+  background: var(--saffron);
+  transition: height 0.3s;
+}
+.rev-bar-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.5rem;
+  color: var(--smoke);
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+}
+.rev-bar-val {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.5rem;
+  color: var(--ink);
+  font-weight: 700;
+}
+
 /* MONTH FILTER ROW */
 .month-row {
   gap: 4px;
@@ -1031,6 +1248,18 @@ a.event-card {
   }
   .month-row::-webkit-scrollbar { display: none; }
   .month-btn { font-size: 0.6rem; padding: 4px 8px; flex-shrink: 0; min-height: 30px; }
+  .compact-stats { gap: 6px; padding-bottom: 6px; }
+  .cs-logo { font-size: 0.75rem; }
+  .cs-item { font-size: 0.62rem; }
+  .cs-num { font-size: 0.7rem; }
+  .cs-divider { font-size: 0.7rem; }
+  .view-row { margin-top: 6px; padding-top: 6px; }
+  .view-btn { font-size: 0.65rem; padding: 5px 10px; }
+  .tl-grid { min-width: 700px; grid-template-columns: 140px repeat(11, 1fr); }
+  .tl-name { font-size: 0.6rem; }
+  .tl-header { font-size: 0.5rem; }
+  .rev-grid { grid-template-columns: 1fr; }
+  .rev-bar-container { height: 100px; }
   .search-box { 
     min-width: 180px; 
     max-width: 200px;
@@ -1204,6 +1433,16 @@ a.event-card {
 
 <!-- FILTER BAR -->
 <div class="filter-section">
+  <div class="compact-stats" id="compactStats">
+    <span class="cs-logo">ELAICHI</span>
+    <span class="cs-item"><span class="cs-num" id="csTotal">116</span> Events</span>
+    <span class="cs-divider">·</span>
+    <span class="cs-item"><span class="cs-num cs-green" id="csConfirmed">5</span> Confirmed</span>
+    <span class="cs-divider">·</span>
+    <span class="cs-item"><span class="cs-num" id="csPotential">83</span> Potential</span>
+    <span class="cs-divider">·</span>
+    <span class="cs-item cs-showing" id="csShowing"></span>
+  </div>
   <div class="filter-row month-row">
     <span class="filter-label">Month</span>
     <button class="month-btn active" onclick="filterMonth('all')">All</button>
@@ -1225,13 +1464,8 @@ a.event-card {
     <button class="filter-btn active" onclick="filterEvents('all')">All Events</button>
     <button class="filter-btn action" onclick="filterEvents('action')">⚡ Action Needed</button>
     <button class="filter-btn confirmed" onclick="filterEvents('confirmed')">Confirmed</button>
-    <button class="filter-btn provisional" onclick="filterEvents('provisional')">Street Food Park</button>
-    <button class="filter-btn fiesta" onclick="filterEvents('fiesta')">Fiesta & Special</button>
-    <button class="filter-btn major" onclick="filterEvents('major')">Major Festivals</button>
-    <button class="filter-btn database" onclick="filterEvents('database')">DB Opportunities</button>
     <button class="filter-btn rejected" onclick="filterEvents('rejected')">Rejected</button>
-    <button class="filter-btn scouted" onclick="filterEvents('scouted')">Scouted</button>
-    <button class="filter-btn sftour" onclick="filterEvents('sftour')">🚐 SF Tour (20)</button>
+    <button class="filter-btn sftour" onclick="filterEvents('sftour')">🚐 SF Tour</button>
     <button class="filter-btn" onclick="filterEvents('conflicts')" style="border-color:#FFE69C;color:#856404;background:#FFF9E6;">⚠️ Conflicts</button>
 
     <div class="search-box">
@@ -1248,6 +1482,26 @@ a.event-card {
     <button class="rank-btn rank-c" onclick="filterRank('C')">C</button>
     <button class="rank-btn rank-d" onclick="filterRank('D')">D</button>
     <span class="rank-hint" id="rankHint"></span>
+  </div>
+  <div class="filter-row view-row">
+    <span class="filter-label">View</span>
+    <button class="view-btn active" onclick="switchView('cards')">📋 Cards</button>
+    <button class="view-btn" onclick="switchView('timeline')">📅 Timeline</button>
+    <button class="view-btn" onclick="switchView('revenue')">💰 Revenue</button>
+  </div>
+</div>
+
+<!-- TIMELINE VIEW -->
+<div class="dashboard-panel" id="timelineView" style="display:none;">
+  <div class="content" style="padding-top:1.5rem;">
+    <div id="timelineContent"></div>
+  </div>
+</div>
+
+<!-- REVENUE VIEW -->
+<div class="dashboard-panel" id="revenueView" style="display:none;">
+  <div class="content" style="padding-top:1.5rem;">
+    <div id="revenueContent"></div>
   </div>
 </div>
 
@@ -1441,6 +1695,8 @@ let currentFilter = 'all';
 let currentRank = 'all';
 let currentMonth = 'all';
 let searchTerm = '';
+let currentView = 'cards';
+let lastFiltered = [];
 
 function filterEvents(type) {
   currentFilter = type;
@@ -1637,18 +1893,215 @@ function renderEvents() {
   document.getElementById('totalEvents').textContent = total;
   document.getElementById('confirmedCount').textContent = conf;
   document.getElementById('provisionalCount').textContent = prov;
+  // Update compact stats bar
+  document.getElementById('csTotal').textContent = total;
+  document.getElementById('csConfirmed').textContent = conf;
+  document.getElementById('csPotential').textContent = prov;
+  const csShowing = document.getElementById('csShowing');
+  const isFiltered = (currentFilter !== 'all' || currentRank !== 'all' || currentMonth !== 'all' || searchTerm);
+  csShowing.textContent = isFiltered ? `Showing ${total}` : '';
+  lastFiltered = filtered;
+  if (currentView === 'timeline') renderTimeline();
+  if (currentView === 'revenue') renderRevenue();
+}
+
+// === VIEW SWITCHING ===
+function switchView(view) {
+  currentView = view;
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('eventsContainer').style.display = view === 'cards' ? '' : 'none';
+  document.getElementById('timelineView').style.display = view === 'timeline' ? '' : 'none';
+  document.getElementById('revenueView').style.display = view === 'revenue' ? '' : 'none';
+  if (view === 'timeline') renderTimeline();
+  if (view === 'revenue') renderRevenue();
+}
+
+// === TIMELINE / GANTT VIEW ===
+function renderTimeline() {
+  const months = ['Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const monthNums = [2,3,4,5,6,7,8,9,10,11,12];
+  const typeColors = {
+    confirmed: '#00F5A0', provisional: '#2D6A4F', fiesta: '#E63946',
+    major: '#6C5CE7', database: '#E67E22', scouted: '#0984E3',
+    sftour: '#FD79A8', rejected: '#555'
+  };
+
+  const sorted = [...lastFiltered].sort((a,b) => {
+    if (a.startMonth !== b.startMonth) return a.startMonth - b.startMonth;
+    return a.startDay - b.startDay;
+  });
+
+  let html = '<div class="tl-section-title">📅 Season Timeline — ' + sorted.length + ' events</div>';
+  html += '<div class="tl-wrapper"><div class="tl-grid">';
+  
+  // Headers
+  html += '<div class="tl-header">Event</div>';
+  months.forEach(m => { html += '<div class="tl-header">' + m + '</div>'; });
+
+  // Rows
+  sorted.forEach(ev => {
+    const name = ev.name.length > 28 ? ev.name.substring(0, 26) + '…' : ev.name;
+    html += '<div class="tl-name" title="' + ev.name + '">' + name + '</div>';
+    
+    const sm = ev.startMonth, sd = ev.startDay, ed = ev.endDay;
+    const start = new Date(2026, sm - 1, sd);
+    const end = ed < sd ? new Date(2026, sm, ed) : new Date(2026, sm - 1, ed);
+    
+    monthNums.forEach(mn => {
+      const mStart = new Date(2026, mn - 1, 1);
+      const mEnd = new Date(2026, mn, 0);
+      const daysInMonth = mEnd.getDate();
+      
+      html += '<div class="tl-cell">';
+      
+      if (start <= mEnd && end >= mStart) {
+        const barStart = start < mStart ? 0 : ((start.getDate() - 1) / daysInMonth);
+        const barEnd = end > mEnd ? 1 : (end.getDate() / daysInMonth);
+        const left = (barStart * 100).toFixed(1);
+        const width = ((barEnd - barStart) * 100).toFixed(1);
+        const col = typeColors[ev.type] || '#999';
+        html += '<div class="tl-bar" style="left:' + left + '%;width:' + Math.max(parseFloat(width), 5) + '%;background:' + col + ';" title="' + ev.name + ' — ' + ev.dates + ' (' + ev.rev + ')"></div>';
+      }
+      
+      html += '</div>';
+    });
+  });
+
+  html += '</div></div>';
+  document.getElementById('timelineContent').innerHTML = html;
+}
+
+// === REVENUE DASHBOARD ===
+function renderRevenue() {
+  const months = ['Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const monthNums = [2,3,4,5,6,7,8,9,10,11,12];
+  const tiers = ['S','A','B','C','D'];
+  const tierColors = { S: '#00F5A0', A: '#6C5CE7', B: '#0984E3', C: '#E67E22', D: '#999' };
+  const typeLabels = {
+    confirmed: 'Confirmed', provisional: 'Street Food Park', fiesta: 'Fiesta & Special',
+    major: 'Major Festival', database: 'DB Opportunity', scouted: 'Scouted',
+    sftour: 'SF Tour', rejected: 'Rejected'
+  };
+
+  function parseRev(r) {
+    if (!r) return 0;
+    return parseInt(r.replace(/[^0-9]/g, '')) || 0;
+  }
+
+  const data = lastFiltered.filter(e => e.type !== 'rejected');
+  const totalRev = data.reduce((s, e) => s + parseRev(e.rev), 0);
+  const totalEvents = data.length;
+
+  // By tier
+  const byTier = {};
+  tiers.forEach(t => { byTier[t] = { count: 0, rev: 0 }; });
+  data.forEach(e => {
+    if (byTier[e.tier]) {
+      byTier[e.tier].count++;
+      byTier[e.tier].rev += parseRev(e.rev);
+    }
+  });
+
+  // By month (event contributes to each month it spans)
+  const byMonth = {};
+  monthNums.forEach(m => { byMonth[m] = { count: 0, rev: 0 }; });
+  data.forEach(e => {
+    const sm = e.startMonth, sd = e.startDay, ed = e.endDay;
+    const start = new Date(2026, sm - 1, sd);
+    const end = ed < sd ? new Date(2026, sm, ed) : new Date(2026, sm - 1, ed);
+    monthNums.forEach(mn => {
+      const mStart = new Date(2026, mn - 1, 1);
+      const mEnd = new Date(2026, mn, 0);
+      if (start <= mEnd && end >= mStart) {
+        byMonth[mn].count++;
+        byMonth[mn].rev += parseRev(e.rev);
+      }
+    });
+  });
+
+  // By type
+  const byType = {};
+  data.forEach(e => {
+    if (!byType[e.type]) byType[e.type] = { count: 0, rev: 0 };
+    byType[e.type].count++;
+    byType[e.type].rev += parseRev(e.rev);
+  });
+
+  // Top 10 by revenue
+  const top10 = [...data].sort((a, b) => parseRev(b.rev) - parseRev(a.rev)).slice(0, 10);
+
+  // Max month rev for bar scaling
+  const maxMonthRev = Math.max(...monthNums.map(m => byMonth[m].rev), 1);
+
+  // Build HTML
+  let html = '<div class="rev-grid">';
+
+  // Card 1: Total Summary
+  html += '<div class="rev-card">';
+  html += '<h3>💰 Revenue Potential</h3>';
+  html += '<div class="rev-total-row"><span>Total (' + totalEvents + ' events)</span><span class="rev-total-val">CHF ' + totalRev.toLocaleString() + '</span></div>';
+  tiers.forEach(t => {
+    if (byTier[t].count > 0) {
+      html += '<div class="rev-row"><span class="rev-label">' + t + '-Tier (' + byTier[t].count + ')</span><span class="rev-val green">CHF ' + byTier[t].rev.toLocaleString() + '</span></div>';
+    }
+  });
+  html += '</div>';
+
+  // Card 2: Monthly Revenue Bar Chart
+  html += '<div class="rev-card">';
+  html += '<h3>📊 Revenue by Month</h3>';
+  html += '<div class="rev-bar-container">';
+  monthNums.forEach((mn, i) => {
+    const h = (byMonth[mn].rev / maxMonthRev * 100).toFixed(0);
+    html += '<div class="rev-bar-col">';
+    if (byMonth[mn].rev > 0) html += '<div class="rev-bar-val">' + (byMonth[mn].rev / 1000).toFixed(0) + 'K</div>';
+    html += '<div class="rev-bar" style="height:' + Math.max(h, 2) + '%;"></div>';
+    html += '<div class="rev-bar-label">' + months[i] + '</div>';
+    html += '</div>';
+  });
+  html += '</div></div>';
+
+  // Card 3: By Category
+  html += '<div class="rev-card">';
+  html += '<h3>🏷️ By Category</h3>';
+  const sortedTypes = Object.entries(byType).sort((a, b) => b[1].rev - a[1].rev);
+  sortedTypes.forEach(([t, d]) => {
+    html += '<div class="rev-row"><span class="rev-label">' + (typeLabels[t] || t) + ' (' + d.count + ')</span><span class="rev-val green">CHF ' + d.rev.toLocaleString() + '</span></div>';
+  });
+  html += '</div>';
+
+  // Card 4: Top 10
+  html += '<div class="rev-card">';
+  html += '<h3>🏆 Top 10 Revenue Events</h3>';
+  top10.forEach((e, i) => {
+    const name = e.name.length > 30 ? e.name.substring(0, 28) + '…' : e.name;
+    html += '<div class="rev-row"><span class="rev-label">' + (i + 1) + '. ' + name + ' <span style="opacity:0.5">' + e.tier + '</span></span><span class="rev-val green">' + e.rev + '</span></div>';
+  });
+  html += '</div>';
+
+  html += '</div>';
+  document.getElementById('revenueContent').innerHTML = html;
 }
 
 // Initial render
 renderEvents();
 
-// Scroll-to-top button
+// Scroll-to-top button & compact stats
 const scrollBtn = document.getElementById('scrollTop');
+const compactStats = document.getElementById('compactStats');
+const heroSection = document.querySelector('.hero');
 window.addEventListener('scroll', () => {
+  const heroBottom = heroSection.getBoundingClientRect().bottom;
   if (window.scrollY > 600) {
     scrollBtn.classList.add('visible');
   } else {
     scrollBtn.classList.remove('visible');
+  }
+  if (heroBottom < 0) {
+    compactStats.classList.add('visible');
+  } else {
+    compactStats.classList.remove('visible');
   }
 }, { passive: true });
 </script>
