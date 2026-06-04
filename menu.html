@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu — Elaichi Indian Restaurant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .menu-hero {
+      background: linear-gradient(135deg, #2D1A00, #1A1A1A);
+      color: white;
+      padding: 64px 24px;
+      text-align: center;
+    }
+    .menu-hero h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 12px; }
+    .menu-hero h1 span { color: var(--saffron); }
+    .menu-hero p { color: rgba(255,255,255,0.6); font-size: 1rem; max-width: 480px; margin: 0 auto; }
+
+    .menu-toolbar {
+      position: sticky;
+      top: 68px;
+      z-index: 90;
+      background: var(--white);
+      border-bottom: 1px solid var(--mist);
+      box-shadow: var(--shadow-sm);
+    }
+    .menu-toolbar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Category tabs */
+    .category-tabs {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      padding: 12px 0;
+      scrollbar-width: none;
+    }
+    .category-tabs::-webkit-scrollbar { display: none; }
+    .cat-tab {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1.5px solid var(--mist);
+      background: transparent;
+      color: var(--ink-soft);
+      font-family: var(--font-body);
+      transition: all var(--transition);
+    }
+    .cat-tab:hover { background: var(--cream-dark); border-color: var(--saffron); }
+    .cat-tab.active { background: var(--saffron); color: white; border-color: var(--saffron); }
+
+    /* Search & filter row */
+    .filter-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 0 12px;
+      flex-wrap: wrap;
+    }
+    .search-box {
+      flex: 1;
+      min-width: 200px;
+      position: relative;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 10px 16px 10px 40px;
+      border: 1.5px solid var(--mist);
+      border-radius: var(--radius-full);
+      font-size: 0.9rem;
+      font-family: var(--font-body);
+      background: var(--cream);
+      outline: none;
+      transition: border-color var(--transition);
+    }
+    .search-box input:focus { border-color: var(--saffron); }
+    .search-box::before {
+      content: '🔍';
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.9rem;
+    }
+    .filter-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1.5px solid var(--mist);
+      background: transparent;
+      color: var(--ink-soft);
+      font-family: var(--font-body);
+      transition: all var(--transition);
+    }
+    .filter-chip:hover { border-color: var(--saffron); }
+    .filter-chip.active { background: var(--cardamom); color: white; border-color: var(--cardamom); }
+
+    /* Menu layout */
+    .menu-layout {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    .menu-section { margin-bottom: 56px; }
+    .menu-section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--mist);
+    }
+    .menu-section-header h2 { font-size: 1.4rem; }
+    .menu-section-emoji { font-size: 1.5rem; }
+
+    .menu-items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 16px;
+    }
+    @media (max-width: 480px) { .menu-items-grid { grid-template-columns: 1fr; } }
+
+    .menu-item {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--mist);
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: box-shadow var(--transition), border-color var(--transition), transform var(--transition);
+    }
+    .menu-item:hover { box-shadow: var(--shadow-md); border-color: var(--saffron-light); transform: translateY(-2px); }
+    .menu-item-emoji {
+      width: 72px;
+      height: 72px;
+      flex-shrink: 0;
+      background: var(--cream-dark);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+    }
+    .menu-item-info { flex: 1; min-width: 0; }
+    .menu-item-meta { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; flex-wrap: wrap; }
+    .menu-item-info h3 { font-size: 1rem; margin-bottom: 4px; }
+    .menu-item-info p { color: var(--ink-soft); font-size: 0.82rem; line-height: 1.5; margin-bottom: 12px; }
+    .menu-item-footer { display: flex; align-items: center; justify-content: space-between; }
+    .item-price {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--saffron-dark);
+      font-size: 1rem;
+    }
+
+    /* Add/qty toggle on item */
+    .add-control { display: flex; align-items: center; gap: 8px; }
+    .btn-add {
+      padding: 7px 14px;
+      background: var(--saffron);
+      color: white;
+      border: none;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 0.82rem;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: background var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .btn-add:hover { background: var(--saffron-dark); }
+
+    /* Floating cart summary */
+    .floating-cart {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--ink);
+      color: white;
+      padding: 14px 28px;
+      border-radius: var(--radius-full);
+      box-shadow: var(--shadow-lg);
+      display: none;
+      align-items: center;
+      gap: 20px;
+      z-index: 200;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      min-width: 320px;
+      justify-content: space-between;
+    }
+    .floating-cart.visible { display: flex; }
+    .floating-cart:hover { transform: translateX(-50%) translateY(-2px); }
+    .fc-left { display: flex; align-items: center; gap: 12px; }
+    .fc-count {
+      background: var(--saffron);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .fc-label { font-weight: 600; font-size: 0.95rem; }
+    .fc-right { font-family: var(--font-mono); font-weight: 700; color: var(--saffron); font-size: 0.95rem; }
+    .fc-arrow { font-size: 1.1rem; }
+
+    .hidden { display: none !important; }
+    .menu-empty {
+      text-align: center;
+      padding: 64px 24px;
+      color: var(--ink-soft);
+    }
+    .menu-empty .empty-icon { font-size: 3rem; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="Elaichi Logo.png" alt="Elaichi" onerror="this.style.display='none'" />
+        Elaichi<span>.</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html" class="active">Menu</a></li>
+        <li><a href="tracking.html">Track Order</a></li>
+      </ul>
+      <a href="cart.html" class="cart-btn">
+        <span>🛒</span>
+        <span>Cart</span>
+        <span class="cart-badge">0</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="menu-hero">
+    <h1>Our <span>Menu</span></h1>
+    <p>From street-food bites to slow-cooked curries — every dish tells a story.</p>
+  </div>
+
+  <div class="menu-toolbar">
+    <div class="menu-toolbar-inner">
+      <div class="category-tabs" id="categoryTabs"></div>
+      <div class="filter-row">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search dishes…" />
+        </div>
+        <button class="filter-chip" id="vegFilter" onclick="toggleVeg()">🟢 Veg Only</button>
+        <button class="filter-chip" id="popularFilter" onclick="togglePopular()">⭐ Popular</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-layout" id="menuLayout"></div>
+
+  <!-- Floating cart -->
+  <div class="floating-cart" id="floatingCart" onclick="location.href='cart.html'">
+    <div class="fc-left">
+      <div class="fc-count" id="fcCount">0</div>
+      <div class="fc-label">View Cart</div>
+    </div>
+    <div class="fc-right" id="fcTotal">CHF 0.00</div>
+    <div class="fc-arrow">→</div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    let activeCategory = 'all';
+    let vegOnly = false;
+    let popularOnly = false;
+
+    // Category tabs
+    document.getElementById('categoryTabs').innerHTML = CATEGORIES.map(c => `
+      <button class="cat-tab ${c.id === 'all' ? 'active' : ''}" onclick="setCategory('${c.id}')">
+        ${c.emoji} ${c.label}
+      </button>
+    `).join('');
+
+    function setCategory(id) {
+      activeCategory = id;
+      document.querySelectorAll('.cat-tab').forEach((t, i) => t.classList.toggle('active', CATEGORIES[i].id === id));
+      renderMenu();
+      if (id !== 'all') {
+        const section = document.querySelector(`[data-category="${id}"]`);
+        if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function toggleVeg() {
+      vegOnly = !vegOnly;
+      document.getElementById('vegFilter').classList.toggle('active', vegOnly);
+      renderMenu();
+    }
+    function togglePopular() {
+      popularOnly = !popularOnly;
+      document.getElementById('popularFilter').classList.toggle('active', popularOnly);
+      renderMenu();
+    }
+
+    document.getElementById('searchInput').addEventListener('input', renderMenu);
+
+    function getFilteredItems() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      return MENU_DATA.filter(i => {
+        if (activeCategory !== 'all' && i.category !== activeCategory) return false;
+        if (vegOnly && !i.veg) return false;
+        if (popularOnly && !i.popular) return false;
+        if (q && !i.name.toLowerCase().includes(q) && !i.desc.toLowerCase().includes(q)) return false;
+        return true;
+      });
+    }
+
+    function renderMenu() {
+      const items = getFilteredItems();
+      const layout = document.getElementById('menuLayout');
+      if (!items.length) {
+        layout.innerHTML = `<div class="menu-empty"><div class="empty-icon">🔍</div><p>No dishes match your search. Try adjusting your filters.</p></div>`;
+        return;
+      }
+
+      // Group by category (respecting active filter)
+      const cats = activeCategory === 'all'
+        ? CATEGORIES.filter(c => c.id !== 'all')
+        : CATEGORIES.filter(c => c.id === activeCategory);
+
+      layout.innerHTML = cats.map(cat => {
+        const catItems = items.filter(i => i.category === cat.id);
+        if (!catItems.length) return '';
+        return `
+          <div class="menu-section" data-category="${cat.id}">
+            <div class="menu-section-header">
+              <span class="menu-section-emoji">${cat.emoji}</span>
+              <h2>${cat.label}</h2>
+              <span style="color:var(--ink-soft);font-size:0.85rem;">${catItems.length} item${catItems.length > 1 ? 's' : ''}</span>
+            </div>
+            <div class="menu-items-grid">
+              ${catItems.map(d => renderItem(d)).join('')}
+            </div>
+          </div>`;
+      }).join('');
+
+      updateItemControls();
+    }
+
+    function renderItem(d) {
+      return `
+        <div class="menu-item" id="item-${d.id}">
+          <div class="menu-item-emoji">${d.emoji}</div>
+          <div class="menu-item-info">
+            <div class="menu-item-meta">
+              <span class="badge ${d.veg ? 'badge-veg' : 'badge-nonveg'}">${d.veg ? '🟢' : '🔴'}</span>
+              ${d.popular ? '<span class="badge badge-popular">⭐ Popular</span>' : ''}
+              ${d.spice > 0 ? `<span class="spice-badge">${'🌶️'.repeat(d.spice)}</span>` : ''}
+            </div>
+            <h3>${d.name}</h3>
+            <p>${d.desc}</p>
+            <div class="menu-item-footer">
+              <span class="item-price">${formatPrice(d.price)}</span>
+              <div class="add-control" id="ctrl-${d.id}"></div>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function updateItemControls() {
+      const cart = getCart();
+      MENU_DATA.forEach(d => {
+        const ctrl = document.getElementById(`ctrl-${d.id}`);
+        if (!ctrl) return;
+        const cartItem = cart.find(c => c.id === d.id);
+        if (cartItem) {
+          ctrl.innerHTML = `
+            <div class="qty-control">
+              <button onclick="changeQty(${d.id}, -1)">−</button>
+              <span>${cartItem.qty}</span>
+              <button onclick="changeQty(${d.id}, 1)">+</button>
+            </div>`;
+        } else {
+          ctrl.innerHTML = `<button class="btn-add" onclick="handleAdd(${d.id})">＋ Add</button>`;
+        }
+      });
+      updateFloatingCart();
+    }
+
+    function handleAdd(id) {
+      addToCart(id);
+      updateItemControls();
+    }
+
+    function changeQty(id, delta) {
+      const cart = getCart();
+      const item = cart.find(c => c.id === id);
+      if (item) updateQty(id, item.qty + delta);
+      updateItemControls();
+    }
+
+    function updateFloatingCart() {
+      const count = getCartCount();
+      const total = getCartTotal();
+      const fc = document.getElementById('floatingCart');
+      document.getElementById('fcCount').textContent = count;
+      document.getElementById('fcTotal').textContent = formatPrice(total);
+      fc.classList.toggle('visible', count > 0);
+    }
+
+    // Override showToast to also refresh controls
+    const _origAdd = addToCart;
+    window.addToCart = function(id, qty) {
+      _origAdd(id, qty);
+      updateItemControls();
+    };
+
+    renderMenu();
+  </script>
+</body>
+</html>

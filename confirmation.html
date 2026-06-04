@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Confirmed — Elaichi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body { background: var(--cream); }
+
+    .success-banner {
+      background: linear-gradient(135deg, #1A1A1A, #2D1A00);
+      color: white;
+      padding: 80px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .success-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(232,168,56,0.2) 0%, transparent 70%);
+    }
+    .success-icon {
+      width: 96px;
+      height: 96px;
+      background: linear-gradient(135deg, var(--saffron-light), var(--saffron));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      margin: 0 auto 24px;
+      position: relative;
+      z-index: 1;
+      animation: pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes pop {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .success-banner h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 8px; position: relative; z-index: 1; }
+    .success-banner h1 span { color: var(--saffron); }
+    .success-banner p { color: rgba(255,255,255,0.7); font-size: 1rem; position: relative; z-index: 1; }
+    .order-id-badge {
+      display: inline-block;
+      background: rgba(232,168,56,0.15);
+      border: 1px solid rgba(232,168,56,0.3);
+      color: var(--saffron-light);
+      padding: 8px 20px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-top: 16px;
+      position: relative;
+      z-index: 1;
+      letter-spacing: 0.1em;
+    }
+
+    .confirmation-layout {
+      max-width: 880px;
+      margin: -32px auto 60px;
+      padding: 0 24px;
+    }
+
+    .conf-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--mist);
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+    .conf-card h3 {
+      font-size: 1rem;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--mist);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Status timeline */
+    .timeline { position: relative; }
+    .timeline-item {
+      display: flex;
+      gap: 16px;
+      padding-bottom: 24px;
+      position: relative;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 36px;
+      bottom: 0;
+      width: 2px;
+      background: var(--mist);
+    }
+    .timeline-item:last-child::before { display: none; }
+    .tl-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      position: relative;
+      z-index: 1;
+    }
+    .tl-dot.done { background: var(--cardamom); }
+    .tl-dot.active { background: var(--saffron); animation: pulse 1.5s ease-in-out infinite; }
+    .tl-dot.pending { background: var(--mist); }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(232,168,56,0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(232,168,56,0); }
+    }
+    .tl-content { flex: 1; padding-top: 6px; }
+    .tl-content strong { display: block; font-size: 0.92rem; margin-bottom: 2px; }
+    .tl-content span { font-size: 0.8rem; color: var(--ink-soft); }
+    .tl-eta {
+      background: rgba(232,168,56,0.1);
+      color: var(--saffron-dark);
+      border-radius: var(--radius-full);
+      padding: 2px 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-left: 8px;
+    }
+
+    /* Order items */
+    .order-items-list { display: flex; flex-direction: column; gap: 0; }
+    .order-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+    .order-item:last-child { border-bottom: none; }
+    .order-item .emoji { font-size: 1.5rem; flex-shrink: 0; }
+    .order-item .name { flex: 1; font-size: 0.9rem; font-weight: 500; }
+    .order-item .qty { color: var(--ink-soft); font-size: 0.82rem; }
+    .order-item .price { font-family: var(--font-mono); font-size: 0.88rem; font-weight: 700; color: var(--saffron-dark); }
+
+    .totals-table { width: 100%; }
+    .totals-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.9rem; }
+    .totals-row.grand { font-weight: 800; font-size: 1.05rem; border-top: 2px solid var(--ink); padding-top: 12px; margin-top: 4px; }
+    .totals-row .val { font-family: var(--font-mono); font-weight: 600; }
+    .totals-row.grand .val { color: var(--saffron-dark); }
+
+    /* Info grid */
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } }
+    .info-item { background: var(--cream-dark); border-radius: var(--radius-sm); padding: 14px; }
+    .info-item .label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); margin-bottom: 4px; }
+    .info-item .value { font-size: 0.9rem; font-weight: 600; }
+
+    .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="Elaichi Logo.png" alt="Elaichi" onerror="this.style.display='none'" />
+        Elaichi<span>.</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="tracking.html">Track Order</a></li>
+      </ul>
+      <a href="cart.html" class="cart-btn">
+        <span>🛒</span>
+        <span>Cart</span>
+        <span class="cart-badge">0</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="success-banner">
+    <div class="success-icon">🎉</div>
+    <h1>Order <span>Confirmed!</span></h1>
+    <p>Your food is being prepared with love. Sit back and relax!</p>
+    <div class="order-id-badge" id="orderIdBadge">#EL000000</div>
+  </div>
+
+  <div class="confirmation-layout" id="confLayout">
+    <div class="conf-card" style="text-align:center; color:var(--ink-soft);">Loading order details…</div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const orderId = params.get('order');
+    const order = orderId ? getOrder(orderId) : null;
+
+    if (!order) {
+      document.getElementById('confLayout').innerHTML = `
+        <div class="conf-card">
+          <div class="empty-state">
+            <div class="empty-icon">❓</div>
+            <h3>Order not found</h3>
+            <p>We couldn't find this order. Please check your order ID.</p>
+            <a href="index.html" class="btn btn-primary">Go to Home</a>
+          </div>
+        </div>`;
+    } else {
+      document.getElementById('orderIdBadge').textContent = '#' + order.id;
+
+      // Timeline statuses
+      const allSteps = order.deliveryType === 'delivery'
+        ? [
+            { key: 'confirmed', icon: '✅', label: 'Order Confirmed', desc: 'We\'ve received your order' },
+            { key: 'preparing', icon: '👨‍🍳', label: 'Preparing', desc: 'Our chefs are cooking your meal' },
+            { key: 'ready', icon: '📦', label: 'Ready for Pickup', desc: 'Packed and ready for the rider' },
+            { key: 'on_the_way', icon: '🛵', label: 'On the Way', desc: 'Your rider is heading to you', eta: '~15 min' },
+            { key: 'delivered', icon: '🏠', label: 'Delivered', desc: 'Enjoy your meal!' },
+          ]
+        : [
+            { key: 'confirmed', icon: '✅', label: 'Order Confirmed', desc: 'We\'ve received your order' },
+            { key: 'preparing', icon: '👨‍🍳', label: 'Preparing', desc: 'Our chefs are cooking your meal' },
+            { key: 'ready', icon: '🔔', label: 'Ready for Pickup', desc: 'Your order is ready! Come collect it', eta: 'Now' },
+            { key: 'collected', icon: '🎉', label: 'Collected', desc: 'Enjoy your meal!' },
+          ];
+
+      const currentStatusIdx = 1; // After "confirmed", now "preparing"
+      const timelineHtml = allSteps.map((step, i) => {
+        const isDone = i < currentStatusIdx;
+        const isActive = i === currentStatusIdx;
+        const isPending = i > currentStatusIdx;
+        return `
+          <div class="timeline-item">
+            <div class="tl-dot ${isDone ? 'done' : isActive ? 'active' : 'pending'}">${isDone ? '✓' : step.icon}</div>
+            <div class="tl-content">
+              <strong>${step.label}${isActive && step.eta ? `<span class="tl-eta">${step.eta}</span>` : ''}</strong>
+              <span style="${isPending ? 'opacity:0.5' : ''}">${step.desc}</span>
+            </div>
+          </div>`;
+      }).join('');
+
+      const itemsHtml = order.items.map(i => `
+        <div class="order-item">
+          <span class="emoji">${i.emoji}</span>
+          <span class="name">${i.name}</span>
+          <span class="qty">×${i.qty}</span>
+          <span class="price">${formatPrice(i.price * i.qty)}</span>
+        </div>`).join('');
+
+      const payIcons = { card: '💳', twint: '📱', cash: '💶' };
+      const payLabels = { card: 'Card Payment', twint: 'TWINT', cash: 'Cash on Delivery' };
+
+      document.getElementById('confLayout').innerHTML = `
+        <!-- Timeline -->
+        <div class="conf-card">
+          <h3>📍 Order Status</h3>
+          <div class="timeline">${timelineHtml}</div>
+          <div style="margin-top:20px; padding:12px 16px; background:rgba(232,168,56,0.08); border-radius:var(--radius-sm); border-left:3px solid var(--saffron);">
+            <strong style="font-size:0.85rem;">⏱ Estimated ${order.deliveryType === 'delivery' ? 'Delivery' : 'Ready'} Time:</strong>
+            <span style="font-size:0.85rem; color:var(--ink-soft); margin-left:8px;">${order.scheduledTime === 'ASAP (~30 min)' ? 'Approximately 30–45 minutes' : order.scheduledTime}</span>
+          </div>
+        </div>
+
+        <!-- Order details -->
+        <div class="conf-card">
+          <h3>🧾 Order Details</h3>
+          <div class="order-items-list">${itemsHtml}</div>
+          <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--mist);">
+            <div class="totals-row"><span style="color:var(--ink-soft)">Subtotal</span><span class="val">${formatPrice(order.subtotal)}</span></div>
+            <div class="totals-row"><span style="color:var(--ink-soft)">Delivery</span><span class="val">${order.delivery === 0 ? 'Free' : formatPrice(order.delivery)}</span></div>
+            <div class="totals-row grand"><span>Total Paid</span><span class="val">${formatPrice(order.total)}</span></div>
+          </div>
+        </div>
+
+        <!-- Delivery info -->
+        <div class="conf-card">
+          <h3>${order.deliveryType === 'delivery' ? '🛵 Delivery Info' : '🏠 Pickup Info'}</h3>
+          <div class="info-grid">
+            <div class="info-item"><div class="label">Name</div><div class="value">${order.customer.name}</div></div>
+            <div class="info-item"><div class="label">Phone</div><div class="value">${order.customer.phone}</div></div>
+            ${order.deliveryType === 'delivery' ? `<div class="info-item" style="grid-column:1/-1"><div class="label">Delivery Address</div><div class="value">${order.customer.address}</div></div>` : `<div class="info-item"><div class="label">Pickup Location</div><div class="value">Hauptstrasse 42, 8157 Dielsdorf</div></div>`}
+            <div class="info-item"><div class="label">Payment</div><div class="value">${payIcons[order.paymentMethod]} ${payLabels[order.paymentMethod]}</div></div>
+            <div class="info-item"><div class="label">Order Time</div><div class="value">${new Date(order.placedAt).toLocaleTimeString('en-CH', { hour: '2-digit', minute: '2-digit' })}</div></div>
+          </div>
+          ${order.notes ? `<div style="margin-top:12px; padding:12px; background:var(--cream-dark); border-radius:var(--radius-sm);"><strong style="font-size:0.8rem; color:var(--ink-soft);">📝 Notes:</strong> <span style="font-size:0.88rem;">${order.notes}</span></div>` : ''}
+        </div>
+
+        <div class="actions">
+          <a href="tracking.html?order=${order.id}" class="btn btn-primary btn-lg">📍 Track Order Live</a>
+          <a href="menu.html" class="btn btn-outline btn-lg">Order Again</a>
+          <a href="index.html" class="btn btn-secondary btn-lg">Home</a>
+        </div>`;
+    }
+  </script>
+</body>
+</html>

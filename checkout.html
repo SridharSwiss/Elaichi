@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Elaichi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .page-header {
+      background: linear-gradient(135deg, #2D1A00, #1A1A1A);
+      color: white;
+      padding: 40px 24px;
+    }
+    .page-header h1 { font-size: clamp(1.5rem, 3vw, 2rem); }
+    .page-header h1 span { color: var(--saffron); }
+
+    .checkout-layout {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 32px;
+      align-items: start;
+    }
+    @media (max-width: 768px) { .checkout-layout { grid-template-columns: 1fr; } }
+
+    /* Form sections */
+    .form-section {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--mist);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .form-section h3 {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--mist);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Delivery type toggle */
+    .delivery-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .delivery-option {
+      border: 2px solid var(--mist);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      cursor: pointer;
+      transition: border-color var(--transition), background var(--transition);
+      text-align: center;
+    }
+    .delivery-option:hover { border-color: var(--saffron-light); }
+    .delivery-option.selected { border-color: var(--saffron); background: rgba(232,168,56,0.06); }
+    .delivery-option input[type="radio"] { display: none; }
+    .delivery-option .icon { font-size: 1.8rem; margin-bottom: 6px; }
+    .delivery-option strong { display: block; font-size: 0.9rem; margin-bottom: 4px; }
+    .delivery-option span { font-size: 0.78rem; color: var(--ink-soft); }
+
+    /* Payment options */
+    .payment-options { display: flex; flex-direction: column; gap: 10px; }
+    .payment-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 2px solid var(--mist);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: border-color var(--transition);
+    }
+    .payment-option:hover { border-color: var(--saffron-light); }
+    .payment-option.selected { border-color: var(--saffron); background: rgba(232,168,56,0.06); }
+    .payment-option input[type="radio"] { accent-color: var(--saffron); width: 16px; height: 16px; }
+    .payment-option .pay-icon { font-size: 1.4rem; }
+    .payment-option strong { font-size: 0.9rem; }
+    .payment-option span { font-size: 0.8rem; color: var(--ink-soft); }
+
+    /* Card input mock */
+    .card-fields {
+      margin-top: 16px;
+      display: none;
+    }
+    .card-fields.visible { display: block; }
+    .card-number-wrap { position: relative; }
+    .card-type-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+    }
+
+    /* Order review */
+    .order-review {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--mist);
+      padding: 24px;
+      position: sticky;
+      top: 88px;
+    }
+    .order-review h3 { font-size: 1rem; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--mist); }
+    .review-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+    .review-item:last-of-type { border-bottom: none; }
+    .review-item .emoji { font-size: 1.4rem; flex-shrink: 0; }
+    .review-item .name { flex: 1; font-size: 0.88rem; font-weight: 500; }
+    .review-item .qty { color: var(--ink-soft); font-size: 0.8rem; }
+    .review-item .price { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; color: var(--saffron-dark); }
+    .summary-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.88rem; }
+    .summary-row.total { font-weight: 700; font-size: 1rem; border-top: 2px solid var(--ink); padding-top: 12px; margin-top: 8px; }
+    .summary-row .value { font-family: var(--font-mono); font-weight: 600; }
+    .summary-row.total .value { color: var(--saffron-dark); }
+
+    .place-order-btn { width: 100%; margin-top: 20px; padding: 16px; font-size: 1rem; }
+
+    /* Time slot */
+    .time-slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
+    .time-slot {
+      border: 1.5px solid var(--mist);
+      border-radius: var(--radius-sm);
+      padding: 8px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: all var(--transition);
+    }
+    .time-slot:hover { border-color: var(--saffron); }
+    .time-slot.selected { border-color: var(--saffron); background: rgba(232,168,56,0.1); color: var(--saffron-dark); font-weight: 700; }
+    .time-slot.asap { background: var(--saffron); color: white; border-color: var(--saffron); }
+    .time-slot.asap.selected { background: var(--saffron-dark); }
+
+    /* Notes */
+    .form-group textarea { resize: vertical; min-height: 80px; }
+
+    .field-error { color: var(--chili); font-size: 0.78rem; margin-top: 4px; }
+    .secure-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--cardamom);
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-top: 8px;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="Elaichi Logo.png" alt="Elaichi" onerror="this.style.display='none'" />
+        Elaichi<span>.</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="cart.html">Cart</a></li>
+      </ul>
+      <a href="cart.html" class="cart-btn">
+        <span>🛒</span>
+        <span>Cart</span>
+        <span class="cart-badge">0</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="container">
+      <h1>Check<span>out</span></h1>
+      <div class="steps" style="margin-top:16px; margin-bottom:0;">
+        <div class="step done"><div class="step-num">✓</div><span>Menu</span></div>
+        <div class="step-divider"></div>
+        <div class="step done"><div class="step-num">✓</div><span>Cart</span></div>
+        <div class="step-divider"></div>
+        <div class="step active"><div class="step-num">3</div><span>Checkout</span></div>
+        <div class="step-divider"></div>
+        <div class="step"><div class="step-num">4</div><span>Confirm</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="checkout-layout">
+    <div>
+      <!-- Delivery type -->
+      <div class="form-section">
+        <h3>📍 Delivery or Pickup?</h3>
+        <div class="delivery-toggle">
+          <label class="delivery-option selected" id="opt-delivery">
+            <input type="radio" name="deliveryType" value="delivery" checked onchange="selectDelivery('delivery')" />
+            <div class="icon">🛵</div>
+            <strong>Home Delivery</strong>
+            <span>30–45 min · CHF 3.90 (free over CHF 40)</span>
+          </label>
+          <label class="delivery-option" id="opt-pickup">
+            <input type="radio" name="deliveryType" value="pickup" onchange="selectDelivery('pickup')" />
+            <div class="icon">🏠</div>
+            <strong>Pickup</strong>
+            <span>Ready in 20 min · Free</span>
+          </label>
+        </div>
+        <div id="addressFields">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name *</label>
+              <input type="text" id="firstName" placeholder="Rahul" />
+              <div class="field-error" id="err-firstName"></div>
+            </div>
+            <div class="form-group">
+              <label>Last Name *</label>
+              <input type="text" id="lastName" placeholder="Sharma" />
+              <div class="field-error" id="err-lastName"></div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Phone *</label>
+              <input type="tel" id="phone" placeholder="+41 79 000 00 00" />
+              <div class="field-error" id="err-phone"></div>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" id="email" placeholder="rahul@example.com" />
+            </div>
+          </div>
+          <div id="deliveryAddressFields">
+            <div class="form-group">
+              <label>Street Address *</label>
+              <input type="text" id="street" placeholder="Bahnhofstrasse 12" />
+              <div class="field-error" id="err-street"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>City *</label>
+                <input type="text" id="city" placeholder="Dielsdorf" />
+                <div class="field-error" id="err-city"></div>
+              </div>
+              <div class="form-group">
+                <label>Postcode *</label>
+                <input type="text" id="postcode" placeholder="8157" />
+                <div class="field-error" id="err-postcode"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Apartment / Floor (optional)</label>
+              <input type="text" id="apt" placeholder="3rd floor, Apt 12" />
+            </div>
+          </div>
+        </div>
+        <div id="pickupFields" style="display:none">
+          <p style="color:var(--ink-soft); font-size:0.9rem;">📍 <strong>Elaichi Restaurant</strong><br />Hauptstrasse 42, 8157 Dielsdorf, Switzerland</p>
+          <div class="form-row" style="margin-top:16px;">
+            <div class="form-group">
+              <label>Your Name *</label>
+              <input type="text" id="pickupName" placeholder="Name for pickup" />
+              <div class="field-error" id="err-pickupName"></div>
+            </div>
+            <div class="form-group">
+              <label>Phone *</label>
+              <input type="tel" id="pickupPhone" placeholder="+41 79 000 00 00" />
+              <div class="field-error" id="err-pickupPhone"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delivery time -->
+      <div class="form-section" id="timeSection">
+        <h3>⏰ Delivery Time</h3>
+        <div class="time-slots" id="timeSlots"></div>
+      </div>
+
+      <!-- Payment -->
+      <div class="form-section">
+        <h3>💳 Payment Method</h3>
+        <div class="payment-options">
+          <label class="payment-option selected" onclick="selectPayment('card', this)">
+            <input type="radio" name="payment" value="card" checked />
+            <span class="pay-icon">💳</span>
+            <div><strong>Credit / Debit Card</strong><span>Visa, Mastercard, Amex</span></div>
+          </label>
+          <label class="payment-option" onclick="selectPayment('twint', this)">
+            <input type="radio" name="payment" value="twint" />
+            <span class="pay-icon">📱</span>
+            <div><strong>TWINT</strong><span>Swiss mobile payment</span></div>
+          </label>
+          <label class="payment-option" onclick="selectPayment('cash', this)">
+            <input type="radio" name="payment" value="cash" />
+            <span class="pay-icon">💶</span>
+            <div><strong>Cash on Delivery</strong><span>Pay when your order arrives</span></div>
+          </label>
+        </div>
+
+        <div class="card-fields visible" id="cardFields">
+          <div class="form-group" style="margin-top:16px;">
+            <label>Card Number *</label>
+            <div class="card-number-wrap">
+              <input type="text" id="cardNum" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)" />
+              <div class="card-type-icon" id="cardTypeIcon">💳</div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Expiry *</label>
+              <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this)" />
+              <div class="field-error" id="err-card"></div>
+            </div>
+            <div class="form-group">
+              <label>CVV *</label>
+              <input type="text" id="cardCVV" placeholder="123" maxlength="4" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Cardholder Name *</label>
+            <input type="text" id="cardName" placeholder="RAHUL SHARMA" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Special instructions -->
+      <div class="form-section">
+        <h3>📝 Special Instructions</h3>
+        <div class="form-group">
+          <label>Notes for kitchen (optional)</label>
+          <textarea id="notes" placeholder="Allergies, spice preferences, extra sauces…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order review -->
+    <div>
+      <div class="order-review">
+        <h3>🧾 Your Order</h3>
+        <div id="reviewItems"></div>
+        <div id="reviewTotals"></div>
+        <button class="btn btn-primary place-order-btn" onclick="placeOrder()">
+          Place Order →
+        </button>
+        <div class="secure-badge">🔒 Secure checkout · SSL encrypted</div>
+        <a href="cart.html" style="display:block; text-align:center; font-size:0.82rem; color:var(--ink-soft); margin-top:12px;">← Edit cart</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    let deliveryType = 'delivery';
+    let selectedPayment = 'card';
+    let selectedTime = 'asap';
+
+    function selectDelivery(type) {
+      deliveryType = type;
+      document.getElementById('opt-delivery').classList.toggle('selected', type === 'delivery');
+      document.getElementById('opt-pickup').classList.toggle('selected', type === 'pickup');
+      document.getElementById('addressFields').style.display = type === 'delivery' ? 'block' : 'none';
+      document.getElementById('deliveryAddressFields').style.display = type === 'delivery' ? 'block' : 'none';
+      document.getElementById('pickupFields').style.display = type === 'pickup' ? 'block' : 'none';
+      document.getElementById('timeSection').querySelector('h3').textContent = type === 'delivery' ? '⏰ Delivery Time' : '⏰ Pickup Time';
+      renderTotals();
+    }
+
+    function selectPayment(val, el) {
+      selectedPayment = val;
+      document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+      document.getElementById('cardFields').classList.toggle('visible', val === 'card');
+    }
+
+    function formatCard(input) {
+      let v = input.value.replace(/\D/g, '').substring(0, 16);
+      input.value = v.replace(/(\d{4})(?=\d)/g, '$1 ');
+      const icon = document.getElementById('cardTypeIcon');
+      if (v.startsWith('4')) icon.textContent = '💳';
+      else if (v.startsWith('5')) icon.textContent = '💳';
+      else if (v.startsWith('3')) icon.textContent = '💳';
+      else icon.textContent = '💳';
+    }
+
+    function formatExpiry(input) {
+      let v = input.value.replace(/\D/g, '');
+      if (v.length >= 2) v = v.substring(0, 2) + '/' + v.substring(2, 4);
+      input.value = v;
+    }
+
+    // Time slots
+    function buildTimeSlots() {
+      const now = new Date();
+      const slots = ['ASAP (~30 min)'];
+      for (let i = 1; i <= 5; i++) {
+        const t = new Date(now.getTime() + (i * 30 + 30) * 60000);
+        slots.push(`${t.getHours().toString().padStart(2,'0')}:${t.getMinutes().toString().padStart(2,'0')}`);
+      }
+      document.getElementById('timeSlots').innerHTML = slots.map((s, i) => `
+        <div class="time-slot ${i === 0 ? 'asap' : ''} ${i === 0 ? 'selected' : ''}" onclick="selectTime('${s}', this)">
+          ${s}
+        </div>`).join('');
+      selectedTime = slots[0];
+    }
+
+    function selectTime(t, el) {
+      selectedTime = t;
+      document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    function renderReview() {
+      const cart = getCart();
+      document.getElementById('reviewItems').innerHTML = cart.map(c => {
+        const item = MENU_DATA.find(i => i.id === c.id);
+        if (!item) return '';
+        return `
+          <div class="review-item">
+            <span class="emoji">${item.emoji}</span>
+            <span class="name">${item.name}</span>
+            <span class="qty">×${c.qty}</span>
+            <span class="price">${formatPrice(item.price * c.qty)}</span>
+          </div>`;
+      }).join('');
+      renderTotals();
+    }
+
+    function renderTotals() {
+      const subtotal = getCartTotal();
+      const delivery = deliveryType === 'pickup' ? 0 : getDeliveryFee(subtotal);
+      const total = subtotal + delivery;
+      document.getElementById('reviewTotals').innerHTML = `
+        <div style="margin-top:12px; padding-top:12px; border-top:1px solid var(--mist);">
+          <div class="summary-row"><span style="color:var(--ink-soft)">Subtotal</span><span class="value">${formatPrice(subtotal)}</span></div>
+          <div class="summary-row"><span style="color:var(--ink-soft)">Delivery</span><span class="value">${delivery === 0 ? 'Free' : formatPrice(delivery)}</span></div>
+          <div class="summary-row total"><span>Total</span><span class="value">${formatPrice(total)}</span></div>
+        </div>`;
+    }
+
+    function validate() {
+      let ok = true;
+      const clearErr = id => document.getElementById(id) && (document.getElementById(id).textContent = '');
+      const setErr = (id, msg) => { if (document.getElementById(id)) { document.getElementById(id).textContent = msg; ok = false; } };
+
+      ['err-firstName','err-lastName','err-phone','err-street','err-city','err-postcode','err-pickupName','err-pickupPhone','err-card'].forEach(clearErr);
+
+      if (deliveryType === 'delivery') {
+        if (!document.getElementById('firstName').value.trim()) setErr('err-firstName', 'Required');
+        if (!document.getElementById('lastName').value.trim()) setErr('err-lastName', 'Required');
+        if (!document.getElementById('phone').value.trim()) setErr('err-phone', 'Required');
+        if (!document.getElementById('street').value.trim()) setErr('err-street', 'Required');
+        if (!document.getElementById('city').value.trim()) setErr('err-city', 'Required');
+        if (!document.getElementById('postcode').value.trim()) setErr('err-postcode', 'Required');
+      } else {
+        if (!document.getElementById('pickupName').value.trim()) setErr('err-pickupName', 'Required');
+        if (!document.getElementById('pickupPhone').value.trim()) setErr('err-pickupPhone', 'Required');
+      }
+
+      if (selectedPayment === 'card') {
+        const num = document.getElementById('cardNum').value.replace(/\s/g, '');
+        const exp = document.getElementById('cardExpiry').value;
+        const cvv = document.getElementById('cardCVV').value;
+        const name = document.getElementById('cardName').value.trim();
+        if (num.length < 16 || !exp || cvv.length < 3 || !name) {
+          setErr('err-card', 'Please complete all card details');
+          ok = false;
+        }
+      }
+
+      return ok;
+    }
+
+    function placeOrder() {
+      if (!validate()) { showToast('Please fix the errors above', 'error'); return; }
+      const cart = getCart();
+      if (!cart.length) { showToast('Your cart is empty', 'error'); return; }
+
+      const subtotal = getCartTotal();
+      const delivery = deliveryType === 'pickup' ? 0 : getDeliveryFee(subtotal);
+
+      const order = {
+        id: generateOrderId(),
+        items: cart.map(c => {
+          const item = MENU_DATA.find(i => i.id === c.id);
+          return { id: c.id, name: item.name, emoji: item.emoji, price: item.price, qty: c.qty };
+        }),
+        subtotal,
+        delivery,
+        total: subtotal + delivery,
+        deliveryType,
+        paymentMethod: selectedPayment,
+        scheduledTime: selectedTime,
+        notes: document.getElementById('notes').value,
+        status: 'confirmed',
+        placedAt: new Date().toISOString(),
+        customer: deliveryType === 'delivery' ? {
+          name: `${document.getElementById('firstName').value} ${document.getElementById('lastName').value}`,
+          phone: document.getElementById('phone').value,
+          email: document.getElementById('email').value,
+          address: `${document.getElementById('street').value}, ${document.getElementById('apt').value ? document.getElementById('apt').value + ', ' : ''}${document.getElementById('postcode').value} ${document.getElementById('city').value}`,
+        } : {
+          name: document.getElementById('pickupName').value,
+          phone: document.getElementById('pickupPhone').value,
+        },
+        timeline: [
+          { status: 'confirmed', label: 'Order Confirmed', time: new Date().toISOString() }
+        ]
+      };
+
+      saveOrder(order);
+      clearCart();
+      location.href = `confirmation.html?order=${order.id}`;
+    }
+
+    // Redirect if empty cart
+    if (!getCart().length) {
+      location.href = 'cart.html';
+    }
+
+    buildTimeSlots();
+    renderReview();
+  </script>
+</body>
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elaichi — Authentic Indian Restaurant & Delivery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ===== Hero ===== */
+    .hero {
+      background: linear-gradient(135deg, #1A1A1A 0%, #2D1A00 60%, #1A1A1A 100%);
+      color: white;
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(232,168,56,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      width: 100%;
+    }
+    @media (max-width: 768px) {
+      .hero-content { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+      .hero-visual { order: -1; }
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(232,168,56,0.15);
+      border: 1px solid rgba(232,168,56,0.3);
+      color: var(--saffron-light);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.1;
+      margin-bottom: 20px;
+      color: white;
+    }
+    .hero h1 span { color: var(--saffron); }
+    .hero p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 32px;
+      max-width: 460px;
+    }
+    @media (max-width: 768px) { .hero p { margin: 0 auto 32px; } }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    @media (max-width: 768px) { .hero-actions { justify-content: center; } }
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    @media (max-width: 768px) { .hero-stats { justify-content: center; } }
+    .hero-stat strong { display: block; font-size: 1.5rem; font-weight: 800; color: var(--saffron); }
+    .hero-stat span { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+    .hero-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 16px;
+    }
+    .hero-dish {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, background 0.3s ease;
+      cursor: pointer;
+    }
+    .hero-dish:hover { background: rgba(232,168,56,0.1); transform: translateY(-4px); }
+    .hero-dish:first-child { grid-column: 1 / -1; }
+    .hero-dish-emoji { font-size: 2.5rem; margin-bottom: 8px; }
+    .hero-dish h4 { font-size: 0.95rem; color: white; margin-bottom: 4px; }
+    .hero-dish p { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin: 0; }
+    .hero-dish .price { color: var(--saffron); font-weight: 700; font-family: var(--font-mono); font-size: 0.9rem; }
+
+    /* ===== Features ===== */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 768px) { .features-grid { grid-template-columns: 1fr; } }
+    .feature-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--mist);
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+    .feature-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--saffron-light), var(--saffron));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+    }
+    .feature-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .feature-card p { color: var(--ink-soft); font-size: 0.9rem; line-height: 1.6; }
+
+    /* ===== Popular dishes ===== */
+    .dishes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .dish-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--mist);
+      transition: box-shadow var(--transition), transform var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .dish-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
+    .dish-thumb {
+      background: linear-gradient(135deg, var(--cream-dark), var(--mist));
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      position: relative;
+    }
+    .dish-card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .dish-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+    .dish-card-body h3 { font-size: 1.05rem; margin-bottom: 6px; }
+    .dish-card-body p { color: var(--ink-soft); font-size: 0.85rem; line-height: 1.5; margin-bottom: 16px; flex: 1; }
+    .dish-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+    .dish-price {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--saffron-dark);
+    }
+
+    /* ===== Testimonials ===== */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 768px) { .testimonials-grid { grid-template-columns: 1fr; } }
+    .testimonial {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--mist);
+    }
+    .testimonial-stars { color: var(--saffron); font-size: 1rem; margin-bottom: 12px; }
+    .testimonial p { color: var(--ink-soft); font-size: 0.9rem; line-height: 1.7; margin-bottom: 16px; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--saffron-light), var(--saffron));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: white;
+      font-size: 0.9rem;
+    }
+    .testimonial-author strong { display: block; font-size: 0.9rem; }
+    .testimonial-author span { font-size: 0.8rem; color: var(--ink-soft); }
+
+    /* ===== CTA Banner ===== */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--saffron-dark), var(--saffron));
+      border-radius: var(--radius-lg);
+      padding: 64px 48px;
+      text-align: center;
+      color: white;
+    }
+    .cta-banner h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 12px; }
+    .cta-banner p { font-size: 1.05rem; margin-bottom: 32px; opacity: 0.9; }
+    .cta-banner .btn { background: white; color: var(--saffron-dark); }
+    .cta-banner .btn:hover { background: var(--cream); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+  </style>
+</head>
+<body>
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="Elaichi Logo.png" alt="Elaichi" onerror="this.style.display='none'" />
+        Elaichi<span>.</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="tracking.html">Track Order</a></li>
+      </ul>
+      <a href="cart.html" class="cart-btn">
+        <span>🛒</span>
+        <span>Cart</span>
+        <span class="cart-badge">0</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-eyebrow">🌿 Fresh · Authentic · Delivered</div>
+        <h1>The Soul of <span>India</span> in Every Bite</h1>
+        <p>Authentic Indian flavours crafted with passion. From aromatic biryanis to buttery curries — order online for pickup or home delivery across the region.</p>
+        <div class="hero-actions">
+          <a href="menu.html" class="btn btn-primary btn-lg">Browse Menu</a>
+          <a href="tracking.html" class="btn btn-lg" style="background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);">Track My Order</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><strong>32+</strong><span>Dishes</span></div>
+          <div class="hero-stat"><strong>4.9★</strong><span>Rating</span></div>
+          <div class="hero-stat"><strong>30 min</strong><span>Delivery</span></div>
+          <div class="hero-stat"><strong>CHF 15</strong><span>Min Order</span></div>
+        </div>
+      </div>
+      <div class="hero-visual" id="heroVisual"></div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section" style="background:var(--white);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why Order from Elaichi?</h2>
+        <p>More than a meal — an experience crafted with care, delivered to your door.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🌿</div>
+          <h3>Fresh Ingredients Daily</h3>
+          <p>We source spices directly from India and prepare everything fresh each morning. No shortcuts, ever.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>30-Minute Delivery</h3>
+          <p>Your food arrives hot and fresh. We promise delivery within 30 minutes or your next order gets 10% off.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3>Customise Your Dish</h3>
+          <p>Adjust spice levels, choose protein, or request dairy-free. Every dish can be tailored to your taste.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Dishes -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Most Loved Dishes</h2>
+        <p>Our guests keep coming back for these. We think you'll see why.</p>
+      </div>
+      <div class="dishes-grid" id="popularDishes"></div>
+      <div style="text-align:center; margin-top:40px;">
+        <a href="menu.html" class="btn btn-outline btn-lg">View Full Menu →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section" style="background:var(--white);">
+    <div class="container">
+      <div class="section-header">
+        <h2>What Our Guests Say</h2>
+        <p>Over 500 happy customers and counting.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial">
+          <div class="testimonial-stars">★★★★★</div>
+          <p>"The Butter Chicken is the best I've had outside of India. Rich, velvety sauce — absolutely perfect. Delivery was on time and still piping hot."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">P</div>
+            <div><strong>Priya M.</strong><span>Regular customer</span></div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-stars">★★★★★</div>
+          <p>"Living in Switzerland and finding a place that makes Biryani this authentic is incredible. The aroma alone is worth it. Ordering every week now!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">R</div>
+            <div><strong>Rahul S.</strong><span>Zürich</span></div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-stars">★★★★★</div>
+          <p>"Amazing food and super easy to order online. The vegetarian options are wonderful — Palak Paneer and Dal Makhani together is a dream combo!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">A</div>
+            <div><strong>Anita K.</strong><span>Dielsdorf</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner">
+        <h2>Ready to Order?</h2>
+        <p>Explore our full menu of authentic Indian dishes. Free delivery on orders over CHF 40.</p>
+        <a href="menu.html" class="btn btn-lg">Order Now — It's Quick & Easy</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-text">Elaichi<span>.</span></div>
+        <p>Authentic Indian cuisine crafted with love and delivered to your door. Based in Dielsdorf, Switzerland.</p>
+      </div>
+      <div>
+        <h4>Order</h4>
+        <ul>
+          <li><a href="menu.html">Full Menu</a></li>
+          <li><a href="cart.html">My Cart</a></li>
+          <li><a href="tracking.html">Track Order</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Info</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Events</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul>
+          <li>Mon–Fri: 11:30–14:30</li>
+          <li>Mon–Fri: 17:30–22:00</li>
+          <li>Sat–Sun: 12:00–22:30</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Elaichi Restaurant, Dielsdorf. All rights reserved. Made with 🌶️ and love.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    // Hero visual
+    const heroItems = MENU_DATA.filter(i => i.popular).slice(0, 4);
+    document.getElementById('heroVisual').innerHTML = heroItems.map((d, i) => `
+      <div class="hero-dish" style="${i === 0 ? 'grid-column: 1 / -1;' : ''}" onclick="location.href='menu.html'">
+        <div class="hero-dish-emoji">${d.emoji}</div>
+        <h4>${d.name}</h4>
+        <p>${d.desc.substring(0, 60)}…</p>
+        <div class="price">${formatPrice(d.price)}</div>
+      </div>
+    `).join('');
+
+    // Popular dishes
+    const popular = MENU_DATA.filter(i => i.popular);
+    document.getElementById('popularDishes').innerHTML = popular.map(d => `
+      <div class="dish-card">
+        <div class="dish-thumb">${d.emoji}</div>
+        <div class="dish-card-body">
+          <div class="dish-meta">
+            <span class="badge ${d.veg ? 'badge-veg' : 'badge-nonveg'}">${d.veg ? '🟢 Veg' : '🔴 Non-veg'}</span>
+            ${d.spice > 0 ? `<span class="spice-badge">${'🌶️'.repeat(d.spice)}</span>` : ''}
+          </div>
+          <h3>${d.name}</h3>
+          <p>${d.desc}</p>
+          <div class="dish-card-footer">
+            <div class="dish-price">${formatPrice(d.price)}</div>
+            <button class="btn btn-primary btn-sm" onclick="addToCart(${d.id})">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  </script>
+</body>
+</html>

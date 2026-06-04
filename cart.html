@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Cart — Elaichi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .page-header {
+      background: linear-gradient(135deg, #2D1A00, #1A1A1A);
+      color: white;
+      padding: 48px 24px;
+    }
+    .page-header .container { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .page-header h1 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+    .page-header h1 span { color: var(--saffron); }
+
+    .cart-layout {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 32px;
+      align-items: start;
+    }
+    @media (max-width: 768px) { .cart-layout { grid-template-columns: 1fr; } }
+
+    /* Cart items */
+    .cart-items-list { display: flex; flex-direction: column; gap: 12px; }
+    .cart-item {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--mist);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: box-shadow var(--transition);
+    }
+    .cart-item:hover { box-shadow: var(--shadow-sm); }
+    .cart-item-emoji {
+      width: 64px;
+      height: 64px;
+      flex-shrink: 0;
+      background: var(--cream-dark);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+    .cart-item-info { flex: 1; min-width: 0; }
+    .cart-item-info h4 { font-size: 1rem; margin-bottom: 4px; }
+    .cart-item-info .item-meta { display: flex; align-items: center; gap: 8px; }
+    .cart-item-info .unit-price { color: var(--ink-soft); font-size: 0.82rem; }
+    .cart-item-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+    .cart-item-total {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--saffron-dark);
+      font-size: 1rem;
+    }
+    .btn-remove {
+      background: none;
+      border: none;
+      color: var(--ink-soft);
+      cursor: pointer;
+      font-size: 0.8rem;
+      padding: 4px;
+      transition: color var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .btn-remove:hover { color: var(--chili); }
+
+    /* Order summary */
+    .order-summary {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--mist);
+      padding: 24px;
+      position: sticky;
+      top: 88px;
+    }
+    .order-summary h3 { font-size: 1.1rem; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--mist); }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      font-size: 0.9rem;
+    }
+    .summary-row.total {
+      border-top: 2px solid var(--ink);
+      margin-top: 8px;
+      padding-top: 16px;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+    .summary-row .label { color: var(--ink-soft); }
+    .summary-row .value { font-family: var(--font-mono); font-weight: 600; }
+    .summary-row.total .value { color: var(--saffron-dark); font-size: 1.2rem; }
+    .free-delivery-notice {
+      background: #e8f5e9;
+      color: var(--cardamom);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin: 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .min-order-warning {
+      background: #fff3cd;
+      color: #8a6d00;
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin: 12px 0;
+    }
+    .checkout-btn { width: 100%; margin-top: 16px; }
+
+    /* Promo code */
+    .promo-row {
+      display: flex;
+      gap: 8px;
+      margin: 12px 0;
+    }
+    .promo-row input {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1.5px solid var(--mist);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-family: var(--font-body);
+      background: var(--cream);
+      outline: none;
+      transition: border-color var(--transition);
+    }
+    .promo-row input:focus { border-color: var(--saffron); }
+    .promo-row button {
+      padding: 10px 16px;
+      background: var(--ink);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: background var(--transition);
+    }
+    .promo-row button:hover { background: var(--saffron-dark); }
+    .promo-applied { color: var(--cardamom); font-size: 0.82rem; font-weight: 600; margin-bottom: 8px; }
+
+    /* Upsell */
+    .upsell { margin-top: 32px; }
+    .upsell h4 { font-size: 1rem; margin-bottom: 16px; }
+    .upsell-grid { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 4px; }
+    .upsell-item {
+      flex-shrink: 0;
+      background: var(--white);
+      border: 1.5px solid var(--mist);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      text-align: center;
+      width: 130px;
+      cursor: pointer;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .upsell-item:hover { border-color: var(--saffron); transform: translateY(-2px); }
+    .upsell-item .emoji { font-size: 2rem; margin-bottom: 6px; }
+    .upsell-item .name { font-size: 0.78rem; font-weight: 600; margin-bottom: 4px; }
+    .upsell-item .price { font-family: var(--font-mono); font-size: 0.78rem; color: var(--saffron-dark); }
+    .upsell-item button {
+      margin-top: 8px;
+      padding: 5px 10px;
+      background: var(--saffron);
+      color: white;
+      border: none;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: var(--font-body);
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="Elaichi Logo.png" alt="Elaichi" onerror="this.style.display='none'" />
+        Elaichi<span>.</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="tracking.html">Track Order</a></li>
+      </ul>
+      <a href="cart.html" class="cart-btn">
+        <span>🛒</span>
+        <span>Cart</span>
+        <span class="cart-badge">0</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="container">
+      <div>
+        <h1>Your <span>Cart</span></h1>
+        <p id="cartSubtitle" style="color:rgba(255,255,255,0.6); margin-top:4px; font-size:0.9rem;"></p>
+      </div>
+      <a href="menu.html" class="btn btn-outline" style="color:white;border-color:rgba(255,255,255,0.3);">+ Add More Items</a>
+    </div>
+  </div>
+
+  <div id="cartContent"></div>
+
+  <script src="app.js"></script>
+  <script>
+    const PROMO_CODES = { 'WELCOME10': 10, 'SPICY20': 20, 'ELAICHI': 15 };
+    let promoDiscount = 0;
+    let promoLabel = '';
+
+    function applyPromo() {
+      const code = document.getElementById('promoInput').value.trim().toUpperCase();
+      const pct = PROMO_CODES[code];
+      if (pct) {
+        promoDiscount = pct;
+        promoLabel = code;
+        showToast(`Promo code applied! ${pct}% off`, 'success');
+        renderCart();
+      } else {
+        showToast('Invalid promo code', 'error');
+      }
+    }
+
+    function renderCart() {
+      const cart = getCart();
+      const content = document.getElementById('cartContent');
+
+      if (!cart.length) {
+        content.innerHTML = `
+          <div class="container" style="padding:64px 24px;">
+            <div class="empty-state">
+              <div class="empty-icon">🛒</div>
+              <h3>Your cart is empty</h3>
+              <p>Looks like you haven't added anything yet. Let's fix that!</p>
+              <a href="menu.html" class="btn btn-primary btn-lg">Browse Menu</a>
+            </div>
+          </div>`;
+        document.getElementById('cartSubtitle').textContent = '0 items';
+        return;
+      }
+
+      const subtotal = getCartTotal();
+      const discount = promoDiscount > 0 ? (subtotal * promoDiscount / 100) : 0;
+      const discountedSubtotal = subtotal - discount;
+      const delivery = getDeliveryFee(discountedSubtotal);
+      const total = discountedSubtotal + delivery;
+      const canCheckout = subtotal >= MIN_ORDER;
+
+      document.getElementById('cartSubtitle').textContent = `${getCartCount()} item${getCartCount() > 1 ? 's' : ''} · ${formatPrice(subtotal)}`;
+
+      const cartItemsHtml = cart.map(c => {
+        const item = MENU_DATA.find(i => i.id === c.id);
+        if (!item) return '';
+        return `
+          <div class="cart-item">
+            <div class="cart-item-emoji">${item.emoji}</div>
+            <div class="cart-item-info">
+              <h4>${item.name}</h4>
+              <div class="item-meta">
+                <span class="badge ${item.veg ? 'badge-veg' : 'badge-nonveg'}">${item.veg ? '🟢' : '🔴'}</span>
+                <span class="unit-price">${formatPrice(item.price)} each</span>
+              </div>
+            </div>
+            <div class="cart-item-right">
+              <div class="cart-item-total">${formatPrice(item.price * c.qty)}</div>
+              <div class="qty-control">
+                <button onclick="changeQty(${item.id}, ${c.qty - 1})">−</button>
+                <span>${c.qty}</span>
+                <button onclick="changeQty(${item.id}, ${c.qty + 1})">+</button>
+              </div>
+              <button class="btn-remove" onclick="handleRemove(${item.id})">🗑 Remove</button>
+            </div>
+          </div>`;
+      }).join('');
+
+      // Upsell: suggest items not in cart from breads/drinks
+      const inCartIds = cart.map(c => c.id);
+      const upsellItems = MENU_DATA.filter(i => (i.category === 'breads' || i.category === 'drinks') && !inCartIds.includes(i.id)).slice(0, 5);
+
+      content.innerHTML = `
+        <div class="cart-layout">
+          <div>
+            <div class="cart-items-list">${cartItemsHtml}</div>
+            ${upsellItems.length ? `
+            <div class="upsell">
+              <h4>🍽️ Goes Well With…</h4>
+              <div class="upsell-grid">
+                ${upsellItems.map(u => `
+                  <div class="upsell-item" onclick="handleUpsellAdd(${u.id})">
+                    <div class="emoji">${u.emoji}</div>
+                    <div class="name">${u.name}</div>
+                    <div class="price">${formatPrice(u.price)}</div>
+                    <button>＋ Add</button>
+                  </div>`).join('')}
+              </div>
+            </div>` : ''}
+          </div>
+
+          <div>
+            <div class="order-summary">
+              <h3>Order Summary</h3>
+
+              <div class="summary-row">
+                <span class="label">Subtotal (${getCartCount()} items)</span>
+                <span class="value">${formatPrice(subtotal)}</span>
+              </div>
+              ${discount > 0 ? `
+              <div class="summary-row" style="color:var(--cardamom)">
+                <span>Promo (${promoLabel} −${promoDiscount}%)</span>
+                <span class="value">−${formatPrice(discount)}</span>
+              </div>` : ''}
+              <div class="summary-row">
+                <span class="label">Delivery fee</span>
+                <span class="value">${delivery === 0 ? '🎉 Free' : formatPrice(delivery)}</span>
+              </div>
+
+              ${!canCheckout ? `
+              <div class="min-order-warning">⚠️ Minimum order is CHF ${MIN_ORDER.toFixed(2)}. Add ${formatPrice(MIN_ORDER - subtotal)} more.</div>` : ''}
+              ${delivery > 0 && discountedSubtotal < FREE_DELIVERY_THRESHOLD ? `
+              <div class="free-delivery-notice">🚚 Add ${formatPrice(FREE_DELIVERY_THRESHOLD - discountedSubtotal)} for free delivery!</div>` : ''}
+              ${delivery === 0 ? `<div class="free-delivery-notice">✅ You get free delivery!</div>` : ''}
+
+              <div class="summary-row total">
+                <span>Total</span>
+                <span class="value">${formatPrice(total)}</span>
+              </div>
+
+              <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--mist);">
+                <div style="font-size:0.78rem; font-weight:600; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;">Promo Code</div>
+                ${promoDiscount > 0 ? `<div class="promo-applied">✅ ${promoLabel} applied (${promoDiscount}% off)</div>` : ''}
+                <div class="promo-row">
+                  <input type="text" id="promoInput" placeholder="Enter code…" value="${promoLabel}" ${promoDiscount > 0 ? 'disabled' : ''} />
+                  ${promoDiscount === 0 ? `<button onclick="applyPromo()">Apply</button>` : `<button onclick="removePromo()">Remove</button>`}
+                </div>
+                <div style="font-size:0.75rem;color:var(--ink-soft);">Try: WELCOME10, SPICY20, ELAICHI</div>
+              </div>
+
+              <a href="${canCheckout ? 'checkout.html' : '#'}" class="btn btn-primary btn-lg checkout-btn" ${!canCheckout ? 'style="opacity:0.5;pointer-events:none;"' : ''}>
+                ${canCheckout ? 'Proceed to Checkout →' : `Min order CHF ${MIN_ORDER}`}
+              </a>
+              <a href="menu.html" class="btn btn-secondary checkout-btn" style="margin-top:8px;text-align:center;">← Continue Shopping</a>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function changeQty(id, qty) {
+      updateQty(id, qty);
+      renderCart();
+    }
+
+    function handleRemove(id) {
+      removeFromCart(id);
+      renderCart();
+    }
+
+    function handleUpsellAdd(id) {
+      addToCart(id);
+      renderCart();
+    }
+
+    function removePromo() {
+      promoDiscount = 0;
+      promoLabel = '';
+      renderCart();
+    }
+
+    renderCart();
+  </script>
+</body>
+</html>
