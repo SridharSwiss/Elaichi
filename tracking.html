@@ -239,6 +239,22 @@
       transition: background var(--transition);
     }
     .demo-controls button:hover { background: #5849c9; }
+
+    .hide-xs { }
+    @media (max-width: 640px) {
+      .hide-xs { display: none; }
+      .page-header { padding: 40px 16px; }
+      .lookup-card { padding: 0 12px; margin: 24px auto; }
+      .lookup-box { padding: 20px; }
+      .lookup-input-row { flex-direction: column; }
+      .lookup-input-row button { width: 100%; padding: 14px; }
+      .tracking-layout { padding: 0 12px; gap: 16px; margin-bottom: 40px; }
+      .status-hero { padding: 24px 16px; }
+      .status-big-icon { font-size: 3rem; }
+      .status-big-label { font-size: 1.3rem; }
+      .track-card { padding: 16px; }
+      .order-summary-side { padding: 16px; position: static; }
+    }
   </style>
 </head>
 <body>
@@ -253,13 +269,26 @@
         <li><a href="menu.html">Menu</a></li>
         <li><a href="tracking.html" class="active">Track Order</a></li>
       </ul>
-      <a href="cart.html" class="cart-btn">
-        <span>🛒</span>
-        <span>Cart</span>
-        <span class="cart-badge">0</span>
-      </a>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <a href="cart.html" class="cart-btn">
+          <span>🛒</span>
+          <span class="hide-xs">Cart</span>
+          <span class="cart-badge">0</span>
+        </a>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
+  <div class="mobile-menu" id="mobileMenu" onclick="closeMenu(event)">
+    <div class="mobile-menu-panel">
+      <a href="index.html">🏠 Home</a>
+      <a href="menu.html">🍛 Menu</a>
+      <a href="tracking.html" class="active">📍 Track Order</a>
+      <a href="cart.html" class="menu-cart-btn">🛒 View Cart</a>
+    </div>
+  </div>
 
   <div class="page-header">
     <h1>Track Your <span>Order</span></h1>
@@ -452,10 +481,22 @@
       document.getElementById('mainContent').innerHTML = renderLookup(getOrders());
     }
 
-    // Enter key on lookup
     document.addEventListener('keydown', e => {
       if (e.key === 'Enter' && document.getElementById('orderInput')) lookupOrder();
     });
+
+    function toggleMenu() {
+      document.getElementById('hamburger').classList.toggle('open');
+      document.getElementById('mobileMenu').classList.toggle('open');
+      document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+    }
+    function closeMenu(e) {
+      if (e.target === document.getElementById('mobileMenu')) {
+        document.getElementById('hamburger').classList.remove('open');
+        document.getElementById('mobileMenu').classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
   </script>
 </body>
 </html>
