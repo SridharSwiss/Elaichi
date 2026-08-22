@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Checkout — Elaichi</title>
+  <title>Checkout — Elaichi × WEF Davos 2027</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -241,8 +241,8 @@
           <label class="delivery-option selected" id="opt-delivery">
             <input type="radio" name="deliveryType" value="delivery" checked onchange="selectDelivery('delivery')" />
             <div class="icon">🛵</div>
-            <strong>Home Delivery</strong>
-            <span>30–45 min · CHF 3.90 (free over CHF 40)</span>
+            <strong>Davos Hotel Delivery</strong>
+            <span>30–45 min · 🏔️ Complimentary for WEF delegates</span>
           </label>
           <label class="delivery-option" id="opt-pickup">
             <input type="radio" name="deliveryType" value="pickup" onchange="selectDelivery('pickup')" />
@@ -478,7 +478,7 @@
       document.getElementById('reviewTotals').innerHTML = `
         <div style="margin-top:12px; padding-top:12px; border-top:1px solid var(--mist);">
           <div class="summary-row"><span style="color:var(--ink-soft)">Subtotal</span><span class="value">${formatPrice(subtotal)}</span></div>
-          <div class="summary-row"><span style="color:var(--ink-soft)">Delivery</span><span class="value">${delivery === 0 ? 'Free' : formatPrice(delivery)}</span></div>
+          <div class="summary-row"><span style="color:var(--ink-soft)">Delivery</span><span class="value" style="color:var(--cardamom);font-weight:700;">${delivery === 0 ? '🏔️ Complimentary' : formatPrice(delivery)}</span></div>
           <div class="summary-row total"><span>Total</span><span class="value">${formatPrice(total)}</span></div>
         </div>`;
     }
