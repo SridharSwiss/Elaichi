@@ -2513,90 +2513,92 @@ Thank you.`);
 <!-- ══════════════════════════════════════
      FEATURED LISTINGS ENTRY BANNER
 ══════════════════════════════════════ -->
+<!-- Overlay backdrop -->
+<div id="featured-backdrop" style="
+  position:fixed;inset:0;z-index:9998;
+  background:rgba(5,5,5,0.72);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  opacity:0;pointer-events:none;
+  transition:opacity 0.45s ease;
+"></div>
+
 <div id="featured-banner" style="
   position:fixed;
-  bottom:0; left:0; right:0;
+  top:50%;left:50%;
+  transform:translate(-50%,-46%) scale(0.96);
   z-index:9999;
-  transform:translateY(100%);
-  transition:transform 0.55s cubic-bezier(0.22,1,0.36,1);
-  pointer-events:none;
-" aria-live="polite" role="region" aria-label="Featured listings">
+  width:min(640px,92vw);
+  opacity:0;pointer-events:none;
+  transition:transform 0.5s cubic-bezier(0.22,1,0.36,1), opacity 0.45s ease;
+" aria-live="polite" role="dialog" aria-modal="true" aria-label="Featured listings">
   <div style="
-    background:linear-gradient(135deg,rgba(10,10,10,0.97) 0%,rgba(18,14,8,0.97) 100%);
-    border-top:1px solid rgba(197,160,89,0.35);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-    padding:18px 28px;
-    display:flex;
-    align-items:center;
-    gap:20px;
+    background:linear-gradient(145deg,rgba(14,11,6,0.98) 0%,rgba(22,17,9,0.98) 100%);
+    border:1px solid rgba(197,160,89,0.35);
+    border-radius:6px;
+    backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+    box-shadow:0 24px 80px rgba(0,0,0,0.75),0 0 0 1px rgba(197,160,89,0.08);
+    padding:36px 40px 32px;
     pointer-events:all;
-    max-width:100%;
-    box-shadow:0 -8px 40px rgba(0,0,0,0.55);
+    position:relative;
   ">
-    <!-- Gold pulse dot -->
-    <div style="position:relative;flex-shrink:0;">
+    <!-- Dismiss -->
+    <button id="banner-close" aria-label="Dismiss" style="
+      position:absolute;top:14px;right:16px;
+      background:none;border:none;cursor:pointer;
+      color:rgba(255,255,255,0.3);font-size:1.4rem;line-height:1;
+      padding:4px 8px;transition:color 0.2s;
+    " onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">×</button>
+
+    <!-- Header -->
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
       <div style="
-        width:10px;height:10px;background:var(--gold);border-radius:50%;
+        width:9px;height:9px;background:var(--gold);border-radius:50%;flex-shrink:0;
         animation:gs-pulse 2s ease-in-out infinite;
       "></div>
-    </div>
-
-    <!-- Text -->
-    <div style="flex:1;min-width:0;">
-      <div style="
-        font-size:0.7rem;letter-spacing:0.2em;color:var(--gold);
-        text-transform:uppercase;margin-bottom:3px;
-      ">Now Available · Davos Annual Meeting 2027</div>
-      <div style="
-        font-family:var(--font-display);font-size:1.15rem;font-weight:600;
-        color:#fff;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-      ">
-        Featured Listings — Private Apartment &amp; Alpine Chalet
+      <div style="font-size:0.68rem;letter-spacing:0.22em;color:var(--gold);text-transform:uppercase;">
+        Now Available · Davos Annual Meeting 2027
       </div>
     </div>
+
+    <!-- Title -->
+    <div style="
+      font-family:var(--font-display);font-size:1.75rem;font-weight:600;
+      color:#fff;line-height:1.15;margin-bottom:8px;
+    ">Featured Listings</div>
+    <div style="
+      font-size:0.78rem;color:rgba(255,255,255,0.45);letter-spacing:0.04em;margin-bottom:28px;
+    ">Private Apartment &amp; Alpine Chalet — Limited Availability</div>
 
     <!-- Property pills -->
-    <div style="display:flex;gap:10px;flex-shrink:0;">
+    <div style="display:flex;gap:12px;margin-bottom:28px;flex-wrap:wrap;">
       <div style="
-        background:rgba(197,160,89,0.08);border:1px solid rgba(197,160,89,0.22);
-        border-radius:3px;padding:6px 12px;
-        font-size:0.7rem;color:rgba(255,255,255,0.65);letter-spacing:0.06em;
-        white-space:nowrap;
+        background:rgba(197,160,89,0.07);border:1px solid rgba(197,160,89,0.25);
+        border-radius:3px;padding:10px 16px;flex:1;min-width:140px;
       ">
-        <span style="color:var(--gold);font-weight:600;">3.5 rm</span> · Davos Platz
+        <div style="font-size:0.65rem;letter-spacing:0.15em;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-bottom:4px;">Apartment</div>
+        <div style="font-size:0.9rem;font-weight:600;color:#fff;">3.5 rm · Davos Platz</div>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);margin-top:2px;">Obere Strasse 51</div>
       </div>
       <div style="
-        background:rgba(197,160,89,0.08);border:1px solid rgba(197,160,89,0.22);
-        border-radius:3px;padding:6px 12px;
-        font-size:0.7rem;color:rgba(255,255,255,0.65);letter-spacing:0.06em;
-        white-space:nowrap;
+        background:rgba(197,160,89,0.07);border:1px solid rgba(197,160,89,0.25);
+        border-radius:3px;padding:10px 16px;flex:1;min-width:140px;
       ">
-        <span style="color:var(--gold);font-weight:600;">4.5 rm</span> · Klosters
+        <div style="font-size:0.65rem;letter-spacing:0.15em;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-bottom:4px;">Chalet</div>
+        <div style="font-size:0.9rem;font-weight:600;color:#fff;">4.5 rm · Klosters</div>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);margin-top:2px;">Monbielerstrasse 93</div>
       </div>
     </div>
 
     <!-- CTA -->
-    <a href="./accommodations.html#featured-listing" style="
-      flex-shrink:0;
+    <a href="./accommodations.html#featured-listing" id="banner-cta" style="
+      display:block;text-align:center;
       background:var(--gold);color:#050505;
-      padding:10px 20px;border-radius:2px;
-      font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
-      text-decoration:none;white-space:nowrap;
-      transition:background 0.2s;
+      padding:13px 24px;border-radius:2px;
+      font-size:0.78rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+      text-decoration:none;transition:background 0.2s;
     " onmouseover="this.style.background='#d4b060'" onmouseout="this.style.background='var(--gold)'">
-      View Listings →
+      View Brochures &amp; Enquire →
     </a>
-
-    <!-- Dismiss -->
-    <button id="banner-close" aria-label="Dismiss banner" style="
-      flex-shrink:0;
-      background:none;border:none;cursor:pointer;
-      color:rgba(255,255,255,0.35);font-size:1.3rem;line-height:1;
-      padding:4px 6px;transition:color 0.2s;
-    " onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">
-      ×
-    </button>
   </div>
 </div>
 
@@ -2609,28 +2611,41 @@ Thank you.`);
 
 <script>
 (function(){
-  var banner = document.getElementById('featured-banner');
-  var close  = document.getElementById('banner-close');
+  var banner   = document.getElementById('featured-banner');
+  var backdrop = document.getElementById('featured-backdrop');
+  var close    = document.getElementById('banner-close');
+  var cta      = document.getElementById('banner-cta');
   if (!banner) return;
 
   // Don't show if dismissed this session
   try { if (sessionStorage.getItem('gs_banner_dismissed')) return; } catch(e){}
 
-  // Show after 1.8s
-  var t = setTimeout(function(){
-    banner.style.transform = 'translateY(0)';
-  }, 1800);
+  function show() {
+    backdrop.style.opacity = '1';
+    backdrop.style.pointerEvents = 'all';
+    banner.style.opacity = '1';
+    banner.style.pointerEvents = 'all';
+    banner.style.transform = 'translate(-50%,-50%) scale(1)';
+  }
 
-  // Dismiss
+  // Show after 1.8s
+  var t = setTimeout(show, 1800);
+
   function dismiss() {
-    banner.style.transform = 'translateY(100%)';
+    banner.style.opacity = '0';
+    banner.style.transform = 'translate(-50%,-50%) scale(0.96)';
+    banner.style.pointerEvents = 'none';
+    backdrop.style.opacity = '0';
+    backdrop.style.pointerEvents = 'none';
     try { sessionStorage.setItem('gs_banner_dismissed','1'); } catch(e){}
   }
 
   close.addEventListener('click', dismiss);
+  backdrop.addEventListener('click', dismiss);
+  cta.addEventListener('click', dismiss);
 
-  // Auto-hide after 18s if not interacted
-  var autoHide = setTimeout(dismiss, 18000);
+  // Auto-hide after 20s if not interacted
+  var autoHide = setTimeout(dismiss, 20000);
 
   // Cancel auto-hide on hover
   banner.addEventListener('mouseenter', function(){ clearTimeout(autoHide); });
