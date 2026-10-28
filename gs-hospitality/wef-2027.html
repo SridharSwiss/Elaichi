@@ -1576,6 +1576,7 @@ textarea { resize: vertical; min-height: 120px; }
   .entry-gate-card { padding: 36px 24px; }
   .wa-quick-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
+  #davos-guidelines .reveal > div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
   section { padding: 56px 0; }
   .info-grid { grid-template-columns: repeat(2, 1fr); }
   .countdown-block { gap: 10px; }
@@ -2243,6 +2244,103 @@ textarea { resize: vertical; min-height: 120px; }
           </div>
         </article>
       </div>
+    </div>
+  </section>
+
+  <!-- Davos Municipality Guidelines -->
+  <section id="davos-guidelines" aria-labelledby="guidelines-title">
+    <div class="container">
+      <div class="section-header centered reveal">
+        <span class="section-label">Official Information</span>
+        <h2 class="section-title" id="guidelines-title">Davos Municipality <em>Guidelines 2027</em></h2>
+        <p class="section-lead">Key regulations from the Gemeinde Davos applicable to the Annual Meeting period — for guests, concierge teams and event organisers.</p>
+      </div>
+
+      <!-- Disclaimer -->
+      <div class="reveal" style="background:rgba(197,160,89,0.06);border:1px solid rgba(197,160,89,0.2);border-radius:var(--radius);padding:20px 24px;margin-bottom:48px;display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-size:1.1rem;flex-shrink:0;margin-top:2px;">ℹ️</span>
+        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.6;margin:0;">
+          <strong style="color:var(--gold);">Disclaimer:</strong> The information below is reproduced for general awareness only, sourced from the official <em>Gemeinde Davos Guidelines for the Annual Meeting 2027</em> (version dated 02.06.2026). Guidelines may be updated by the municipality at any time. GS Hospitality is not liable for changes, omissions, or individual application outcomes. Applicants must verify requirements directly with the Gemeinde Davos building authority prior to submitting any permit or operational plan.
+        </p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;" class="reveal">
+
+        <!-- Traffic & Deliveries during event week -->
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:36px;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+            <div style="width:42px;height:42px;background:rgba(197,160,89,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem;">🚗</div>
+            <h3 style="font-family:var(--font-display);font-size:1.35rem;color:var(--white);">Traffic & Deliveries<br><em style="color:var(--gold);font-size:0.9em;">During the Annual Meeting</em></h3>
+          </div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:14px;">
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:0.9rem;color:var(--text-muted);">
+              <span style="color:var(--gold);flex-shrink:0;margin-top:2px;">›</span>
+              <span>A <strong style="color:var(--text);">vehicle checkpoint</strong> operates at the town entrance in Davos Dorf. Drivers of lorries and delivery vans must pass it before proceeding.</span>
+            </li>
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:0.9rem;color:var(--text-muted);">
+              <span style="color:var(--gold);flex-shrink:0;margin-top:2px;">›</span>
+              <span><strong style="color:var(--text);">Vehicles over 3.5 t</strong> are not permitted in the core area during the Annual Meeting week (including Friday, 22 January 2027 after 15:00).</span>
+            </li>
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:0.9rem;color:var(--text-muted);">
+              <span style="color:var(--gold);flex-shrink:0;margin-top:2px;">›</span>
+              <span>Deliveries to <strong style="color:var(--text);">private ground</strong> are permitted 07:00–11:00 am during event week (subject to traffic conditions).</span>
+            </li>
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:0.9rem;color:var(--text-muted);">
+              <span style="color:var(--gold);flex-shrink:0;margin-top:2px;">›</span>
+              <span>Only <strong style="color:var(--text);">essential goods</strong> are permitted during event week — flowers, hotel supplies and catering. No technical material or furniture.</span>
+            </li>
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:0.9rem;color:var(--text-muted);">
+              <span style="color:var(--gold);flex-shrink:0;margin-top:2px;">›</span>
+              <span>Loading and unloading must be completed <strong style="color:var(--text);">within 20 minutes</strong> (Art. 21 (2) Ordinance on Traffic Regulation VRV).</span>
+            </li>
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:0.9rem;color:var(--text-muted);">
+              <span style="color:var(--gold);flex-shrink:0;margin-top:2px;">›</span>
+              <span>The streets in Davos are narrow — plan logistics and transfers well in advance. Our concierge team coordinates transfers and last-mile logistics for guests.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- For event organisers -->
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:36px;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+            <div style="width:42px;height:42px;background:rgba(197,160,89,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem;">📋</div>
+            <h3 style="font-family:var(--font-display);font-size:1.35rem;color:var(--white);">Permit Deadlines<br><em style="color:var(--gold);font-size:0.9em;">For Supplementary Event Spaces</em></h3>
+          </div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:14px;">
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:0.9rem;color:var(--text-muted);">
+              <span style="color:var(--gold);flex-shrink:0;margin-top:2px;">›</span>
+              <span><strong style="color:#e8a020;">15 August 2026</strong> — Planning application (Baugesuch) deadline. Applications received after this date will not be accepted.</span>
+            </li>
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:0.9rem;color:var(--text-muted);">
+              <span style="color:var(--gold);flex-shrink:0;margin-top:2px;">›</span>
+              <span><strong style="color:#e8a020;">15 October 2026</strong> — Operating concept (Betriebskonzept) deadline, including vehicle accreditation voucher requests (CHF 500 per voucher).</span>
+            </li>
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:0.9rem;color:var(--text-muted);">
+              <span style="color:var(--gold);flex-shrink:0;margin-top:2px;">›</span>
+              <span><strong style="color:#e8a020;">15 November 2026</strong> — No additional set-up days may be registered after this date. Only day passes (CHF 600 each, non-transferable) issued thereafter.</span>
+            </li>
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:0.9rem;color:var(--text-muted);">
+              <span style="color:var(--gold);flex-shrink:0;margin-top:2px;">›</span>
+              <span>Eligible end-users include: WEF official partners and invited organisations, country representations, NGOs/NPOs, and accredited educational/research institutions. Commercial entities are not eligible.</span>
+            </li>
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:0.9rem;color:var(--text-muted);">
+              <span style="color:var(--gold);flex-shrink:0;margin-top:2px;">›</span>
+              <span><strong style="color:var(--text);">No construction on Sundays.</strong> Saturday work permitted only until 16:00. Assembly period runs December 2026 through January 11–16, 2027.</span>
+            </li>
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:0.9rem;color:var(--text-muted);">
+              <span style="color:var(--gold);flex-shrink:0;margin-top:2px;">›</span>
+              <span>Disassembly of structures may begin Friday, 22 January 2027 from 15:00 (vehicles &lt;3.5 t only). Full disassembly must be completed by Friday, 29 January 2027.</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Source note -->
+      <p class="reveal" style="text-align:center;font-size:0.78rem;color:var(--text-faint);margin-top:32px;">
+        Source: Gemeinde Davos <em>Guidelines WEF 2027</em>, version 02.06.2026. For official forms and current guidance visit <strong>gemeindedavos.ch</strong>. Contact: Building authority +41 (0)81 414 30 95 · Municipality police (logistics) +41 (0)81 414 30 33.
+      </p>
+
     </div>
   </section>
 
