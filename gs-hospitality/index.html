@@ -1346,7 +1346,7 @@ textarea { resize: vertical; min-height: 120px; }
 /* --- Entry Gate --- */
 .entry-gate {
   position: fixed; inset: 0;
-  z-index: 9990;
+  z-index: 10001;
   background: var(--bg);
   display: flex;
   align-items: center;
@@ -2628,8 +2628,23 @@ Thank you.`);
     banner.style.transform = 'translate(-50%,-50%) scale(1)';
   }
 
-  // Show after 1.8s
-  var t = setTimeout(show, 1800);
+  // Wait until entry gate is gone, then show after 1.8s delay
+  function scheduleShow() {
+    var gate = document.getElementById('entry-gate');
+    if (gate && gate.offsetParent !== null && gate.style.display !== 'none') {
+      // Gate still visible — poll until it's gone
+      var poll = setInterval(function() {
+        var g = document.getElementById('entry-gate');
+        if (!g || g.style.opacity === '0' || g.style.display === 'none') {
+          clearInterval(poll);
+          setTimeout(show, 1800);
+        }
+      }, 300);
+    } else {
+      setTimeout(show, 1800);
+    }
+  }
+  scheduleShow();
 
   function dismiss() {
     banner.style.opacity = '0';
