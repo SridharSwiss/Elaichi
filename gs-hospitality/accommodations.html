@@ -317,9 +317,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   margin: 0 auto;
   padding: 0 24px;
 }
-section { padding: 80px 0; }
-section.section-sm { padding: 48px 0; }
-section.section-lg { padding: 120px 0; }
+section { padding: 52px 0; }
+section.section-sm { padding: 32px 0; }
+section.section-lg { padding: 80px 0; }
 
 /* --- Section Titles --- */
 .section-label {
@@ -345,7 +345,7 @@ section.section-lg { padding: 120px 0; }
   max-width: 600px;
   line-height: 1.7;
 }
-.section-header { margin-bottom: 56px; }
+.section-header { margin-bottom: 36px; }
 .section-header.centered { text-align: center; }
 .section-header.centered .section-lead { margin: 0 auto; }
 
@@ -1562,7 +1562,7 @@ textarea { resize: vertical; min-height: 120px; }
   .entry-gate-card { padding: 36px 24px; }
   .wa-quick-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
-  section { padding: 56px 0; }
+  section { padding: 36px 0; }
   .info-grid { grid-template-columns: repeat(2, 1fr); }
   .countdown-block { gap: 10px; }
   .countdown-unit { min-width: 76px; padding: 16px 12px; }
@@ -1806,7 +1806,7 @@ textarea { resize: vertical; min-height: 120px; }
       .featured-section-inner { padding: 48px 0 56px !important; }
     }
   </style>
-  <section aria-labelledby="featured-listing" class="featured-section-inner" style="padding:72px 0 80px;background:linear-gradient(180deg,rgba(197,160,89,0.04) 0%,transparent 100%);">
+  <section aria-labelledby="featured-listing" class="featured-section-inner" style="padding:48px 0 52px;background:linear-gradient(180deg,rgba(197,160,89,0.04) 0%,transparent 100%);">
     <div class="container">
 
       <!-- Label -->
@@ -2087,13 +2087,13 @@ textarea { resize: vertical; min-height: 120px; }
     <div class="container">
       <div class="section-header centered reveal">
         <span class="section-label">Property Portfolio</span>
-        <h2 class="section-title" id="props-title">Three Property <em>Categories</em></h2>
+        <h2 class="section-title" id="props-title">Five Property <em>Categories</em></h2>
         <div class="divider centered"></div>
         <p class="section-lead">Selected to match every delegation size, operational requirement, and budget profile.</p>
       </div>
 
       <!-- Category 1: Luxury Chalets -->
-      <div class="grid-2" style="gap:64px;align-items:start;margin-bottom:80px;">
+      <div class="grid-2" style="gap:40px;align-items:start;margin-bottom:48px;">
         <div class="reveal">
           <span class="section-label">Category 01</span>
           <h3 style="font-family:var(--font-display);font-size:2.5rem;font-weight:600;color:var(--white);line-height:1.1;margin-bottom:16px;">Luxury <em style="color:var(--gold);">Chalets</em></h3>
@@ -2151,7 +2151,7 @@ textarea { resize: vertical; min-height: 120px; }
       </div>
 
       <!-- Category 2: Corporate HQ Venues -->
-      <div class="grid-2" style="gap:64px;align-items:start;margin-bottom:80px;">
+      <div class="grid-2" style="gap:40px;align-items:start;margin-bottom:48px;">
         <div class="reveal reveal-delay-2" style="order:2;">
           <div style="background:linear-gradient(135deg,rgba(99,179,237,0.1),rgba(197,160,89,0.08));height:280px;border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;font-size:5rem;border:1px solid var(--border);margin-bottom:20px;">🏢</div>
           <div class="grid-2" style="gap:12px;">
@@ -2465,7 +2465,7 @@ textarea { resize: vertical; min-height: 120px; }
   </section>
 
   <!-- CTA -->
-  <section style="padding-bottom:100px;">
+  <section style="padding-bottom:60px;">
     <div class="container">
       <div class="cta-block reveal">
         <span class="section-label" style="margin-bottom:16px;">Act Now — Limited Stock</span>
@@ -2627,7 +2627,7 @@ textarea { resize: vertical; min-height: 120px; }
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+  }, { threshold: 0.01, rootMargin: '120px 0px 0px 0px' });
 
   revealEls.forEach(el => {
     if (!el.classList.contains('visible')) observer.observe(el);
